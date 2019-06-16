@@ -1,0 +1,14 @@
+{
+  "name": "tree-sitter-ql",
+  "version": "0.0.1",
+  "description": "tree-sitter grammar for Semmle QL",
+  "repository": "https://github.com/samlanning/tree-sitter-ql",
+  "author": "Sam Lanning <sam@samlanning.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tree-sitter-cli": "^0.15.3"
+  },
+  "scripts": {
+    "tree-sitter": "tree-sitter"
+  }
+}
