@@ -221,7 +221,20 @@ module.exports = grammar({
       $.type, $.simpleId
     ),
 
-    formula: $ => 'TODO: formula',
+    formula: $ => choice(
+      'TODO: formula',
+      // $.fparen,
+      // $.disjunction,
+      // $.conjunction,
+      // $.implies,
+      // $.ifthen,
+      // $.negated,
+      // $.quantified,
+      // $.comparison,
+      // $.instanceof,
+      // $.inrange,
+      // $.call,
+    ),
 
     expr: $ => choice(
       // $.dontcare,
