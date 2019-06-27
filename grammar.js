@@ -167,12 +167,16 @@ module.exports = grammar({
     ),
 
     literal: $ => choice(
-      // 'false',
-      // 'true',
-      // $.int,
-      // $.float,
+      $.FALSE,
+      $.TRUE,
+      $.int,
+      $.float,
       $.string
     ),
+
+    int: $ => /[0-9]+/,
+
+    float: $ => seq(/[0-9]+/, '.', /[0-9]+/),
 
     string: $ => seq(
       '"',
