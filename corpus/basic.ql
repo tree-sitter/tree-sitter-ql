@@ -182,3 +182,48 @@ order by foo, bar desc, baz asc
             (simpleId 
               (lowerId ))
             (ASC )))))))
+
+===========
+Annotations
+===========
+
+private import foo
+
+pragma[noinline]
+bindingset[foobar, this]
+import bar
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (import 
+        (annotation 
+          (simpleAnnotation ))
+        (IMPORT )
+        (moduleId 
+          (qualId 
+            (simpleId 
+              (lowerId )))))
+      (import 
+        (annotation 
+          (argsAnnotation 
+            (OBLOCK )
+            (CBLOCK )))
+        (annotation 
+          (argsAnnotation 
+            (OBLOCK )
+            (variable 
+              (varname 
+                (simpleId 
+                  (lowerId ))))
+            (COMMA )
+            (variable 
+              (THIS ))
+            (CBLOCK )))
+        (IMPORT )
+        (moduleId 
+          (qualId 
+            (simpleId 
+              (lowerId ))))))))

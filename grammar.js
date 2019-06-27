@@ -160,7 +160,46 @@ module.exports = grammar({
       $.simpleId, optional(choice($.ASC, $.DESC))
     ),
 
-    annotation: $ => 'TODO:annotation',
+    annotation: $ => choice(
+      $.simpleAnnotation, $.argsAnnotation
+    ),
+
+    simpleAnnotation: $ => choice (
+      'abstract',
+      'cached',
+      'external',
+      'final',
+      'transient',
+      'library',
+      'private',
+      'deprecated',
+      'override',
+      'query',
+    ),
+
+    argsAnnotation: $ => choice (
+      seq(
+        'pragma',
+        $.OBLOCK,
+        choice('noinline', 'nomagic', 'noopt'),
+        $.CBLOCK
+      ),
+      seq(
+        'language',
+        $.OBLOCK,
+        'monotonicAggregates',
+        $.CBLOCK
+      ),
+      seq(
+        'bindingset',
+        $.OBLOCK,
+        optional(seq(
+          $.variable,
+          repeat(seq($.COMMA, $.variable))
+        )),
+        $.CBLOCK
+      )
+    ),
 
     type: $ => seq(
       choice(
@@ -212,6 +251,12 @@ module.exports = grammar({
       $.string
     ),
 
+    variable: $ => choice(
+      $.varname,
+      $.THIS,
+      $.RESULT
+    ),
+
     simpleId: $ => choice($.lowerId, $.upperId),
 
     modulename: $ => $.simpleId,
@@ -219,6 +264,8 @@ module.exports = grammar({
     classname: $ => $.upperId,
 
     dbasetype: $ => $.atlowerId,
+
+    varname: $ => $.simpleId
 
   }
 });
