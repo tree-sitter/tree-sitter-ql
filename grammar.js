@@ -147,8 +147,41 @@ module.exports = grammar({
     formula: $ => 'TODO: formula',
 
     expr: $ => choice(
-      '"hello world"',
-      '"other"'
-    )
+      // $.dontcare,
+      // $.unop,
+      // $.binop,
+      // $.cast,
+      $.primary,
+    ),
+
+    primary: $ => choice(
+      // $.eparen,
+      $.literal,
+      // $.variable,
+      // $.super_expr,
+      // $.postfix_cast,
+      // $.callwithresults,
+      // $.aggregation,
+      // $.any,
+      // $.range,
+    ),
+
+    literal: $ => choice(
+      // 'false',
+      // 'true',
+      // $.int,
+      // $.float,
+      $.string
+    ),
+
+    string: $ => seq(
+      '"',
+      repeat(choice(
+        /[^\\"\n\r\t]/,
+        seq('\\', /[\\"nrt]/),
+      )),
+      '"',
+    ),
+
   }
 });
