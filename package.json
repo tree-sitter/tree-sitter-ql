@@ -9,6 +9,8 @@
     "tree-sitter-cli": "^0.15.3"
   },
   "scripts": {
-    "tree-sitter": "tree-sitter"
+    "tree-sitter": "tree-sitter",
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
   }
 }
