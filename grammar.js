@@ -98,7 +98,7 @@ module.exports = grammar({
       '"',
     ),
 
-    //////
+    // Summary of Syntax https://help.semmle.com/QL/ql-spec/language.html#summary-of-syntax
 
     ql: $ => $.moduleBody,
 
