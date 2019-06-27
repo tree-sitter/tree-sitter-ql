@@ -71,3 +71,40 @@ select
               (primary 
                 (literal 
                   (FALSE ))))))))))
+
+============
+Select with Order By
+============
+
+select "hello world"
+order by foo, bar desc, baz asc
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (literal 
+                  (string ))))))
+        (ORDER )
+        (BY )
+        (orderbys 
+          (orderby 
+            (simpleId 
+              (Lowerid )))
+          (COMMA )
+          (orderby 
+            (simpleId 
+              (Lowerid ))
+            (DESC ))
+          (COMMA )
+          (orderby 
+            (simpleId 
+              (Lowerid ))
+            (ASC )))))))

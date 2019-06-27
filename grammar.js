@@ -106,6 +106,10 @@ module.exports = grammar({
     moduleBody: $ => repeat1(
       choice(
         $.import,
+        // $.predicate,
+        // $.class,
+        // $.module,
+        // $.alias,
         $.select
       )
     ),
@@ -140,7 +144,13 @@ module.exports = grammar({
       $.expr, optional(seq($.AS, $.simpleId))
     ),
 
-    orderbys: $ => 'TODO: orderbys',
+    orderbys: $ => seq(
+      $.orderby, repeat(seq($.COMMA, $.orderby))
+    ),
+
+    orderby: $ => seq(
+      $.simpleId, optional(choice($.ASC, $.DESC))
+    ),
 
     var_decls: $ => 'TODO: var_decls',
 
