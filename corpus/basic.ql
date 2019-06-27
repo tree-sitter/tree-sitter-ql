@@ -1,5 +1,5 @@
 ============
-Basic Module
+Basic select
 ============
 
 import javascript
@@ -23,7 +23,7 @@ select
         (moduleId 
           (qualId 
             (simpleId 
-              (Lowerid )))))
+              (lowerId )))))
       (select 
         (SELECT )
         (as_exprs 
@@ -34,7 +34,7 @@ select
                   (string ))))
             (AS )
             (simpleId 
-              (Lowerid )))
+              (lowerId )))
           (COMMA )
           (as_expr 
             (expr 
@@ -73,9 +73,18 @@ select
                   (FALSE ))))))))))
 
 ============
-Select with Order By
+Select with variables and order by
 ============
 
+from
+  Foo foo,
+  some.module::submodule::Bar bar,
+  @dbtype bar,
+  boolean b,
+  date d,
+  float f,
+  int i,
+  string s
 select "hello world"
 order by foo, bar desc, baz asc
 
@@ -85,6 +94,71 @@ order by foo, bar desc, baz asc
   (ql 
     (moduleBody 
       (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (moduleId 
+                (moduleId 
+                  (qualId 
+                    (qualId 
+                      (simpleId 
+                        (lowerId )))
+                    (DOT )
+                    (simpleId 
+                      (lowerId ))))
+                (SELECTION )
+                (simpleId 
+                  (lowerId )))
+              (SELECTION )
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (dbasetype 
+                (atlowerId )))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (BOOLEAN ))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (DATE ))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (FLOAT ))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (INT ))
+            (simpleId 
+              (lowerId )))
+          (COMMA )
+          (var_decl 
+            (type 
+              (STRING ))
+            (simpleId 
+              (lowerId ))))
         (SELECT )
         (as_exprs 
           (as_expr 
@@ -97,14 +171,14 @@ order by foo, bar desc, baz asc
         (orderbys 
           (orderby 
             (simpleId 
-              (Lowerid )))
+              (lowerId )))
           (COMMA )
           (orderby 
             (simpleId 
-              (Lowerid ))
+              (lowerId ))
             (DESC ))
           (COMMA )
           (orderby 
             (simpleId 
-              (Lowerid ))
+              (lowerId ))
             (ASC )))))))

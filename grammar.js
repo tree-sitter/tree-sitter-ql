@@ -81,14 +81,22 @@ module.exports = grammar({
     BAR        : $ => '|',
     SELECTION  : $ => '::',
 
-    Lowerid: $ => /[a-z][0-9A-Za-z_]*/,
-    Upperid: $ => /[A-Z][0-9A-Za-z_]*/,
+    lowerId: $ => /[a-z][0-9A-Za-z_]*/,
+    upperId: $ => /[A-Z][0-9A-Za-z_]*/,
+    atlowerId: $ => /@[a-z][0-9A-Za-z_]*/,
 
-    simpleId: $ => choice($.Lowerid, $.Upperid),
+    int: $ => /[0-9]+/,
 
-    annotation: $ => 'TODO:annotation',
+    float: $ => seq(/[0-9]+/, '.', /[0-9]+/),
 
-    modulename: $ => $.simpleId,
+    string: $ => seq(
+      '"',
+      repeat(choice(
+        /[^\\"\n\r\t]/,
+        seq('\\', /[\\"nrt]/),
+      )),
+      '"',
+    ),
 
     //////
 
@@ -152,7 +160,27 @@ module.exports = grammar({
       $.simpleId, optional(choice($.ASC, $.DESC))
     ),
 
-    var_decls: $ => 'TODO: var_decls',
+    annotation: $ => 'TODO:annotation',
+
+    type: $ => seq(
+      choice(
+        seq(optional(seq($.moduleId, $.SELECTION)), $.classname),
+        $.dbasetype,
+        $.BOOLEAN,
+        $.DATE,
+        $.FLOAT,
+        $.INT,
+        $.STRING
+      )
+    ),
+
+    var_decls: $ => seq(
+      $.var_decl, repeat(seq($.COMMA, $.var_decl))
+    ),
+
+    var_decl: $ => seq(
+      $.type, $.simpleId
+    ),
 
     formula: $ => 'TODO: formula',
 
@@ -184,18 +212,13 @@ module.exports = grammar({
       $.string
     ),
 
-    int: $ => /[0-9]+/,
+    simpleId: $ => choice($.lowerId, $.upperId),
 
-    float: $ => seq(/[0-9]+/, '.', /[0-9]+/),
+    modulename: $ => $.simpleId,
 
-    string: $ => seq(
-      '"',
-      repeat(choice(
-        /[^\\"\n\r\t]/,
-        seq('\\', /[\\"nrt]/),
-      )),
-      '"',
-    ),
+    classname: $ => $.upperId,
+
+    dbasetype: $ => $.atlowerId,
 
   }
 });
