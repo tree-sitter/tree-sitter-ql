@@ -1,3 +1,3 @@
 import javascript
 
-select "hello world"
+select "hello world" as foo, "other"

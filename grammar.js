@@ -106,9 +106,7 @@ module.exports = grammar({
     moduleBody: $ => repeat1(
       choice(
         $.import,
-        // TODO: remove
-        'hello',
-        'select "hello world"'
+        $.select
       )
     ),
 
@@ -125,5 +123,32 @@ module.exports = grammar({
       $.qualId,
       seq($.moduleId, $.SELECTION, $.simpleId)
     ),
+
+    select: $ => seq(
+      optional(seq($.FROM, $.var_decls)),
+      optional(seq($.WHERE, $.formula)),
+      $.SELECT,
+      $.as_exprs,
+      optional(seq($.ORDER, $.BY, $.orderbys))
+    ),
+
+    as_exprs: $ => seq(
+      $.as_expr, repeat(seq($.COMMA, $.as_expr))
+    ),
+
+    as_expr: $ => seq(
+      $.expr, optional(seq($.AS, $.simpleId))
+    ),
+
+    orderbys: $ => 'TODO: orderbys',
+
+    var_decls: $ => 'TODO: var_decls',
+
+    formula: $ => 'TODO: formula',
+
+    expr: $ => choice(
+      '"hello world"',
+      '"other"'
+    )
   }
 });
