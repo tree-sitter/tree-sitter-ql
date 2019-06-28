@@ -395,3 +395,72 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+==========
+and vs not
+==========
+
+from Foo f
+where not f = f and f = f
+select f
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (conjunction 
+            (formula 
+              (negated 
+                (NOT )
+                (formula 
+                  (comparison 
+                    (expr 
+                      (primary 
+                        (variable 
+                          (varname 
+                            (simpleId 
+                              (lowerId ))))))
+                    (compop )
+                    (expr 
+                      (primary 
+                        (variable 
+                          (varname 
+                            (simpleId 
+                              (lowerId ))))))))))
+            (AND )
+            (formula 
+              (comparison 
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))
+                (compop )
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))

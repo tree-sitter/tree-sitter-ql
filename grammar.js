@@ -250,7 +250,7 @@ module.exports = grammar({
       $.conjunction,
       $.implies,
       $.ifthen,
-      // $.negated,
+      $.negated,
       // $.quantified,
       $.comparison,
       // $.instanceof,
@@ -276,6 +276,10 @@ module.exports = grammar({
 
     ifthen: $ => prec.left(PREC.CONDITIONAL, seq(
       $.IF, $.formula, $.THEN, $.formula, $.ELSE, $.formula
+    )),
+
+    negated: $ => prec.left(PREC.NEGATION, seq(
+      $.NOT, $.formula
     )),
 
     comparison: $ => seq(
