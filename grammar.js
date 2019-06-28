@@ -1,3 +1,11 @@
+const PREC = {
+  NEGATION: 5,
+  CONDITIONAL: 4,
+  CONJUNCTION: 3,
+  DISJUNCTION: 2,
+  IMPLICATION: 1
+};
+
 module.exports = grammar({
   name: 'ql',
 
@@ -238,8 +246,8 @@ module.exports = grammar({
 
     formula: $ => choice(
       $.fparen,
-      // $.disjunction,
-      // $.conjunction,
+      $.disjunction,
+      $.conjunction,
       // $.implies,
       // $.ifthen,
       // $.negated,
@@ -253,6 +261,14 @@ module.exports = grammar({
     fparen: $ => seq(
       $.OPAR, $.formula, $.CPAR
     ),
+
+    disjunction: $ => prec.left(PREC.DISJUNCTION, seq(
+      $.formula, $.OR, $.formula
+    )),
+
+    conjunction: $ => prec.left(PREC.CONJUNCTION, seq(
+      $.formula, $.AND, $.formula
+    )),
 
     comparison: $ => seq(
       $.expr, $.compop, $.expr
