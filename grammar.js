@@ -237,7 +237,7 @@ module.exports = grammar({
     ),
 
     formula: $ => choice(
-      // $.fparen,
+      $.fparen,
       // $.disjunction,
       // $.conjunction,
       // $.implies,
@@ -248,6 +248,10 @@ module.exports = grammar({
       // $.instanceof,
       // $.inrange,
       // $.call,
+    ),
+
+    fparen: $ => seq(
+      $.OPAR, $.formula, $.CPAR
     ),
 
     comparison: $ => seq(

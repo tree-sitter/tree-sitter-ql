@@ -238,7 +238,7 @@ Formula
 =======
 
 from File f
-where f = f
+where (f = f)
 select f
 
 ---
@@ -257,20 +257,24 @@ select f
               (lowerId ))))
         (WHERE )
         (formula 
-          (comparison 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))
-            (compop )
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))
+          (fparen 
+            (OPAR )
+            (formula 
+              (comparison 
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))
+                (compop )
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))))
+            (CPAR )))
         (SELECT )
         (as_exprs 
           (as_expr 

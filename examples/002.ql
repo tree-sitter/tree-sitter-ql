@@ -1,3 +1,3 @@
 from File f
-where f = f
+where (f = f)
 select f
