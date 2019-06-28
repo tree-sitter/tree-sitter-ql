@@ -237,7 +237,6 @@ module.exports = grammar({
     ),
 
     formula: $ => choice(
-      'TODO: formula',
       // $.fparen,
       // $.disjunction,
       // $.conjunction,
@@ -245,10 +244,18 @@ module.exports = grammar({
       // $.ifthen,
       // $.negated,
       // $.quantified,
-      // $.comparison,
+      $.comparison,
       // $.instanceof,
       // $.inrange,
       // $.call,
+    ),
+
+    comparison: $ => seq(
+      $.expr, $.compop, $.expr
+    ),
+
+    compop: $ => choice(
+      '=', '!=', '<', '>', '<=', '>='
     ),
 
     expr: $ => choice(
@@ -262,7 +269,7 @@ module.exports = grammar({
     primary: $ => choice(
       // $.eparen,
       $.literal,
-      // $.variable,
+      $.variable,
       // $.super_expr,
       // $.postfix_cast,
       // $.callwithresults,

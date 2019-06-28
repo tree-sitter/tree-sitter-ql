@@ -1,8 +1,3 @@
-private import foo // some other comment
-
-/*
- * Some comment
- */
-pragma[noinline]
-bindingset[foobar, this]
-import bar
+from File f
+where f = f
+select f

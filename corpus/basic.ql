@@ -232,3 +232,51 @@ import bar
           (qualId 
             (simpleId 
               (lowerId ))))))))
+
+=======
+Formula
+=======
+
+from File f
+where f = f
+select f
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (comparison 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))
+            (compop )
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))
