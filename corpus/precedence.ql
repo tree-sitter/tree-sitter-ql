@@ -165,3 +165,150 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+============
+Or vs implies
+============
+
+from Foo f
+where (f = f or f = f implies f = f)
+  and (f = f implies f = f or f = f)
+select f
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (conjunction 
+            (formula 
+              (fparen 
+                (OPAR )
+                (formula 
+                  (implies 
+                    (formula 
+                      (disjunction 
+                        (formula 
+                          (comparison 
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))
+                            (compop )
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))))
+                        (OR )
+                        (formula 
+                          (comparison 
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))
+                            (compop )
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))))))
+                    (IMPLIES )
+                    (formula 
+                      (comparison 
+                        (expr 
+                          (primary 
+                            (variable 
+                              (varname 
+                                (simpleId 
+                                  (lowerId ))))))
+                        (compop )
+                        (expr 
+                          (primary 
+                            (variable 
+                              (varname 
+                                (simpleId 
+                                  (lowerId ))))))))))
+                (CPAR )))
+            (AND )
+            (formula 
+              (fparen 
+                (OPAR )
+                (formula 
+                  (implies 
+                    (formula 
+                      (comparison 
+                        (expr 
+                          (primary 
+                            (variable 
+                              (varname 
+                                (simpleId 
+                                  (lowerId ))))))
+                        (compop )
+                        (expr 
+                          (primary 
+                            (variable 
+                              (varname 
+                                (simpleId 
+                                  (lowerId ))))))))
+                    (IMPLIES )
+                    (formula 
+                      (disjunction 
+                        (formula 
+                          (comparison 
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))
+                            (compop )
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))))
+                        (OR )
+                        (formula 
+                          (comparison 
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))
+                            (compop )
+                            (expr 
+                              (primary 
+                                (variable 
+                                  (varname 
+                                    (simpleId 
+                                      (lowerId ))))))))))))
+                (CPAR )))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))

@@ -248,7 +248,7 @@ module.exports = grammar({
       $.fparen,
       $.disjunction,
       $.conjunction,
-      // $.implies,
+      $.implies,
       // $.ifthen,
       // $.negated,
       // $.quantified,
@@ -268,6 +268,10 @@ module.exports = grammar({
 
     conjunction: $ => prec.left(PREC.CONJUNCTION, seq(
       $.formula, $.AND, $.formula
+    )),
+
+    implies: $ => prec.left(PREC.IMPLICATION, seq(
+      $.formula, $.IMPLIES, $.formula
     )),
 
     comparison: $ => seq(
