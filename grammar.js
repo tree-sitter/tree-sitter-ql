@@ -14,6 +14,11 @@ module.exports = grammar({
     /\s/
   ],
 
+  conflicts: $ => [
+    [$.int, $.float],
+    [$.qualId, $.varname]
+  ],
+
   rules: {
 
     source_file: $ => $.ql,
@@ -306,9 +311,9 @@ module.exports = grammar({
       seq(
         $.predicateRef, optional($.closure), $.OPAR, optional($.exprs), $.CPAR
       ),
-      // seq(
-      //   $.primary, $.DOT, $.predicateName, optional($.closure), $.OPAR, optional($.exprs), $.CPAR
-      // )
+      seq(
+        $.primary, $.DOT, $.predicateName, optional($.closure), $.OPAR, optional($.exprs), $.CPAR
+      )
     ),
 
     closure: $ => choice(
@@ -329,7 +334,7 @@ module.exports = grammar({
       $.variable,
       // $.super_expr,
       // $.postfix_cast,
-      // $.callwithresults,
+      $.callwithresults,
       // $.aggregation,
       // $.any,
       // $.range,
@@ -348,6 +353,8 @@ module.exports = grammar({
       $.THIS,
       $.RESULT
     ),
+
+    callwithresults: $ => $.call,
 
     range: $ => seq (
       $.OBLOCK, $.expr, $.RANGE , $.expr, $.CBLOCK

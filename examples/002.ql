@@ -1,4 +1,3 @@
 
 from int i
-where bar(i) and module::baz+()
-select i
+select i.foo+(), 1.foo(), 1.1.foo()

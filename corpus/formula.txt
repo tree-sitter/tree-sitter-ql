@@ -308,3 +308,71 @@ select i
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+=================
+calls with results & method calls
+=================
+
+from int i
+select i.foo+(), 1.foo(), 1.1.foo()
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (INT ))
+            (simpleId 
+              (lowerId ))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (variable 
+                        (varname 
+                          (simpleId 
+                            (lowerId )))))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (closure 
+                      (PLUS ))
+                    (OPAR )
+                    (CPAR ))))))
+          (COMMA )
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (literal 
+                        (int )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR ))))))
+          (COMMA )
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (literal 
+                        (float )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR )))))))))))
