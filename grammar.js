@@ -1,6 +1,11 @@
 module.exports = grammar({
   name: 'ql',
 
+  extras: $ => [
+    $.comment,
+    /\s/
+  ],
+
   rules: {
 
     source_file: $ => $.ql,
@@ -97,6 +102,16 @@ module.exports = grammar({
       )),
       '"',
     ),
+
+    // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
+    comment: $ => token(choice(
+      seq('//', /.*/),
+      seq(
+        '/*',
+        /[^*]*\*+([^/*][^*]*\*+)*/,
+        '/'
+      )
+    )),
 
     // Summary of Syntax https://help.semmle.com/QL/ql-spec/language.html#summary-of-syntax
 

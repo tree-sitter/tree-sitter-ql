@@ -183,12 +183,15 @@ order by foo, bar desc, baz asc
               (lowerId ))
             (ASC )))))))
 
-===========
-Annotations
-===========
+========================
+Annotations and comments
+========================
 
-private import foo
+private import foo // some other comment
 
+/*
+ * Some comment
+ */
 pragma[noinline]
 bindingset[foobar, this]
 import bar
@@ -206,6 +209,8 @@ import bar
           (qualId 
             (simpleId 
               (lowerId )))))
+      (comment )
+      (comment )
       (import 
         (annotation 
           (argsAnnotation 
