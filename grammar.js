@@ -254,7 +254,7 @@ module.exports = grammar({
       // $.quantified,
       $.comparison,
       $.instanceof,
-      // $.inrange,
+      $.inrange,
       // $.call,
     ),
 
@@ -294,6 +294,10 @@ module.exports = grammar({
       $.expr, $.INSTANCEOF, $.type
     ),
 
+    inrange: $ => seq(
+      $.expr, $.IN, $.range
+    ),
+
     expr: $ => choice(
       // $.dontcare,
       // $.unop,
@@ -326,6 +330,10 @@ module.exports = grammar({
       $.varname,
       $.THIS,
       $.RESULT
+    ),
+
+    range: $ => seq (
+      $.OBLOCK, $.expr, $.RANGE , $.expr, $.CBLOCK
     ),
 
     simpleId: $ => choice($.lowerId, $.upperId),

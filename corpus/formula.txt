@@ -192,3 +192,56 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+=====
+range
+=====
+
+from int i
+where i in [0..10]
+select i
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (INT ))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (inrange 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))
+            (IN )
+            (range 
+              (OBLOCK )
+              (expr 
+                (primary 
+                  (literal 
+                    (int ))))
+              (RANGE )
+              (expr 
+                (primary 
+                  (literal 
+                    (int ))))
+              (CBLOCK ))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))
