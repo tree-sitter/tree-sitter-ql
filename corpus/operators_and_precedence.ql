@@ -312,3 +312,86 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+============
+if then else
+============
+
+from Foo f
+where if f = f then f = f else f = f
+select f
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (ifthen 
+            (IF )
+            (formula 
+              (comparison 
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))
+                (compop )
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))))
+            (THEN )
+            (formula 
+              (comparison 
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))
+                (compop )
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))))
+            (ELSE )
+            (formula 
+              (comparison 
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))
+                (compop )
+                (expr 
+                  (primary 
+                    (variable 
+                      (varname 
+                        (simpleId 
+                          (lowerId ))))))))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))

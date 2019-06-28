@@ -1,4 +1,4 @@
+
 from Foo f
-where (f = f or f = f implies f = f)
-  and (f = f implies f = f or f = f)
+where if f = f then f = f else f = f
 select f
