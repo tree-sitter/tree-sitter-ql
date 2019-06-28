@@ -236,6 +236,10 @@ module.exports = grammar({
       )
     ),
 
+    exprs: $ => seq(
+      $.expr, repeat(seq($.COMMA, $.expr))
+    ),
+
     var_decls: $ => seq(
       $.var_decl, repeat(seq($.COMMA, $.var_decl))
     ),
@@ -255,7 +259,7 @@ module.exports = grammar({
       $.comparison,
       $.instanceof,
       $.inrange,
-      // $.call,
+      $.call,
     ),
 
     fparen: $ => seq(
@@ -296,6 +300,19 @@ module.exports = grammar({
 
     inrange: $ => seq(
       $.expr, $.IN, $.range
+    ),
+
+    call: $ => choice(
+      seq(
+        $.predicateRef, optional($.closure), $.OPAR, optional($.exprs), $.CPAR
+      ),
+      // seq(
+      //   $.primary, $.DOT, $.predicateName, optional($.closure), $.OPAR, optional($.exprs), $.CPAR
+      // )
+    ),
+
+    closure: $ => choice(
+      $.STAR, $.PLUS
     ),
 
     expr: $ => choice(
@@ -344,7 +361,17 @@ module.exports = grammar({
 
     dbasetype: $ => $.atlowerId,
 
-    varname: $ => $.simpleId
+    predicateRef: $ => seq(
+      optional(seq($.moduleId, $.SELECTION)), $.literalId
+    ),
+
+    predicateName: $ => $.lowerId,
+
+    varname: $ => $.simpleId,
+
+    literalId: $ => choice(
+      $.lowerId, $.atlowerId, $.ANY, $.NONE
+    ),
 
   }
 });

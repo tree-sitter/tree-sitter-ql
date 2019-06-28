@@ -1,4 +1,4 @@
 
 from int i
-where i in [0..10]
+where bar(i) and module::baz+()
 select i
