@@ -147,3 +147,48 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+==========
+instanceof
+==========
+
+from Foo f
+where f instanceof Foo
+select f
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (FROM )
+        (var_decls 
+          (var_decl 
+            (type 
+              (classname 
+                (upperId )))
+            (simpleId 
+              (lowerId ))))
+        (WHERE )
+        (formula 
+          (instanceof 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))
+            (INSTANCEOF )
+            (type 
+              (classname 
+                (upperId )))))
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (variable 
+                  (varname 
+                    (simpleId 
+                      (lowerId ))))))))))))

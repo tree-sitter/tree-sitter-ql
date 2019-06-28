@@ -253,7 +253,7 @@ module.exports = grammar({
       $.negated,
       // $.quantified,
       $.comparison,
-      // $.instanceof,
+      $.instanceof,
       // $.inrange,
       // $.call,
     ),
@@ -288,6 +288,10 @@ module.exports = grammar({
 
     compop: $ => choice(
       '=', '!=', '<', '>', '<=', '>='
+    ),
+
+    instanceof: $ => seq(
+      $.expr, $.INSTANCEOF, $.type
     ),
 
     expr: $ => choice(

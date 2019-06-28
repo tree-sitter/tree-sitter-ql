@@ -1,4 +1,4 @@
 
 from Foo f
-where not f = f and f = f
+where f instanceof Foo
 select f
