@@ -1,1 +1,1 @@
-select super.foo(), module::Foo.super.foo()
+select f.(Foo).thing()

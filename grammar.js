@@ -342,7 +342,7 @@ module.exports = grammar({
       $.literal,
       $.variable,
       $.super_expr,
-      // $.postfix_cast,
+      $.postfix_cast,
       $.callwithresults,
       // $.aggregation,
       // $.any,
@@ -372,6 +372,10 @@ module.exports = grammar({
       seq(
         $.type, $.DOT, $.SUPER
       )
+    ),
+
+    postfix_cast: $ => seq(
+      $.primary, $.DOT, $.OPAR, $.type, $.CPAR
     ),
 
     callwithresults: $ => $.call,

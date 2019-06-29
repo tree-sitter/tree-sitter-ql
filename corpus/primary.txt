@@ -83,3 +83,41 @@ select super.foo(), module::Foo.super.foo()
                       (lowerId ))
                     (OPAR )
                     (CPAR )))))))))))
+
+============
+postfix cast
+============
+
+select f.(Foo).thing()
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (postfix_cast 
+                        (primary 
+                          (variable 
+                            (varname 
+                              (simpleId 
+                                (lowerId )))))
+                        (DOT )
+                        (OPAR )
+                        (type 
+                          (classname 
+                            (upperId )))
+                        (CPAR )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR )))))))))))
