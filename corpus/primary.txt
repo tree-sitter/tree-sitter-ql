@@ -1,0 +1,34 @@
+======
+eparen
+======
+
+select (f).getAThing()
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (eparen 
+                        (OPAR )
+                        (expr 
+                          (primary 
+                            (variable 
+                              (varname 
+                                (simpleId 
+                                  (lowerId ))))))
+                        (CPAR )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR )))))))))))

@@ -16,7 +16,8 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$.int, $.float],
-    [$.qualId, $.varname]
+    [$.qualId, $.varname],
+    [$.formula, $.callwithresults]
   ],
 
   rules: {
@@ -336,7 +337,7 @@ module.exports = grammar({
     ),
 
     primary: $ => choice(
-      // $.eparen,
+      $.eparen,
       $.literal,
       $.variable,
       // $.super_expr,
@@ -345,6 +346,10 @@ module.exports = grammar({
       // $.aggregation,
       // $.any,
       // $.range,
+    ),
+
+    eparen: $ => seq(
+      $.OPAR, $.expr, $.CPAR
     ),
 
     literal: $ => choice(
