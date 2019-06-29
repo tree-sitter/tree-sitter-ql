@@ -347,7 +347,7 @@ module.exports = grammar({
       $.callwithresults,
       // $.aggregation,
       $.any,
-      // $.range,
+      $.range,
     ),
 
     eparen: $ => seq(

@@ -262,3 +262,33 @@ select
                           (OPAR )
                           (CPAR )))))
                   (CPAR ))))))))))
+
+=====
+range
+=====
+
+select [0..10]
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (range 
+                  (OBLOCK )
+                  (expr 
+                    (primary 
+                      (literal 
+                        (int ))))
+                  (RANGE )
+                  (expr 
+                    (primary 
+                      (literal 
+                        (int ))))
+                  (CBLOCK ))))))))))
