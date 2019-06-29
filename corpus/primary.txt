@@ -32,3 +32,54 @@ select (f).getAThing()
                       (lowerId ))
                     (OPAR )
                     (CPAR )))))))))))
+
+=====
+super
+=====
+
+select super.foo(), module::Foo.super.foo()
+
+---
+
+(source_file 
+  (ql 
+    (moduleBody 
+      (select 
+        (SELECT )
+        (as_exprs 
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (super_expr 
+                        (SUPER )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR ))))))
+          (COMMA )
+          (as_expr 
+            (expr 
+              (primary 
+                (callwithresults 
+                  (call 
+                    (primary 
+                      (super_expr 
+                        (type 
+                          (moduleId 
+                            (qualId 
+                              (simpleId 
+                                (lowerId ))))
+                          (SELECTION )
+                          (classname 
+                            (upperId )))
+                        (DOT )
+                        (SUPER )))
+                    (DOT )
+                    (predicateName 
+                      (lowerId ))
+                    (OPAR )
+                    (CPAR )))))))))))

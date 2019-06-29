@@ -17,6 +17,7 @@ module.exports = grammar({
   conflicts: $ => [
     [$.int, $.float],
     [$.qualId, $.varname],
+    [$.classname, $.simpleId],
     [$.formula, $.callwithresults]
   ],
 
@@ -340,7 +341,7 @@ module.exports = grammar({
       $.eparen,
       $.literal,
       $.variable,
-      // $.super_expr,
+      $.super_expr,
       // $.postfix_cast,
       $.callwithresults,
       // $.aggregation,
@@ -364,6 +365,13 @@ module.exports = grammar({
       $.varname,
       $.THIS,
       $.RESULT
+    ),
+
+    super_expr: $ => choice(
+      $.SUPER,
+      seq(
+        $.type, $.DOT, $.SUPER
+      )
     ),
 
     callwithresults: $ => $.call,

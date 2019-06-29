@@ -1,1 +1,1 @@
-select (f).getAThing()
+select super.foo(), module::Foo.super.foo()
