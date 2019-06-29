@@ -18,7 +18,8 @@ module.exports = grammar({
     [$.int, $.float],
     [$.qualId, $.varname],
     [$.classname, $.simpleId],
-    [$.formula, $.callwithresults]
+    [$.formula, $.callwithresults],
+    [$.literalId, $.any]
   ],
 
   rules: {
@@ -345,7 +346,7 @@ module.exports = grammar({
       $.postfix_cast,
       $.callwithresults,
       // $.aggregation,
-      // $.any,
+      $.any,
       // $.range,
     ),
 
@@ -376,6 +377,14 @@ module.exports = grammar({
 
     postfix_cast: $ => seq(
       $.primary, $.DOT, $.OPAR, $.type, $.CPAR
+    ),
+
+    any: $ => seq (
+      $.ANY, $.OPAR, $.var_decls, optional(seq(
+        $.BAR, optional($.formula), optional(seq(
+          $.BAR, $.expr
+        ))
+      )), $.CPAR
     ),
 
     callwithresults: $ => $.call,
