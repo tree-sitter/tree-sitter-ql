@@ -1,3 +1,8 @@
 
-from int i
-select i.foo+(), 1.foo(), 1.1.foo()
+from Foo f
+where exists(f.aThing())
+   or exists(Foo f | f.aThing())
+   or exists(Foo f | f.aThing() | f.aThing())
+   or forall(Foo f | f.aThing() | f.aThing())
+   or forex(Foo f | f.aThing() | f.aThing())
+select f

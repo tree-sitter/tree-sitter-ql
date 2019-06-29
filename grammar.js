@@ -260,7 +260,7 @@ module.exports = grammar({
       $.implies,
       $.ifthen,
       $.negated,
-      // $.quantified,
+      $.quantified,
       $.comparison,
       $.instanceof,
       $.inrange,
@@ -290,6 +290,13 @@ module.exports = grammar({
     negated: $ => prec.left(PREC.NEGATION, seq(
       $.NOT, $.formula
     )),
+
+    quantified: $ => choice(
+      seq($.EXISTS, $.OPAR, $.expr, $.CPAR),
+      seq($.EXISTS, $.OPAR, $.var_decls, optional(seq($.BAR, $.formula)), optional(seq($.BAR, $.formula)), $.CPAR),
+      seq($.FORALL, $.OPAR, $.var_decls, optional(seq($.BAR, $.formula)), $.BAR, $.formula, $.CPAR),
+      seq($.FOREX, $.OPAR, $.var_decls, optional(seq($.BAR, $.formula)), $.BAR, $.formula, $.CPAR),
+    ),
 
     comparison: $ => seq(
       $.expr, $.compop, $.expr
