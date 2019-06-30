@@ -5,7 +5,7 @@
   "repository": "https://github.com/samlanning/tree-sitter-ql",
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "tree-sitter-cli": "^0.15.3"
   },
   "scripts": {
