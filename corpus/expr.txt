@@ -7,3 +7,14 @@ select (Foo) f
 ---
 
 (source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (cast (OPAR) (type (classname (upperId))) (CPAR) (expr (primary (variable (varname (simpleId (lowerId))))))))))))))
+
+========
+dontcare
+========
+
+select _
+
+---
+
+(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (dontcare (UNDERSCORE))))))))) 
+

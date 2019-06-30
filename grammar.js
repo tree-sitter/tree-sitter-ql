@@ -332,7 +332,7 @@ module.exports = grammar({
     ),
 
     expr: $ => choice(
-      // $.dontcare,
+      $.dontcare,
       // $.unop,
       // $.binop,
       $.cast,
@@ -354,6 +354,8 @@ module.exports = grammar({
     eparen: $ => seq(
       $.OPAR, $.expr, $.CPAR
     ),
+
+    dontcare: $ => $.UNDERSCORE,
 
     literal: $ => choice(
       $.FALSE,
