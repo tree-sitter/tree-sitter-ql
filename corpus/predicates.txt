@@ -26,7 +26,7 @@ int predicateWithResult(){
 
 ---
 
-(source_file (ql (moduleBody (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (varname (simpleId (lowerId)))))) (compop) (expr (primary (variable (varname (simpleId (lowerId)))))))) (CBRACE))) (predicate (head (type (INT)) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop) (expr (primary (literal (int)))))) (CBRACE)))))) 
+(source_file (ql (moduleBody (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (varname (simpleId (lowerId)))))) (compop (EQ)) (expr (primary (variable (varname (simpleId (lowerId)))))))) (CBRACE))) (predicate (head (type (INT)) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop (EQ)) (expr (primary (literal (int)))))) (CBRACE)))))) 
 
 =====================
 higher-order relation

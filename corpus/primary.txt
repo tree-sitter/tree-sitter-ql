@@ -177,7 +177,7 @@ select
                             (varname 
                               (simpleId 
                                 (lowerId ))))))
-                      (compop )
+                      (compop (EQ))
                       (expr 
                         (primary 
                           (variable 
@@ -239,7 +239,7 @@ select
                             (varname 
                               (simpleId 
                                 (lowerId ))))))
-                      (compop )
+                      (compop (EQ))
                       (expr 
                         (primary 
                           (variable 

@@ -344,7 +344,7 @@ module.exports = grammar({
     ),
 
     compop: $ => choice(
-      '=', '!=', '<', '>', '<=', '>='
+      $.EQ, $.NE, $.LT, $.GT, $.LE, $.GE
     ),
 
     instanceof: $ => seq(
