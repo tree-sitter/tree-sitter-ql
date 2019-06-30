@@ -254,7 +254,22 @@ module.exports = grammar({
     optbody: $ => choice(
       $.SEMI,
       seq($.OBRACE, $.formula, $.CBRACE),
+      // (predicateRef "/" int ("," predicateRef "/" int)*)? ")" 
       // TODO: higher-order-predicates
+      seq(
+        $.EQ, $.literalId,
+        $.OPAR,
+        optional(seq(
+          $.predicateRef, $.SLASH, $.int,
+          repeat(seq(
+            $.COMMA, $.predicateRef, $.SLASH, $.int
+          ))
+        )),
+        $.CPAR,
+        $.OPAR,
+        optional($.exprs),
+        $.CPAR
+      )
     ),
 
     type: $ => seq(
