@@ -11,6 +11,10 @@
   "scripts": {
     "tree-sitter": "tree-sitter",
     "generate": "tree-sitter generate",
-    "test": "tree-sitter test"
+    "test": "tree-sitter test",
+    "build": "tree-sitter generate && node-gyp build"
+  },
+  "dependencies": {
+    "nan": "^2.14.0"
   }
 }
