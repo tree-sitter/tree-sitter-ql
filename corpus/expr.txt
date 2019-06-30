@@ -28,3 +28,13 @@ select - 5, + 5
 
 (source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (unop (MINUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (unop (PLUS) (expr (primary (literal (int))))))))))))
 
+=====
+binop
+=====
+
+select 5 + 5, 5 - 5, 5 * 5, 5 / 5, 5 % 5
+
+---
+
+(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (binop (expr (primary (literal (int)))) (PLUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (MINUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (STAR) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (SLASH) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (MOD) (expr (primary (literal (int)))))))))))) 
+

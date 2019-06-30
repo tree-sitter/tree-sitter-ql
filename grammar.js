@@ -3,7 +3,13 @@ const PREC = {
   CONDITIONAL: 4,
   CONJUNCTION: 3,
   DISJUNCTION: 2,
-  IMPLICATION: 1
+  IMPLICATION: 1,
+
+  MOD: 5,
+  DIV: 4,
+  MUL: 3,
+  MINUS: 2,
+  PLUS: 1
 };
 
 module.exports = grammar({
@@ -20,7 +26,8 @@ module.exports = grammar({
     [$.classname, $.simpleId],
     [$.formula, $.callwithresults],
     [$.literalId, $.any],
-    [$.as_expr, $.aggregation]
+    [$.as_expr, $.aggregation],
+    [$.simpleId, $.literalId]
   ],
 
   rules: {
@@ -334,7 +341,7 @@ module.exports = grammar({
     expr: $ => choice(
       $.dontcare,
       $.unop,
-      // $.binop,
+      $.binop,
       $.cast,
       $.primary,
     ),
@@ -368,6 +375,14 @@ module.exports = grammar({
     unop: $ => choice (
       seq($.PLUS, $.expr),
       seq($.MINUS, $.expr)
+    ),
+
+    binop: $ => choice (
+      prec.left(PREC.PLUS, seq($.expr, $.PLUS, $.expr)),
+      prec.left(PREC.MINUS, seq($.expr, $.MINUS, $.expr)),
+      prec.left(PREC.MUL, seq($.expr, $.STAR, $.expr)),
+      prec.left(PREC.DIV, seq($.expr, $.SLASH, $.expr)),
+      prec.left(PREC.MOD, seq($.expr, $.MOD, $.expr))
     ),
 
     variable: $ => choice(
