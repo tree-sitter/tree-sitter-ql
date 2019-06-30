@@ -18,3 +18,13 @@ select _
 
 (source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (dontcare (UNDERSCORE))))))))) 
 
+====
+unop
+====
+
+select - 5, + 5
+
+---
+
+(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (unop (MINUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (unop (PLUS) (expr (primary (literal (int))))))))))))
+

@@ -333,7 +333,7 @@ module.exports = grammar({
 
     expr: $ => choice(
       $.dontcare,
-      // $.unop,
+      $.unop,
       // $.binop,
       $.cast,
       $.primary,
@@ -363,6 +363,11 @@ module.exports = grammar({
       $.int,
       $.float,
       $.string
+    ),
+
+    unop: $ => choice (
+      seq($.PLUS, $.expr),
+      seq($.MINUS, $.expr)
     ),
 
     variable: $ => choice(
