@@ -1,15 +1,7 @@
-select
-  // left associative
-  5 + 5 - 5,
-  5 - 5 + 5,
-  // mul binds tighter
-  5 + 5 * 5,
-  5 + 5 / 5,
-  5 * 5 + 5,
-  5 / 5 + 5,
-  // left associative
-  5 / 5 * 5,
-  5 * 5 / 5,
-  // mod tighter,
-  5 * 5 % 5,
-  5 % 5 * 5
+predicate foo(F f){
+  f = f
+}
+
+int predicateWithResult(){
+  result = 43
+}

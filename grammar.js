@@ -153,7 +153,7 @@ module.exports = grammar({
     moduleBody: $ => repeat1(
       choice(
         $.import,
-        // $.predicate,
+        $.predicate,
         // $.class,
         // $.module,
         // $.alias,
@@ -199,6 +199,10 @@ module.exports = grammar({
       $.simpleId, optional(choice($.ASC, $.DESC))
     ),
 
+    predicate: $ => seq(
+      repeat($.annotation), $.head, $.optbody
+    ),
+
     annotation: $ => choice(
       $.simpleAnnotation, $.argsAnnotation
     ),
@@ -238,6 +242,19 @@ module.exports = grammar({
         )),
         $.CBLOCK
       )
+    ),
+
+    head: $ => seq(
+      choice(
+        $.PREDICATE, $.type
+      ),
+      $.predicateName, $.OPAR, optional($.var_decls), $.CPAR
+    ),
+
+    optbody: $ => choice(
+      $.SEMI,
+      seq($.OBRACE, $.formula, $.CBRACE),
+      // TODO: higher-order-predicates
     ),
 
     type: $ => seq(

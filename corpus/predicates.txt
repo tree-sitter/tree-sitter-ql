@@ -1,0 +1,29 @@
+=======
+no-body
+=======
+
+predicate foo();
+
+module::Type foo(int arg, Foo arg);
+
+---
+
+(source_file (ql (moduleBody
+  (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (SEMI)))
+  (predicate (head (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (predicateName (lowerId)) (OPAR) (var_decls (var_decl (type (INT)) (simpleId (lowerId))) (COMMA) (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR)) (optbody (SEMI))))))
+
+================
+simple predicate
+================
+
+predicate foo(F f){
+  f = f
+}
+
+int predicateWithResult(){
+  result = 43
+}
+
+---
+
+(source_file (ql (moduleBody (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (varname (simpleId (lowerId)))))) (compop) (expr (primary (variable (varname (simpleId (lowerId)))))))) (CBRACE))) (predicate (head (type (INT)) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop) (expr (primary (literal (int)))))) (CBRACE)))))) 
