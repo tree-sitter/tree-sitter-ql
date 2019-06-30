@@ -5,10 +5,10 @@ const PREC = {
   DISJUNCTION: 2,
   IMPLICATION: 1,
 
-  MOD: 5,
-  DIV: 4,
-  MUL: 3,
-  MINUS: 2,
+  MOD: 3,
+  DIV: 2,
+  MUL: 2,
+  MINUS: 1,
   PLUS: 1
 };
 
