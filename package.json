@@ -2,6 +2,10 @@
   "name": "tree-sitter-ql",
   "version": "1.0.0",
   "description": "tree-sitter grammar for Semmle QL",
+  "keywords": [
+    "tree-sitter",
+    "semmle-ql"
+  ],
   "repository": "https://github.com/samlanning/tree-sitter-ql",
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
