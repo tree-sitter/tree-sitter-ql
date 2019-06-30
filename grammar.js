@@ -335,7 +335,7 @@ module.exports = grammar({
       // $.dontcare,
       // $.unop,
       // $.binop,
-      // $.cast,
+      $.cast,
       $.primary,
     ),
 
@@ -374,6 +374,10 @@ module.exports = grammar({
       seq(
         $.type, $.DOT, $.SUPER
       )
+    ),
+
+    cast: $ => seq(
+      $.OPAR, $.type, $.CPAR, $.expr
     ),
 
     postfix_cast: $ => seq(
