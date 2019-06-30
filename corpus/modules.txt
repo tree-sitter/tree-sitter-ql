@@ -1,0 +1,19 @@
+======
+module
+======
+
+module foo {
+  module bar {
+    import woo;
+
+    predicate baz();
+  }
+}
+
+---
+
+(source_file (ql (moduleBody
+  (module (MODULE) (modulename (simpleId (lowerId))) (OBRACE) (moduleBody
+    (module (MODULE) (modulename (simpleId (lowerId))) (OBRACE) (moduleBody
+      (import (IMPORT) (moduleId (qualId (simpleId (lowerId))))) (ERROR (SEMI))
+      (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (SEMI)))) (CBRACE))) (CBRACE)))))

@@ -4,7 +4,7 @@ no-body
 
 predicate foo();
 
-module::Type foo(int arg, Foo arg);
+mod::Type foo(int arg, Foo arg);
 
 ---
 

@@ -155,7 +155,7 @@ module.exports = grammar({
         $.import,
         $.predicate,
         // $.class,
-        // $.module,
+        $.module,
         // $.alias,
         $.select
       )
