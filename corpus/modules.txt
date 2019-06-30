@@ -17,3 +17,13 @@ module foo {
     (module (MODULE) (modulename (simpleId (lowerId))) (OBRACE) (moduleBody
       (import (IMPORT) (moduleId (qualId (simpleId (lowerId))))) (ERROR (SEMI))
       (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (SEMI)))) (CBRACE))) (CBRACE)))))
+
+============
+module alias
+============
+
+module foo = bar::baz;
+
+---
+
+(source_file (ql (moduleBody (alias (MODULE) (modulename (simpleId (lowerId))) (EQ) (moduleId (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (simpleId (lowerId))) (SEMI)))))

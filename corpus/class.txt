@@ -40,3 +40,13 @@ class X extends Y {
 ---
 
 (source_file (ql (moduleBody (class (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (member (field (var_decl (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (simpleId (lowerId))) (SEMI))) (member (predicate (head (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop (EQ)) (expr (primary (variable (varname (simpleId (lowerId)))))))) (ERROR (SEMI)) (CBRACE)))) (CBRACE)))))
+
+===========
+class alias
+===========
+
+class X = foo::Bas;
+
+---
+
+(source_file (ql (moduleBody (alias (CLASS) (classname (upperId)) (EQ) (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (SEMI)))))

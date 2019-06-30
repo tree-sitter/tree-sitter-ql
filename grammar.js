@@ -156,7 +156,7 @@ module.exports = grammar({
         $.predicate,
         $.class,
         $.module,
-        // $.alias,
+        $.alias,
         $.select
       )
     ),
@@ -303,6 +303,18 @@ module.exports = grammar({
 
     exprs: $ => seq(
       $.expr, repeat(seq($.COMMA, $.expr))
+    ),
+
+    alias: $ => choice(
+      seq(
+        repeat($.annotation), $.PREDICATE, $.literalId, $.EQ, $.predicateRef, $.SLASH, $.int, $.SEMI
+      ),
+      seq(
+        repeat($.annotation), $.CLASS, $.classname, $.EQ, $.type, $.SEMI
+      ),
+      seq(
+        repeat($.annotation), $.MODULE, $.modulename, $.EQ, $.moduleId, $.SEMI
+      )
     ),
 
     var_decls: $ => seq(

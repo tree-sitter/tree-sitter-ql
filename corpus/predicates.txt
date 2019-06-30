@@ -40,3 +40,13 @@ int foo(X x, Y y) = name(pred1/1, pred2/3)(x.x(), result)
 (source_file (ql (moduleBody
   (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (EQ) (literalId (atlowerId)) (OPAR) (CPAR) (OPAR) (CPAR)))
   (predicate (head (type (INT)) (predicateName (lowerId)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId))) (COMMA) (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR)) (optbody (EQ) (literalId (lowerId)) (OPAR) (predicateRef (literalId (lowerId))) (SLASH) (int) (COMMA) (predicateRef (literalId (lowerId))) (SLASH) (int) (CPAR) (OPAR) (exprs (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))) (COMMA) (expr (primary (variable (RESULT))))) (CPAR))))))
+
+===============
+predicate alias
+===============
+
+predicate foo = somePredicate/12;
+
+---
+
+(source_file (ql (moduleBody (alias (PREDICATE) (literalId (lowerId)) (EQ) (predicateRef (literalId (lowerId))) (SLASH) (int) (SEMI)))))
