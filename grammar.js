@@ -154,7 +154,7 @@ module.exports = grammar({
       choice(
         $.import,
         $.predicate,
-        // $.class,
+        $.class,
         $.module,
         // $.alias,
         $.select
@@ -268,6 +268,25 @@ module.exports = grammar({
         optional($.exprs),
         $.CPAR
       )
+    ),
+
+    class: $ => seq(
+      repeat($.annotation), $.CLASS, $.classname, $.EXTENDS, $.type,
+      repeat(seq($.COMMA, $.type)),
+      $.OBRACE, repeat($.member), $.CBRACE
+    ),
+
+    member: $ => choice(
+      $.character, $.predicate, $.field
+    ),
+
+    character: $ => seq(
+      repeat($.annotation), $.classname, $.OPAR, $.CPAR,
+      $.OBRACE, $.formula, $.CBRACE
+    ),
+
+    field: $ => seq(
+      repeat($.annotation), $.var_decl, $.SEMI
     ),
 
     type: $ => seq(

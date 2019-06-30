@@ -1,0 +1,42 @@
+===========
+empty class
+===========
+
+class Foo extends Bar {}
+
+---
+
+(source_file (ql (moduleBody (class (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (CBRACE))))) 
+
+===================================
+class with characteristic predicate
+===================================
+
+abstract class Foo extends Bar {
+
+  pragma[inline]
+  Foo() {
+    this = this
+  }
+
+}
+
+---
+
+(source_file (ql (moduleBody (class (annotation (simpleAnnotation)) (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (ERROR (OBLOCK) (IN) (UNEXPECTED 'n') (UNEXPECTED ']') (CBLOCK)) (member (character (classname (upperId)) (OPAR) (CPAR) (OBRACE) (formula (comparison (expr (primary (variable (THIS)))) (compop (EQ)) (expr (primary (variable (THIS)))))) (CBRACE))) (CBRACE))))) 
+
+==================
+class with members
+==================
+
+class X extends Y {
+  m::F f;
+
+  m::F a() {
+    result = f;
+  }
+}
+
+---
+
+(source_file (ql (moduleBody (class (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (member (field (var_decl (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (simpleId (lowerId))) (SEMI))) (member (predicate (head (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop (EQ)) (expr (primary (variable (varname (simpleId (lowerId)))))))) (ERROR (SEMI)) (CBRACE)))) (CBRACE)))))
