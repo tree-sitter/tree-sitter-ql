@@ -19,7 +19,8 @@ module.exports = grammar({
     [$.qualId, $.varname],
     [$.classname, $.simpleId],
     [$.formula, $.callwithresults],
-    [$.literalId, $.any]
+    [$.literalId, $.any],
+    [$.as_expr, $.aggregation]
   ],
 
   rules: {
@@ -345,7 +346,7 @@ module.exports = grammar({
       $.super_expr,
       $.postfix_cast,
       $.callwithresults,
-      // $.aggregation,
+      $.aggregation,
       $.any,
       $.range,
     ),
@@ -377,6 +378,47 @@ module.exports = grammar({
 
     postfix_cast: $ => seq(
       $.primary, $.DOT, $.OPAR, $.type, $.CPAR
+    ),
+
+    aggregation: $ => choice(
+      seq(
+        $.aggid,
+        optional(seq($.OBLOCK, $.expr, $.CBLOCK)),
+        $.OPAR,
+        optional($.var_decls),
+        optional(seq(
+          $.BAR, optional($.formula),
+          optional(seq(
+            $.BAR, $.as_exprs,
+            optional(seq(
+              $.ORDER, $.BY, $.aggorderbys
+            ))
+          ))
+        )),
+        $.CPAR
+      ),
+      seq(
+        $.aggid,
+        optional(seq($.OPAR, $.expr, $.CPAR)),
+        $.OPAR,
+        $.as_exprs,
+        optional(seq(
+          $.ORDER, $.BY, $.aggorderbys
+        )),
+        $.CPAR
+      )
+    ),
+
+    aggid: $ => choice(
+      $.AVG, $.CONCAT, $.COUNT, $.MAX, $.MIN, $.RANK, $.STRICTCONCAT, $.STRICTCOUNT, $.STRICTSUM, $.SUM
+    ),
+
+    aggorderbys: $ => seq(
+      $.aggorderby, repeat(seq($.COMMA, $.aggorderby))
+    ),
+
+    aggorderby: $ => seq(
+      $.expr, optional(choice($.ASC, $.DESC))
     ),
 
     any: $ => seq (

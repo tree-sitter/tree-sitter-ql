@@ -292,3 +292,23 @@ select [0..10]
                       (literal 
                         (int ))))
                   (CBLOCK ))))))))))
+
+==========
+aggregates
+==========
+
+select
+  rank[123](Foo f),
+  count(f.thing()),
+  count(f.thing() as thing order by thing asc, thing desc),
+  count(Foo f),
+  count(Foo f | f.thing() ),
+  sum(Foo f | | f.x() ),
+  sum(Foo f | | f.x() as x),
+  sum(Foo f | | f.x() as x order by x),
+  sum(Foo f | | f.x() as x order by x asc, f.y()),
+  sum(Foo f | f.thing() | f.x() )
+
+---
+
+(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (primary (aggregation (aggid (RANK)) (OBLOCK) (expr (primary (literal (int)))) (CBLOCK) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (COUNT)) (OPAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (COUNT)) (OPAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))) (AS) (simpleId (lowerId)))) (ORDER) (BY) (aggorderbys (aggorderby (expr (primary (variable (varname (simpleId (lowerId)))))) (ASC)) (COMMA) (aggorderby (expr (primary (variable (varname (simpleId (lowerId)))))) (DESC))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (COUNT)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (COUNT)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (formula (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (SUM)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (BAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (SUM)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (BAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))) (AS) (simpleId (lowerId)))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (SUM)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (BAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))) (AS) (simpleId (lowerId)))) (ORDER) (BY) (aggorderbys (aggorderby (expr (primary (variable (varname (simpleId (lowerId)))))))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (SUM)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (BAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))) (AS) (simpleId (lowerId)))) (ORDER) (BY) (aggorderbys (aggorderby (expr (primary (variable (varname (simpleId (lowerId)))))) (ASC)) (COMMA) (aggorderby (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))))) (CPAR))))) (COMMA) (as_expr (expr (primary (aggregation (aggid (SUM)) (OPAR) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId)))) (BAR) (formula (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))) (BAR) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR))))))) (CPAR))))))))))
