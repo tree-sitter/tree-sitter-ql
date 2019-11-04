@@ -1,0 +1,11 @@
+=========================
+dataflow example from ctf
+=========================
+
+from Configuration cfg, DataFlow::PathNode source, DataFlow::PathNode sink
+where cfg.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, "Potential XSS vulnerability in plugin."
+
+---
+
+(source_file (ql (moduleBody (select (FROM) (var_decls (var_decl (type (classname (upperId))) (simpleId (lowerId))) (COMMA) (var_decl (type (moduleId (qualId (simpleId (upperId)))) (SELECTION) (classname (upperId))) (simpleId (lowerId))) (COMMA) (var_decl (type (moduleId (qualId (simpleId (upperId)))) (SELECTION) (classname (upperId))) (simpleId (lowerId)))) (WHERE) (formula (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (exprs (expr (primary (variable (varname (simpleId (lowerId)))))) (COMMA) (expr (primary (variable (varname (simpleId (lowerId))))))) (CPAR))) (SELECT) (as_exprs (as_expr (expr (primary (callwithresults (call (primary (variable (varname (simpleId (lowerId))))) (DOT) (predicateName (lowerId)) (OPAR) (CPAR)))))) (COMMA) (as_expr (expr (primary (variable (varname (simpleId (lowerId))))))) (COMMA) (as_expr (expr (primary (variable (varname (simpleId (lowerId))))))) (COMMA) (as_expr (expr (primary (literal (string)))))))))) 
