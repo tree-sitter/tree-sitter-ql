@@ -1,30 +1,3 @@
-// symbols
-const LT = '<';
-const LE = '<=';
-const EQ = '=';
-const GT = '>';
-const GE = '>=';
-const UNDERSCORE = '_';
-const MINUS = '-';
-const COMMA = ',';
-const SEMI = ';';
-const NE = '!=';
-const SLASH = '/';
-const DOT = '.';
-const RANGE = '..';
-const OPAR = '(';
-const CPAR = ')';
-const OBLOCK = '[';
-const CBLOCK = ']';
-const OBRACE = '{';
-const CBRACE = '}';
-const STAR = '*';
-const MOD = '%';
-const PLUS = '+';
-const BAR = '|';
-const SELECTION = '::';
-
-
 module.exports = grammar({
   name: 'ql',
   conflicts: $ => [
@@ -203,7 +176,7 @@ module.exports = grammar({
         $.cpar)                         // QuantifiedTerm
     ),
 
-    specialId: $ => choice($.any, $.none),
+    specialId: $ => $.none,
 
     quantifier: $ => choice($.exists, $.forall, $.forex),
 
@@ -309,7 +282,7 @@ module.exports = grammar({
 
     importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq($.selection, $.simpleId))),
 
-    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, SELECTION,$.simpleId)),
+    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, $.selection,$.simpleId)),
 
     typeLiteral: $ => choice($.atLowerId, $.boolean, $.date, 'float', 'int', 'string'),
 
@@ -332,7 +305,7 @@ module.exports = grammar({
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, $.slash, $.integer),
 
-    varname: $ => $.simpleId,
+    varName: $ => $.simpleId,
 
     aggId: $ => choice($.avg, $.concat, $.strictoncat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
 
