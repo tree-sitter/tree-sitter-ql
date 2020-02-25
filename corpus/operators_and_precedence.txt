@@ -464,3 +464,20 @@ select f
                   (varname 
                     (simpleId 
                       (lowerId ))))))))))))
+
+
+==========
+call vs plus
+==========
+
+select a+(b)
+
+---
+
+==========
+cast vs subtract
+==========
+
+select (A)-(b)
+
+---

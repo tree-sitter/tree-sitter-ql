@@ -1,11 +1,36 @@
+// symbols
+const LT = '<';
+const LE = '<=';
+const EQ = '=';
+const GT = '>';
+const GE = '>=';
+const UNDERSCORE = '_';
+const MINUS = '-';
+const COMMA = ',';
+const SEMI = ';';
+const NE = '!=';
+const SLASH = '/';
+const DOT = '.';
+const RANGE = '..';
+const OPAR = '(';
+const CPAR = ')';
+const OBLOCK = '[';
+const CBLOCK = ']';
+const OBRACE = '{';
+const CBRACE = '}';
+const STAR = '*';
+const MOD = '%';
+const PLUS = '+';
+const BAR = '|';
+const SELECTION = '::';
+
+
 module.exports = grammar({
-  name: 'QL',
+  name: 'ql',
   conflicts: $ => [
-    [$.moduleExpr],
-    [$.specialId, $.aggId],
     [$.simpleId, $.typeExpr],
     [$.simpleId, $.literalId],
-    [$.varDecl, $.returnType]
+    [$.varDecl, $.returnType],
   ],
   word: $ => $.lowerId,
   extras: $ => [
@@ -13,6 +38,7 @@ module.exports = grammar({
     $.line_comment,
     $.block_comment,
   ],
+
 
   rules: {
 
@@ -24,7 +50,7 @@ module.exports = grammar({
       seq(
         repeat($.annotation),
         choice($.imprt, $.classlessPredicate, $.dataclass, $.datatype, $.select, $.module)
-      ),
+      ), 
       $.qldoc
     ),
 
@@ -107,7 +133,7 @@ module.exports = grammar({
 
     exprOrTerm: $ => choice(
       seq($.specialId, $.opar, $.cpar),                                        // SpecialCall
-      seq($.opar, $.typeExpr, $.cpar, $.exprOrTerm),                             // Cast
+      prec.dynamic(10, seq($.opar, $.typeExpr, $.cpar, $.exprOrTerm)),                             // Cast
       $.primary,                                                           // PrimaryTerm
       seq($.unop, $.exprOrTerm),                                             // Unary
       prec.left(9,                                                       // MulOperation
@@ -190,7 +216,7 @@ module.exports = grammar({
       seq($.predicateName, optional($.closure), $.opar, sep($.callArg, $.comma), $.cpar), //QualCall
       seq($.opar, $.typeExpr, $.cpar)                                        // QualCast
     ),
-
+    
     primary: $ => choice(
       seq($.aritylessPredicateExpr, optional($.closure), $.opar, sep($.callArg, $.comma), $.cpar), // PredicateAtomExpr
       seq($.primary, $.dot, $.qualifiedRhs),                                        // QualifiedExpr
@@ -223,7 +249,7 @@ module.exports = grammar({
       ),
       seq($.opar, $.exprOrTerm, $.cpar)                                                 // ParExpr
     ),
-
+    
     literal: $ => choice(
       $.integer,     // IntLit
       $.float,       // FloatLit
@@ -257,10 +283,8 @@ module.exports = grammar({
     orderBys: $ => seq($.order, $.by, sep1($.orderBy, $.comma)),
 
     orderBy: $ => seq($.exprOrTerm, optional($.direction)),
-
+    
     qldoc: $ => /\/\*\*[^*]*\*+([^/*][^*]*\*+)*\//,
-
-
 
     literalId: $ => choice($.lowerId, $.atLowerId, $.upperId),
 
@@ -285,7 +309,7 @@ module.exports = grammar({
 
     importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq($.selection, $.simpleId))),
 
-    moduleExpr: $ => sep1($.simpleId, $.selection),
+    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, SELECTION,$.simpleId)),
 
     typeLiteral: $ => choice($.atLowerId, $.boolean, $.date, 'float', 'int', 'string'),
 
@@ -308,7 +332,7 @@ module.exports = grammar({
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, $.slash, $.integer),
 
-    varName: $ => $.simpleId,
+    varname: $ => $.simpleId,
 
     aggId: $ => choice($.avg, $.concat, $.strictoncat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
 
@@ -398,5 +422,5 @@ function sep(rule, s) {
 }
 
 function sep1(rule, s) {
-  return seq(rule, repeat(seq(s, rule)))
+  return seq(rule,repeat(seq(s,rule)))
 }
