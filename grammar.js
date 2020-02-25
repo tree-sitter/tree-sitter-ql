@@ -1,3 +1,52 @@
+const AND = 'and';
+const ANY = 'any';
+const AS = 'as';
+const ASC = 'asc';
+const AVG = 'avg';
+const BOOLEAN = 'boolean';
+const BY = 'by';
+const CLASS = 'class';
+const NEWTYPE = 'newtype';
+const COUNT = 'count';
+const DATE = 'date';
+const DESC = 'desc';
+const ELSE = 'else';
+const EXISTS = 'exists';
+const EXTENDS = 'extends';
+const FALSE = 'false';
+const FLOAT = 'float';
+const FORALL = 'forall';
+const FOREX = 'forex';
+const FROM = 'from';
+const IF = 'if';
+const IMPLIES = 'implies';
+const IMPORT = 'import';
+const IN = 'in';
+const INSTANCEOF = 'instanceof';
+const INT = 'int';
+const MAX = 'max';
+const MIN = 'min';
+const MODULE = 'module';
+const NOT = 'not';
+const NONE = 'none';
+const OR = 'or';
+const ORDER = 'order';
+const PREDICATE = 'predicate';
+const RANK = 'rank';
+const RESULT = 'result';
+const SELECT = 'select';
+const STRICTCOUNT = 'strictcount';
+const STRICTSUM = 'strictsum';
+const STRICTCONCAT = 'strictconcat';
+const CONCAT = 'concat';
+const STRING = 'string';
+const SUM = 'sum';
+const SUPER = 'super';
+const THEN = 'then';
+const THIS = 'this';
+const TRUE = 'true';
+const WHERE = 'where';
+
 // symbols
 const LT = '<';
 const LE = '<=';
@@ -26,13 +75,11 @@ const SELECTION = '::';
 
 
 module.exports = grammar({
-  name: 'QL',
+  name: 'ql',
   conflicts: $ => [
-    [$.moduleExpr],
-    [$.specialId, $.aggId],
     [$.simpleId, $.typeExpr],
     [$.simpleId, $.literalId],
-    [$.varDecl, $.returnType]
+    [$.varDecl, $.returnType],
   ],
   word: $ => $.lowerId,
   extras: $ => [
@@ -41,26 +88,27 @@ module.exports = grammar({
     $.block_comment,
   ],
 
+
   rules: {
 
     ql: $ => repeat($.moduleMember),
 
     module: $ => seq(MODULE, $.moduleName, choice(seq(OBRACE, repeat($.moduleMember), CBRACE), $.moduleAliasBody)),
-
+    
     moduleMember: $ => choice(
       seq(
         repeat($.annotation),
         choice($.imprt, $.classlessPredicate, $.dataclass, $.datatype, $.select, $.module)
-      ),
+      ), 
       $.qldoc
     ),
 
     imprt: $ => seq(IMPORT, $.importModuleExpr, optional(seq(AS, $.moduleName))),
-
+    
     moduleAliasBody: $ => seq(EQ, $.moduleExpr, SEMI),
     predicateAliasBody: $ => seq(EQ, $.predicateExpr, SEMI),
     typeAliasBody: $ => seq(EQ, $.typeExpr, SEMI),
-
+    
     classlessPredicate: $ => seq(
       $.returnType,
       $.predicateName,
@@ -72,7 +120,7 @@ module.exports = grammar({
 
     datatype: $ => seq(NEWTYPE, $.className, EQ, $.datatypeBranches),
     datatypeBranches: $ => sep1($.datatypeBranch, OR),
-
+    
     datatypeBranch: $ => seq(
       optional($.qldoc),
       optional($.annotation),
@@ -110,18 +158,18 @@ module.exports = grammar({
     memberPredicate: $ => seq($.returnType, $.predicateName, OPAR, sep($.varDecl, COMMA), CPAR, $.optbody),
 
     field: $ => seq($.varDecl, SEMI),
-
+    
     optbody: $ => choice(
       $.empty,
       $.body,
       $.higherOrderTerm
       ),
-
-
+  
+            
     empty: $ => SEMI,
-
+    
     body: $ => seq(OBRACE, $.exprOrTerm, CBRACE),
-
+    
     higherOrderTerm: $ => seq(
       EQ,
       field('name', $.literalId),
@@ -135,7 +183,7 @@ module.exports = grammar({
 
     exprOrTerm: $ => choice(
       seq($.specialId, OPAR, CPAR),                                        // SpecialCall
-      seq(OPAR, $.typeExpr, CPAR, $.exprOrTerm),                             // Cast
+      prec.dynamic(10, seq(OPAR, $.typeExpr, CPAR, $.exprOrTerm)),                             // Cast
       $.primary,                                                           // PrimaryTerm
       seq($.unop, $.exprOrTerm),                                             // Unary
       prec.left(9,                                                       // MulOperation
@@ -204,21 +252,21 @@ module.exports = grammar({
         ),
         CPAR)                         // QuantifiedTerm
     ),
-
-    specialId: $ => choice(ANY, NONE),
-
+    
+    specialId: $ => choice(NONE),
+    
     quantifier: $ => choice(EXISTS, FORALL, FOREX),
-
+    
     callArg: $ => choice(
       $.exprOrTerm,  // ExprArg
       UNDERSCORE  // DontCare
-    ),
-
+    ),      
+    
     qualifiedRhs: $ => choice(
       seq($.predicateName, optional($.closure), OPAR, sep($.callArg, COMMA), CPAR), //QualCall
       seq(OPAR, $.typeExpr, CPAR)                                        // QualCast
     ),
-
+    
     primary: $ => choice(
       seq($.aritylessPredicateExpr, optional($.closure), OPAR, sep($.callArg, COMMA), CPAR), // PredicateAtomExpr
       seq($.primary, DOT, $.qualifiedRhs),                                        // QualifiedExpr
@@ -251,44 +299,44 @@ module.exports = grammar({
       ),
       seq(OPAR, $.exprOrTerm, CPAR)                                                 // ParExpr
     ),
-
+    
     literal: $ => choice(
       $.integer,     // IntLit
       $.float,       // FloatLit
       $.bool,        // BoolLit
       $.string       // StringLit
     ),
-
-
+           
+    
     bool: $ => choice(TRUE, FALSE),
-
-    variable: $ => choice(THIS, RESULT, $.varName),
-
+    
+    variable: $ => choice(THIS, RESULT, $.varname), 
+    
     compop: $ => choice(EQ, NE, LT, GT, LE, GE),
-
+    
     unop: $ => choice(PLUS, MINUS),
-
+    
     mulop: $ => choice(STAR, SLASH, MOD),
-
+    
     addop : $ => choice(PLUS, MINUS),
-
+      
     closure : $ => choice(STAR, PLUS),
-
+    
     direction: $ => choice(ASC, DESC),
-
-    varDecl: $ => seq($.typeExpr, $.varName),
-
+       
+    varDecl: $ => seq($.typeExpr, $.varname),
+    
     asExprs : $ => sep1($.asExpr, COMMA),
-
+    
     asExpr: $ => seq($.exprOrTerm, optional(seq(AS, $.simpleId))),
-
+    
     orderBys: $ => seq(ORDER, BY, sep1($.orderBy, COMMA)),
-
+    
     orderBy: $ => seq($.exprOrTerm, optional($.direction)),
-
+    
     qldoc: $ => /\/\*\*[^*]*\*+([^/*][^*]*\*+)*\//,
 
-
+    
     simpleId: $ => choice($.lowerId, $.upperId),
 
     literalId: $ => choice($.lowerId, $.atLowerId, $.upperId),
@@ -314,7 +362,7 @@ module.exports = grammar({
 
     importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq(SELECTION, $.simpleId))),
 
-    moduleExpr: $ => sep1($.simpleId, SELECTION),
+    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, SELECTION,$.simpleId)),
 
     typeLiteral: $ => choice($.atLowerId, BOOLEAN, DATE, FLOAT, INT, STRING),
 
@@ -335,7 +383,7 @@ module.exports = grammar({
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, SLASH, $.integer),
 
-    varName: $ => $.simpleId,
+    varname: $ => $.simpleId,
 
     aggId: $ => choice(AVG, CONCAT, STRICTCONCAT, COUNT, MAX, MIN, RANK, STRICTCOUNT, STRICTSUM, SUM, ANY),
 
@@ -348,56 +396,6 @@ module.exports = grammar({
     line_comment: $ => /\/\/[^\r\n]*/,
     block_comment: $ => /\/\*([^*]+\*+([^/*][^*]*\*+)*|\*)\//,
 
-    const AND = 'and';
-    const ANY = 'any';
-    const AS = 'as';
-    const ASC = 'asc';
-    const AVG = 'avg';
-    const BOOLEAN = 'boolean';
-    const BY = 'by';
-    const CLASS = 'class';
-    const NEWTYPE = 'newtype';
-    const COUNT = 'count';
-    const DATE = 'date';
-    const DESC = 'desc';
-    const ELSE = 'else';
-    const EXISTS = 'exists';
-    const EXTENDS = 'extends';
-    const FALSE = 'false';
-    const FLOAT = 'float';
-    const FORALL = 'forall';
-    const FOREX = 'forex';
-    const FROM = 'from';
-    const IF = 'if';
-    const IMPLIES = 'implies';
-    const IMPORT = 'import';
-    const IN = 'in';
-    const INSTANCEOF = 'instanceof';
-    const INT = 'int';
-    const MAX = 'max';
-    const MIN = 'min';
-    const MODULE = 'module';
-    const NOT = 'not';
-    const NONE = 'none';
-    const OR = 'or';
-    const ORDER = 'order';
-    const PREDICATE = 'predicate';
-    const RANK = 'rank';
-    const RESULT = 'result';
-    const SELECT = 'select';
-    const STRICTCOUNT = 'strictcount';
-    const STRICTSUM = 'strictsum';
-    const STRICTCONCAT = 'strictconcat';
-    const CONCAT = 'concat';
-    const STRING = 'string';
-    const SUM = 'sum';
-    const SUPER = 'super';
-    const THEN = 'then';
-    const THIS = 'this';
-    const TRUE = 'true';
-    const WHERE = 'where';
-
-
   }
 });
 
@@ -406,5 +404,5 @@ function sep(rule, s) {
 }
 
 function sep1(rule, s) {
-  return seq(rule, repeat(seq(s, rule)))
+  return seq(rule,repeat(seq(s,rule)))
 }
