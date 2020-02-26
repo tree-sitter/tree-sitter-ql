@@ -1,4 +1,4 @@
-predicate foo(F f){
+private predicate foo(F f){
   f = f
 }
 

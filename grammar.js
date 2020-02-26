@@ -307,13 +307,13 @@ module.exports = grammar({
 
     varName: $ => $.simpleId,
 
-    aggId: $ => choice($.avg, $.concat, $.strictoncat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
+    aggId: $ => choice($.avg, $.concat, $.strictconcat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
 
     upperId: $ => /[A-Z][A-Za-z0-9_]*/,
     lowerId: $ => /[a-z][A-Za-z0-9_]*/,
     atLowerId: $ => /@[a-z][A-Za-z0-9_]*/,
-    integer: $ => /[+-]?[0-9]+/,
-    float: $ => /[+-]?[0-9]+\.[0-9]+/,
+    integer: $ => /[0-9]+/,
+    float: $ => /[0-9]+\.[0-9]+/,
     string: $ => /"([^"\\\r\n\t]|\\["\\nrt])*"/,
     line_comment: $ => /\/\/[^\r\n]*/,
     block_comment: $ => /\/\*([^*]+\*+([^/*][^*]*\*+)*|\*)\//,
@@ -353,7 +353,7 @@ module.exports = grammar({
     result: $ => 'result',
     strictcount: $ => 'strictcount',
     strictsum: $ => 'strictsum',
-    strictoncat: $ => 'strictconcat',
+    strictconcat: $ => 'strictconcat',
     concat: $ => 'concat',
     sum: $ => 'sum',
     super: $ => 'super',
