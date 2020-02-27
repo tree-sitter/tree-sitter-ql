@@ -85,8 +85,11 @@
 (integer) @number
 (float) @number 
 
+(string) @string 
+
 (aritylessPredicateExpr (literalId) @function)
 (predicateName) @function
 
 (line_comment) @comment
 (block_comment) @comment
+(qldoc) @comment
