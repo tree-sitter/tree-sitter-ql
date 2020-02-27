@@ -5,19 +5,15 @@ cast
 select (Foo) f
 
 ---
-
-(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (cast (OPAR) (type (classname (upperId))) (CPAR) (expr (primary (variable (varname (simpleId (lowerId))))))))))))))
-
+(ql (moduleMember (select (asExprs (asExpr (prefix_cast (typeExpr (className)) (variable (varName (simpleId)))))))))
 ========
 dontcare
 ========
 
-select _
+select foo(_)
 
 ---
-
-(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (dontcare (UNDERSCORE))))))))) 
-
+(ql (moduleMember (select (asExprs (asExpr (classless_predicate_call (aritylessPredicateExpr (literalId)) (underscore)))))))
 ====
 unop
 ====
@@ -25,9 +21,7 @@ unop
 select - 5, + 5
 
 ---
-
-(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (unop (MINUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (unop (PLUS) (expr (primary (literal (int))))))))))))
-
+ (ql (moduleMember (select (asExprs (asExpr (unary_expr (unop (minus)) (literal (integer)))) (asExpr (unary_expr (unop (plus)) (literal (integer))))))))
 =====
 binop
 =====
@@ -36,7 +30,14 @@ select 5 + 5, 5 - 5, 5 * 5, 5 / 5, 5 % 5
 
 ---
 
-(source_file (ql (moduleBody (select (SELECT) (as_exprs (as_expr (expr (binop (expr (primary (literal (int)))) (PLUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (MINUS) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (STAR) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (SLASH) (expr (primary (literal (int))))))) (COMMA) (as_expr (expr (binop (expr (primary (literal (int)))) (MOD) (expr (primary (literal (int)))))))))))) 
+(ql (moduleMember 
+  (select 
+    (asExprs 
+      (asExpr (add_expr (literal (integer)) (addop (plus)) (literal (integer)))) 
+      (asExpr (add_expr (literal (integer)) (addop (minus)) (literal (integer)))) 
+      (asExpr (mul_expr (literal (integer)) (mulop (star)) (literal (integer)))) 
+      (asExpr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer)))) 
+      (asExpr (mul_expr (literal (integer)) (mulop (mod)) (literal (integer))))))))
 
 ================
 binop precedence
@@ -60,212 +61,18 @@ select
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (SELECT )
-        (comment )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (PLUS )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (MINUS )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (MINUS )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (PLUS )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (comment )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (primary 
-                    (literal 
-                      (int ))))
-                (PLUS )
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (STAR )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int )))))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (primary 
-                    (literal 
-                      (int ))))
-                (PLUS )
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (SLASH )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int )))))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (STAR )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (PLUS )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (SLASH )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (PLUS )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (comment )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (SLASH )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (STAR )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (STAR )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (SLASH )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int )))))))
-          (COMMA )
-          (comment )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (primary 
-                    (literal 
-                      (int ))))
-                (STAR )
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (MOD )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int )))))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (binop 
-                (expr 
-                  (binop 
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))
-                    (MOD )
-                    (expr 
-                      (primary 
-                        (literal 
-                          (int ))))))
-                (STAR )
-                (expr 
-                  (primary 
-                    (literal 
-                      (int ))))))))))))
+(ql (moduleMember (select (line_comment) 
+  (asExprs 
+    (asExpr (add_expr (add_expr (literal (integer)) (addop (plus)) (literal (integer))) (addop (minus)) (literal (integer)))) 
+    (asExpr (add_expr (add_expr (literal (integer)) (addop (minus)) (literal (integer))) (addop (plus)) (literal (integer)))) 
+    (line_comment) 
+    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (star)) (literal (integer))))) 
+    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))))) 
+    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (addop (plus)) (literal (integer)))) 
+    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (addop (plus)) (literal (integer)))) 
+    (line_comment) 
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (mulop (star)) (literal (integer)))) 
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (mulop (slash)) (literal (integer)))) 
+    (line_comment) 
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (mulop (mod)) (literal (integer))))
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (mod)) (literal (integer))) (mulop (star)) (literal (integer))))))))

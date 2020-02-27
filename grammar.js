@@ -1,11 +1,11 @@
 module.exports = grammar({
   name: 'ql',
   conflicts: $ => [
-    [$.simpleId, $.typeExpr],
+    [$.simpleId, $.className],
     [$.simpleId, $.literalId],
     [$.varDecl, $.returnType],
   ],
-  word: $ => $.lowerId,
+  word: $ => $._lower_id,
   extras: $ => [
     /[ \t\r\n]/,
     $.line_comment,
@@ -17,54 +17,54 @@ module.exports = grammar({
 
     ql: $ => repeat($.moduleMember),
 
-    module: $ => seq('module', $.moduleName, choice(seq($.obrace, repeat($.moduleMember), $.cbrace), $.moduleAliasBody)),
+    module: $ => seq('module', $.moduleName, choice(seq("{", repeat($.moduleMember), "}"), $.moduleAliasBody)),
 
     moduleMember: $ => choice(
       seq(
         repeat($.annotation),
         choice($.imprt, $.classlessPredicate, $.dataclass, $.datatype, $.select, $.module)
-      ), 
+      ),
       $.qldoc
     ),
 
     imprt: $ => seq($.import, $.importModuleExpr, optional(seq($.as, $.moduleName))),
 
-    moduleAliasBody: $ => seq($.eq, $.moduleExpr, $.semi),
-    predicateAliasBody: $ => seq($.eq, $.predicateExpr, $.semi),
-    typeAliasBody: $ => seq($.eq, $.typeExpr, $.semi),
+    moduleAliasBody: $ => seq($.eq, $.moduleExpr, ";"),
+    predicateAliasBody: $ => seq($.eq, $.predicateExpr, ";"),
+    typeAliasBody: $ => seq($.eq, $.typeExpr, ";"),
 
     classlessPredicate: $ => seq(
       $.returnType,
       $.predicateName,
       choice(
-        seq($.opar, sep($.varDecl, $.comma), $.cpar, $.optbody),
+        seq("(", sep($.varDecl, ","), ")", $._optbody),
         $.predicateAliasBody
       )
     ),
 
     datatype: $ => seq($.newtype, $.className, $.eq, $.datatypeBranches),
-    datatypeBranches: $ => sep1($.datatypeBranch, $.or),
+    datatypeBranches: $ => sep1($.datatypeBranch, "or"),
 
     datatypeBranch: $ => seq(
       optional($.qldoc),
       optional($.annotation),
       $.className,
-      $.opar,
-      sep($.varDecl, $.comma),
-      $.cpar,
+      "(",
+      sep($.varDecl, ","),
+      ")",
       optional($.body)
     ),
 
     select: $ => seq(
-      optional(seq($.from, sep($.varDecl, $.comma))),
-      optional(seq($.where, $.exprOrTerm)),
+      optional(seq("from", sep($.varDecl, ","))),
+      optional(seq("where", $._exprOrTerm)),
       seq('select', $.asExprs, optional($.orderBys))
     ),
 
     dataclass: $ => seq(
       $.class, $.className,
       choice(
-        seq($.extends, sep1($.typeExpr, $.comma), $.obrace, repeat($.classMember), $.cbrace),
+        seq($.extends, sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
         $.typeAliasBody
       )
     ),
@@ -77,152 +77,170 @@ module.exports = grammar({
       $.qldoc
     ),
 
-    charpred: $ => seq($.className, $.opar, $.cpar, $.obrace, $.exprOrTerm, $.cbrace),
+    charpred: $ => seq($.className, "(", ")", "{", $._exprOrTerm, "}"),
 
-    memberPredicate: $ => seq($.returnType, $.predicateName, $.opar, sep($.varDecl, $.comma), $.cpar, $.optbody),
+    memberPredicate: $ => seq($.returnType, $.predicateName, "(", sep($.varDecl, ","), ")", $._optbody),
 
-    field: $ => seq($.varDecl, $.semi),
+    field: $ => seq($.varDecl, ";"),
 
-    optbody: $ => choice(
+    _optbody: $ => choice(
       $.empty,
       $.body,
       $.higherOrderTerm
-      ),
+    ),
 
-    empty: $ => $.semi,
+    empty: $ => ";",
 
-    body: $ => seq($.obrace, $.exprOrTerm, $.cbrace),
+    body: $ => seq("{", $._exprOrTerm, "}"),
 
     higherOrderTerm: $ => seq(
       $.eq,
       field('name', $.literalId),
-      $.opar,
-      sep($.predicateExpr, $.comma),
-      $.cpar,
-      $.opar,
-      sep($.callArg, $.comma),
-      $.cpar
+      "(",
+      sep($.predicateExpr, ","),
+      ")",
+      "(",
+      sep($._call_arg, ","),
+      ")"
     ),
 
-    exprOrTerm: $ => choice(
-      seq($.specialId, $.opar, $.cpar),                                        // SpecialCall
-      prec.dynamic(10, seq($.opar, $.typeExpr, $.cpar, $.exprOrTerm)),                             // Cast
-      $.primary,                                                           // PrimaryTerm
-      seq($.unop, $.exprOrTerm),                                             // Unary
-      prec.left(9,                                                       // MulOperation
+    special_call: $ => seq($.specialId, "(", ")"),
+    prefix_cast: $ => prec.dynamic(10, seq("(", $.typeExpr, ")", $._exprOrTerm)),
+    unary_expr: $ => seq($.unop, $._exprOrTerm),
+    mul_expr: $ => prec.left(9, seq(
+      field('left', $._exprOrTerm),
+      $.mulop,
+      field('right', $._exprOrTerm)
+    )),
+    add_expr: $ => prec.left(8, seq(
+      field('left', $._exprOrTerm),
+      $.addop,
+      field('right', $._exprOrTerm)
+    )),
+    in_expr: $ => prec.left(7, seq(
+      field('left', $._exprOrTerm),
+      $.in,
+      field('right', $.range)
+    )),
+    comp_term: $ => prec.left(6, seq(
+      field('left', $._exprOrTerm),
+      $.compop,
+      field('right', $._exprOrTerm)
+    )),
+    instance_of: $ => prec.left(5, seq($._exprOrTerm, $.instanceof, $.typeExpr)),
+    negation: $ => prec.left(4, seq($.not, $._exprOrTerm)),
+    if_term: $ => prec.left(3, seq(
+      "if", field('cond', $._exprOrTerm),
+      "then", field('first', $._exprOrTerm),
+      "else", field('second', $._exprOrTerm)
+    )),
+    conjunction: $ => prec.left(3, seq(
+      field('left', $._exprOrTerm),
+      "and",
+      field('right', $._exprOrTerm)
+    )),
+    disjunction: $ => prec.left(2, seq(
+      field('left', $._exprOrTerm),
+      "or",
+      field('right', $._exprOrTerm)
+    )),
+    implication: $ => prec.left(1, seq(
+      field('left', $._exprOrTerm),
+      "implies",
+      field('right', $._exprOrTerm)
+    )),
+
+    quantified: $ => seq($.quantifier, "(",
+      choice(
         seq(
-          field('left', $.exprOrTerm),
-          $.mulop,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      prec.left(8,                                                       // AddOperation
-        seq(
-          field('left', $.exprOrTerm),
-          $.addop,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      prec(7,                                                            // In
-        seq(
-          field('target', $.exprOrTerm),
-          $.in,
-          field('range', $.primary)
-        )
-      ),
-      prec.left(6,                                                       // Comparison
-        seq(
-          field('left', $.exprOrTerm),
-          $.compop,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      prec(5, seq($.exprOrTerm, $.instanceof, $.typeExpr)),                         // Instanceof
-      prec(4, seq($.not, $.exprOrTerm)),                                            // Not
-      seq(                                                               // If
-        $.if, field('cond', $.exprOrTerm),
-        $.then, field('first', $.exprOrTerm),
-        $.else, field('second', $.exprOrTerm)
-      ),
-      prec.left(3,                                                       // Conjunction
-        seq(
-          field('left', $.exprOrTerm),
-          $.and,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      prec.left(2,                                                       // Disjunction
-        seq(
-          field('left', $.exprOrTerm),
-          $.or,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      prec.right(1,                                                      // Implies
-        seq(
-          field('left', $.exprOrTerm),
-          $.implies,
-          field('right', $.exprOrTerm)
-        )
-      ),
-      seq($.quantifier, $.opar,
-        choice(
-          seq(
-            sep($.varDecl, $.comma),
-            optional(seq($.bar, $.exprOrTerm, optional(seq($.bar, $.exprOrTerm))))
-          ),
-          $.exprOrTerm
+          sep($.varDecl, ","),
+          optional(seq("|", $._exprOrTerm, optional(seq("|", $._exprOrTerm))))
         ),
-        $.cpar)                         // QuantifiedTerm
-    ),
+        $._exprOrTerm
+      ),
+      ")"),
 
     specialId: $ => $.none,
 
     quantifier: $ => choice($.exists, $.forall, $.forex),
 
-    callArg: $ => choice(
-      $.exprOrTerm,  // ExprArg
+    _call_arg: $ => choice(
+      $._exprOrTerm,  // ExprArg
       $.underscore  // DontCare
     ),
 
     qualifiedRhs: $ => choice(
-      seq($.predicateName, optional($.closure), $.opar, sep($.callArg, $.comma), $.cpar), //QualCall
-      seq($.opar, $.typeExpr, $.cpar)                                        // QualCast
+      seq($.predicateName, optional($.closure), "(", sep($._call_arg, ","), ")"), //QualCall
+      seq("(", $.typeExpr, ")")                                        // QualCast
     ),
-    
-    primary: $ => choice(
-      seq($.aritylessPredicateExpr, optional($.closure), $.opar, sep($.callArg, $.comma), $.cpar), // PredicateAtomExpr
-      seq($.primary, $.dot, $.qualifiedRhs),                                        // QualifiedExpr
+
+    classless_predicate_call: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), "(", sep($._call_arg, ","), ")")),
+    qualified_expr: $ => seq($._primary, ".", $.qualifiedRhs),
+    super_ref: $ => seq(optional(seq($.typeExpr, ".")), $.super),
+
+
+    // The split here is to ensure that the node is non-empty
+    full_aggregate_body: $ => choice(
+      seq(sep($.varDecl, ","),
+        seq(
+          "|",
+          optional($._exprOrTerm),
+          optional(seq("|", $.asExprs, optional($.orderBys)))
+        )
+      ),
+      sep1($.varDecl, ","),
+      ),
+
+    expr_aggregate_body: $ => seq($.asExprs, optional($.orderBys)),
+
+    aggregate: $ => seq($.aggId,                                                                // Agg
+      optional(
+        seq("[", sep1($._exprOrTerm, ","), "]")
+      ),
+      "(",
+      optional(
+        choice($.full_aggregate_body, $.expr_aggregate_body)
+      ),
+      ")"
+    ),
+    range: $ => seq(                                                                        // Range
+      "[",
+      field('lower', $._exprOrTerm), "..", field('upper', $._exprOrTerm),
+      "]"
+    ),
+
+    par_expr: $ => seq("(", $._exprOrTerm, ")"),
+
+
+    _exprOrTerm: $ => choice(
+      $.special_call,
+      $.prefix_cast,
+      $._primary,
+      $.unary_expr,
+      $.mul_expr,
+      $.add_expr,
+      $.in_expr,
+      $.comp_term,
+      $.instance_of,
+      $.negation,
+      $.if_term,
+      $.conjunction,
+      $.disjunction,
+      $.implication,
+      $.quantified,                         // QuantifiedTerm
+    ),
+
+    _primary: $ => choice(
+      $.classless_predicate_call, // PredicateAtomExpr
+      $.qualified_expr,                                        // QualifiedExpr
       $.literal,                                                                  // Lit
       $.variable,                                                                 // Var
-      seq(optional(seq($.typeExpr, $.dot)), $.super),                                 // Super
-      seq($.aggId,                                                                // Agg
-        optional(
-          seq($.oblock, sep1($.exprOrTerm, $.comma), $.cblock)
-        ),
-        $.opar,
-        choice(
-          seq(sep($.varDecl, $.comma),                                // FullAggBody
-            optional(
-              seq(
-                $.bar,
-                optional($.exprOrTerm),
-                optional(seq($.bar, $.asExprs, optional($.orderBys)))
-              )
-            )
-          ),
-          seq($.asExprs, optional($.orderBys))           // ExprAggBody
-        ),
-        $.cpar
-      ),
-      seq(                                                                        // Range
-        $.oblock,
-        field('lower', $.exprOrTerm), $.range, field('upper', $.exprOrTerm),
-        $.cblock
-      ),
-      seq($.opar, $.exprOrTerm, $.cpar)                                                 // ParExpr
+      $.super_ref,
+      $.aggregate,
+      $.range,
+      $.par_expr                                                 // ParExpr
     ),
-    
+
     literal: $ => choice(
       $.integer,     // IntLit
       $.float,       // FloatLit
@@ -241,67 +259,67 @@ module.exports = grammar({
 
     mulop: $ => choice($.star, $.slash, $.mod),
 
-    addop : $ => choice($.plus, $.minus),
+    addop: $ => choice($.plus, $.minus),
 
-    closure : $ => choice($.star, $.plus),
+    closure: $ => choice($.star, $.plus),
 
     direction: $ => choice($.asc, $.desc),
 
     varDecl: $ => seq($.typeExpr, $.varName),
 
-    asExprs : $ => sep1($.asExpr, $.comma),
+    asExprs: $ => sep1($.asExpr, ","),
 
-    asExpr: $ => seq($.exprOrTerm, optional(seq($.as, $.simpleId))),
+    asExpr: $ => seq($._exprOrTerm, optional(seq($.as, $.varName))),
 
-    orderBys: $ => seq($.order, $.by, sep1($.orderBy, $.comma)),
+    orderBys: $ => seq("order", "by", sep1($.orderBy, ",")),
 
-    orderBy: $ => seq($.exprOrTerm, optional($.direction)),
-    
+    orderBy: $ => seq($._exprOrTerm, optional($.direction)),
+
     qldoc: $ => /\/\*\*[^*]*\*+([^/*][^*]*\*+)*\//,
 
-    literalId: $ => choice($.lowerId, $.atLowerId, $.upperId),
+    literalId: $ => choice($._lower_id, $._upper_id),
 
     annotation: $ => choice(
       field('name', $.annotName),                                  // SimpleAnnotation
       seq(                                                       // ArgsAnnotation
         field('name', $.annotName),
-        $.oblock,
-        field('args', sep1($.annotArg, $.comma)),
-        $.cblock
+        "[",
+        field('args', sep1($.annotArg, ",")),
+        "]"
       )
     ),
 
 
-    annotName: $ => $.lowerId,
+    annotName: $ => $._lower_id,
 
     annotArg: $ => choice($.simpleId, $.this, $.result),
 
     moduleName: $ => $.simpleId,
 
-    qualModuleExpr: $ => sep1($.simpleId, $.dot),
+    qualModuleExpr: $ => sep1($.simpleId, "."),
 
-    importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq($.selection, $.simpleId))),
+    importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", $.simpleId))),
 
-    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, $.selection,$.simpleId)),
+    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", $.simpleId)),
 
-    typeLiteral: $ => choice($.atLowerId, $.boolean, $.date, 'float', 'int', 'string'),
+    typeLiteral: $ => choice($.dbtype, $.boolean, $.date, 'float', 'int', 'string'),
 
-    simpleId: $ => choice($.lowerId, $.upperId),
-    
-    className: $ => $.upperId,
+    simpleId: $ => choice($._lower_id, $._upper_id),
 
-    dbtype: $ => $.atLowerId,
+    className: $ => $._upper_id,
+
+    dbtype: $ => $._at_lower_id,
 
     returnType: $ => choice($.predicate, $.typeExpr),
 
     typeExpr: $ => choice(
-      seq(optional(seq($.moduleExpr, $.selection)), $.upperId),
+      seq(optional(seq($.moduleExpr, "::")), $.className),
       $.typeLiteral
     ),
 
-    predicateName: $ => $.lowerId,
+    predicateName: $ => $._lower_id,
 
-    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, $.selection)), $.literalId),
+    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), $.literalId),
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, $.slash, $.integer),
 
@@ -309,36 +327,30 @@ module.exports = grammar({
 
     aggId: $ => choice($.avg, $.concat, $.strictconcat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
 
-    upperId: $ => /[A-Z][A-Za-z0-9_]*/,
-    lowerId: $ => /[a-z][A-Za-z0-9_]*/,
-    atLowerId: $ => /@[a-z][A-Za-z0-9_]*/,
+    _upper_id: $ => /[A-Z][A-Za-z0-9_]*/,
+    _lower_id: $ => /[a-z][A-Za-z0-9_]*/,
+    _at_lower_id: $ => /@[a-z][A-Za-z0-9_]*/,
     integer: $ => /[0-9]+/,
     float: $ => /[0-9]+\.[0-9]+/,
     string: $ => /"([^"\\\r\n\t]|\\["\\nrt])*"/,
     line_comment: $ => /\/\/[^\r\n]*/,
     block_comment: $ => /\/\*([^*]+\*+([^/*][^*]*\*+)*|\*)\//,
 
-    and: $ => 'and',
     any: $ => 'any',
     as: $ => 'as',
     asc: $ => 'asc',
     avg: $ => 'avg',
     boolean: $ => 'boolean',
-    by: $ => 'by',
     class: $ => 'class',
     newtype: $ => 'newtype',
     count: $ => 'count',
     date: $ => 'date',
     desc: $ => 'desc',
-    else: $ => 'else',
     exists: $ => 'exists',
     extends: $ => 'extends',
     false: $ => 'false',
     forall: $ => 'forall',
     forex: $ => 'forex',
-    from: $ => 'from',
-    if: $ => 'if',
-    implies: $ => 'implies',
     import: $ => 'import',
     in: $ => 'in',
     instanceof: $ => 'instanceof',
@@ -346,8 +358,6 @@ module.exports = grammar({
     min: $ => 'min',
     not: $ => 'not',
     none: $ => 'none',
-    or: $ => 'or',
-    order: $ => 'order',
     predicate: $ => 'predicate',
     rank: $ => 'rank',
     result: $ => 'result',
@@ -357,10 +367,8 @@ module.exports = grammar({
     concat: $ => 'concat',
     sum: $ => 'sum',
     super: $ => 'super',
-    then: $ => 'then',
     this: $ => 'this',
     true: $ => 'true',
-    where: $ => 'where',
 
     // symbols
     lt: $ => '<',
@@ -370,23 +378,11 @@ module.exports = grammar({
     ge: $ => '>=',
     underscore: $ => '_',
     minus: $ => '-',
-    comma: $ => ',',
-    semi: $ => ';',
     ne: $ => '!=',
     slash: $ => '/',
-    dot: $ => '.',
-    range: $ => '..',
-    opar: $ => '(',
-    cpar: $ => ')',
-    oblock: $ => '[',
-    cblock: $ => ']',
-    obrace: $ => '{',
-    cbrace: $ => '}',
     star: $ => '*',
     mod: $ => '%',
     plus: $ => '+',
-    bar: $ => '|',
-    selection: $ => '::',
   }
 });
 
@@ -395,5 +391,5 @@ function sep(rule, s) {
 }
 
 function sep1(rule, s) {
-  return seq(rule,repeat(seq(s,rule)))
+  return seq(rule, repeat(seq(s, rule)))
 }

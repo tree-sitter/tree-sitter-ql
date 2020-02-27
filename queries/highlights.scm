@@ -1,24 +1,24 @@
-(and) @keyword
+"and" @keyword
 (any) @keyword
 (as) @keyword
 (asc) @keyword
 (any) @keyword
 (avg) @keyword
-(by) @keyword
+"by" @keyword
 (class) @keyword
 (newtype) @keyword
 (count) @keyword
 (date) @keyword
 (desc) @keyword
-(else) @keyword
+"else" @keyword
 (exists) @keyword
 (extends) @keyword
 (false) @keyword
 (forall) @keyword
 (forex) @keyword
-(from) @keyword
-(if) @keyword
-(implies) @keyword
+"from" @keyword
+"if" @keyword
+"implies" @keyword
 (import) @keyword
 (in) @keyword
 (instanceof) @keyword
@@ -27,8 +27,8 @@
 "module" @keyword
 (not) @keyword
 (none) @keyword
-(or) @keyword
-(order) @keyword
+"or" @keyword
+"order" @keyword
 (predicate) @keyword
 (rank) @keyword
 (result) @keyword
@@ -39,10 +39,10 @@
 (concat) @keyword
 (sum) @keyword
 (super) @keyword
-(then) @keyword
+"then" @keyword
 (this) @keyword
 (true) @keyword
-(where) @keyword
+"where" @keyword
 
 
 (boolean) @type.builtin
@@ -64,19 +64,19 @@
 (star) @operator
 (mod) @operator
 (plus) @operator
-(selection) @operator
+"::" @operator
 
-(opar) @punctuation.bracket
-(cpar) @punctuation.bracket
-(obrace) @punctuation.bracket
-(cbrace) @punctuation.bracket
-(oblock) @punctuation.bracket
-(cblock) @punctuation.bracket
+"(" @punctuation.bracket
+")" @punctuation.bracket
+"{" @punctuation.bracket
+"}" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
 
-(comma) @punctuation.delimiter
-(bar) @punctuation.delimiter
+"," @punctuation.delimiter
+"|" @punctuation.delimiter
 
-(typeExpr (upperId) @type)
+(typeExpr (className) @type)
 (className) @type
 
 (varName) @variable

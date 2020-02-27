@@ -15,62 +15,16 @@ select
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (import 
-        (IMPORT )
-        (moduleId 
-          (qualId 
-            (simpleId 
-              (lowerId )))))
-      (select 
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (string ))))
-            (AS )
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (string )))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (string )))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (int )))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (float )))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (TRUE )))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (FALSE ))))))))))
+(ql 
+  (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
+  (moduleMember (select (asExprs 
+    (asExpr (literal (string)) (as) (varName (simpleId))) 
+    (asExpr (literal (string))) 
+    (asExpr (literal (string))) 
+    (asExpr (literal (integer))) 
+    (asExpr (literal (float))) 
+    (asExpr (literal (bool (true)))) 
+    (asExpr (literal (bool (false))))))))
 
 ============
 Select with variables and order by
@@ -78,7 +32,7 @@ Select with variables and order by
 
 from
   Foo foo,
-  some.module::submodule::Bar bar,
+  some::submodule::Bar bar,
   @dbtype bar,
   boolean b,
   date d,
@@ -90,98 +44,22 @@ order by foo, bar desc, baz asc
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (classname 
-                (upperId )))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (moduleId 
-                (moduleId 
-                  (qualId 
-                    (qualId 
-                      (simpleId 
-                        (lowerId )))
-                    (DOT )
-                    (simpleId 
-                      (lowerId ))))
-                (SELECTION )
-                (simpleId 
-                  (lowerId )))
-              (SELECTION )
-              (classname 
-                (upperId )))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (dbasetype 
-                (atlowerId )))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (BOOLEAN ))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (DATE ))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (FLOAT ))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (INT ))
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (var_decl 
-            (type 
-              (STRING ))
-            (simpleId 
-              (lowerId ))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (literal 
-                  (string ))))))
-        (ORDER )
-        (BY )
-        (orderbys 
-          (orderby 
-            (simpleId 
-              (lowerId )))
-          (COMMA )
-          (orderby 
-            (simpleId 
-              (lowerId ))
-            (DESC ))
-          (COMMA )
-          (orderby 
-            (simpleId 
-              (lowerId ))
-            (ASC )))))))
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (className)) (varName (simpleId))) 
+    (varDecl (typeExpr (moduleExpr (moduleExpr (simpleId)) (simpleId)) (className)) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral (dbtype))) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral (boolean))) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral (date))) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+    (asExprs 
+      (asExpr (literal (string)))) 
+    (orderBys
+      (orderBy (variable (varName (simpleId)))) 
+      (orderBy (variable (varName (simpleId))) (direction (desc))) 
+      (orderBy (variable (varName (simpleId))) (direction (asc)))))))
 
 ========================
 Annotations and comments
@@ -198,38 +76,10 @@ import bar
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (import 
-        (annotation 
-          (simpleAnnotation ))
-        (IMPORT )
-        (moduleId 
-          (qualId 
-            (simpleId 
-              (lowerId )))))
-      (comment )
-      (comment )
-      (import 
-        (annotation 
-          (argsAnnotation 
-            (OBLOCK )
-            (CBLOCK )))
-        (annotation 
-          (argsAnnotation 
-            (OBLOCK )
-            (variable 
-              (varname 
-                (simpleId 
-                  (lowerId ))))
-            (COMMA )
-            (variable 
-              (THIS ))
-            (CBLOCK )))
-        (IMPORT )
-        (moduleId 
-          (qualId 
-            (simpleId 
-              (lowerId ))))))))
-
+(ql 
+  (moduleMember (annotation (annotName)) (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
+  (line_comment) (block_comment) 
+  (moduleMember 
+    (annotation (annotName) (annotArg (simpleId))) 
+    (annotation (annotName) (annotArg (simpleId)) (annotArg (this))) 
+    (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))))

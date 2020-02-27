@@ -4,7 +4,7 @@ module
 
 module foo {
   module bar {
-    import woo;
+    import woo
 
     predicate baz();
   }
@@ -12,12 +12,11 @@ module foo {
 
 ---
 
-(source_file (ql (moduleBody
-  (module (MODULE) (modulename (simpleId (lowerId))) (OBRACE) (moduleBody
-    (module (MODULE) (modulename (simpleId (lowerId))) (OBRACE) (moduleBody
-      (import (IMPORT) (moduleId (qualId (simpleId (lowerId))))) (ERROR (SEMI))
-      (predicate (head (PREDICATE) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (SEMI)))) (CBRACE))) (CBRACE)))))
-
+(ql (moduleMember 
+   (module (moduleName (simpleId)) (moduleMember 
+     (module (moduleName (simpleId)) 
+       (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
+       (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (empty))))))))
 ============
 module alias
 ============
@@ -26,4 +25,4 @@ module foo = bar::baz;
 
 ---
 
-(source_file (ql (moduleBody (alias (MODULE) (modulename (simpleId (lowerId))) (EQ) (moduleId (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (simpleId (lowerId))) (SEMI)))))
+(ql (moduleMember (module (moduleName (simpleId)) (moduleAliasBody (eq) (moduleExpr (moduleExpr (simpleId)) (simpleId))))))
