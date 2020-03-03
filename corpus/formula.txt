@@ -12,141 +12,21 @@ select f
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (classname 
-                (upperId )))
-            (simpleId 
-              (lowerId ))))
-        (WHERE )
-        (formula 
-          (disjunction 
-            (formula 
-              (fparen 
-                (OPAR )
-                (formula 
-                  (comparison 
-                    (expr 
-                      (primary 
-                        (variable 
-                          (varname 
-                            (simpleId 
-                              (lowerId ))))))
-                    (compop (EQ))
-                    (expr 
-                      (primary 
-                        (variable 
-                          (varname 
-                            (simpleId 
-                              (lowerId ))))))))
-                (CPAR )))
-            (OR )
-            (formula 
-              (conjunction 
-                (formula 
-                  (conjunction 
-                    (formula 
-                      (conjunction 
-                        (formula 
-                          (comparison 
-                            (expr 
-                              (primary 
-                                (variable 
-                                  (varname 
-                                    (simpleId 
-                                      (lowerId ))))))
-                            (compop (NE))
-                            (expr 
-                              (primary 
-                                (variable 
-                                  (varname 
-                                    (simpleId 
-                                      (lowerId ))))))))
-                        (AND )
-                        (formula 
-                          (comparison 
-                            (expr 
-                              (primary 
-                                (variable 
-                                  (varname 
-                                    (simpleId 
-                                      (lowerId ))))))
-                            (compop (LT))
-                            (expr 
-                              (primary 
-                                (variable 
-                                  (varname 
-                                    (simpleId 
-                                      (lowerId ))))))))))
-                    (AND )
-                    (formula 
-                      (fparen 
-                        (OPAR )
-                        (formula 
-                          (disjunction 
-                            (formula 
-                              (comparison 
-                                (expr 
-                                  (primary 
-                                    (variable 
-                                      (varname 
-                                        (simpleId 
-                                          (lowerId ))))))
-                                (compop (GT))
-                                (expr 
-                                  (primary 
-                                    (variable 
-                                      (varname 
-                                        (simpleId 
-                                          (lowerId ))))))))
-                            (OR )
-                            (formula 
-                              (comparison 
-                                (expr 
-                                  (primary 
-                                    (variable 
-                                      (varname 
-                                        (simpleId 
-                                          (lowerId ))))))
-                                (compop (LE))
-                                (expr 
-                                  (primary 
-                                    (variable 
-                                      (varname 
-                                        (simpleId 
-                                          (lowerId ))))))))))
-                        (CPAR )))))
-                (AND )
-                (formula 
-                  (comparison 
-                    (expr 
-                      (primary 
-                        (variable 
-                          (varname 
-                            (simpleId 
-                              (lowerId ))))))
-                    (compop (GE))
-                    (expr 
-                      (primary 
-                        (variable 
-                          (varname 
-                            (simpleId 
-                              (lowerId ))))))))))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))))))
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (className)) (varName (simpleId))) 
+    (disjunction 
+      (par_expr (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (conjunction
+        (conjunction 
+          (conjunction 
+            (comp_term (variable (varName (simpleId))) (compop (ne)) (variable (varName (simpleId)))) 
+            (comp_term (variable (varName (simpleId))) (compop (lt)) (variable (varName (simpleId))))) 
+          (par_expr (disjunction 
+            (comp_term (variable (varName (simpleId))) (compop (gt)) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop (le)) (variable (varName (simpleId))))))) 
+        (comp_term (variable (varName (simpleId))) (compop (ge)) (variable (varName (simpleId)))))) 
+    (asExprs (asExpr (variable (varName (simpleId)))))))) 
 
 ==========
 instanceof
@@ -158,40 +38,11 @@ select f
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (classname 
-                (upperId )))
-            (simpleId 
-              (lowerId ))))
-        (WHERE )
-        (formula 
-          (instanceof 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))
-            (INSTANCEOF )
-            (type 
-              (classname 
-                (upperId )))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))))))
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (className)) (varName (simpleId))) 
+    (instance_of (variable (varName (simpleId))) (instanceof) (typeExpr (className))) 
+    (asExprs (asExpr (variable (varName (simpleId))))))))
 
 =====
 range
@@ -203,48 +54,11 @@ select i
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (INT ))
-            (simpleId 
-              (lowerId ))))
-        (WHERE )
-        (formula 
-          (inrange 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))
-            (IN )
-            (range 
-              (OBLOCK )
-              (expr 
-                (primary 
-                  (literal 
-                    (int ))))
-              (RANGE )
-              (expr 
-                (primary 
-                  (literal 
-                    (int ))))
-              (CBLOCK ))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))))))
+(ql (moduleMember 
+  (select 
+   (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+   (in_expr (variable (varName (simpleId))) (in) (range (literal (integer)) (literal (integer)))) 
+   (asExprs (asExpr (variable (varName (simpleId))))))))
 
 =================
 predicateRef call
@@ -256,59 +70,13 @@ select i
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (INT ))
-            (simpleId 
-              (lowerId ))))
-        (WHERE )
-        (formula 
-          (conjunction 
-            (formula 
-              (call 
-                (predicateRef 
-                  (literalId 
-                    (lowerId )))
-                (OPAR )
-                (exprs 
-                  (expr 
-                    (primary 
-                      (variable 
-                        (varname 
-                          (simpleId 
-                            (lowerId )))))))
-                (CPAR )))
-            (AND )
-            (formula 
-              (call 
-                (predicateRef 
-                  (moduleId 
-                    (qualId 
-                      (simpleId 
-                        (lowerId ))))
-                  (SELECTION )
-                  (literalId 
-                    (lowerId )))
-                (closure 
-                  (PLUS ))
-                (OPAR )
-                (CPAR )))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))))))
-
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+    (conjunction 
+      (classless_predicate_call (aritylessPredicateExpr (literalId)) (variable (varName (simpleId)))) 
+      (classless_predicate_call (aritylessPredicateExpr (moduleExpr (simpleId)) (literalId)) (closure (plus)))) 
+    (asExprs (asExpr (variable (varName (simpleId))))))))
 =================================
 calls with results & method calls
 =================================
@@ -317,65 +85,13 @@ from int i
 select i.foo+(), 1.foo(), 1.1.foo()
 
 ---
-
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (INT ))
-            (simpleId 
-              (lowerId ))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (callwithresults 
-                  (call 
-                    (primary 
-                      (variable 
-                        (varname 
-                          (simpleId 
-                            (lowerId )))))
-                    (DOT )
-                    (predicateName 
-                      (lowerId ))
-                    (closure 
-                      (PLUS ))
-                    (OPAR )
-                    (CPAR ))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (callwithresults 
-                  (call 
-                    (primary 
-                      (literal 
-                        (int )))
-                    (DOT )
-                    (predicateName 
-                      (lowerId ))
-                    (OPAR )
-                    (CPAR ))))))
-          (COMMA )
-          (as_expr 
-            (expr 
-              (primary 
-                (callwithresults 
-                  (call 
-                    (primary 
-                      (literal 
-                        (float )))
-                    (DOT )
-                    (predicateName 
-                      (lowerId ))
-                    (OPAR )
-                    (CPAR )))))))))))
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
+    (asExprs 
+      (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName) (closure (plus))))) 
+      (asExpr (qualified_expr (literal (integer)) (qualifiedRhs (predicateName)))) 
+      (asExpr (qualified_expr (literal (float)) (qualifiedRhs (predicateName))))))))
 
 ==============
 quantification
@@ -392,195 +108,23 @@ select f
 
 ---
 
-(source_file 
-  (ql 
-    (moduleBody 
-      (select 
-        (FROM )
-        (var_decls 
-          (var_decl 
-            (type 
-              (classname 
-                (upperId )))
-            (simpleId 
-              (lowerId ))))
-        (WHERE )
-        (formula 
+(ql (moduleMember 
+  (select 
+    (varDecl (typeExpr (className)) (varName (simpleId))) 
+    (disjunction 
+      (disjunction 
+        (disjunction 
           (disjunction 
-            (formula 
-              (disjunction 
-                (formula 
-                  (disjunction 
-                    (formula 
-                      (disjunction 
-                        (formula 
-                          (quantified 
-                            (EXISTS )
-                            (OPAR )
-                            (expr 
-                              (primary 
-                                (callwithresults 
-                                  (call 
-                                    (primary 
-                                      (variable 
-                                        (varname 
-                                          (simpleId 
-                                            (lowerId )))))
-                                    (DOT )
-                                    (predicateName 
-                                      (lowerId ))
-                                    (OPAR )
-                                    (CPAR )))))
-                            (CPAR )))
-                        (OR )
-                        (formula 
-                          (quantified 
-                            (EXISTS )
-                            (OPAR )
-                            (var_decls 
-                              (var_decl 
-                                (type 
-                                  (classname 
-                                    (upperId )))
-                                (simpleId 
-                                  (lowerId ))))
-                            (BAR )
-                            (formula 
-                              (call 
-                                (primary 
-                                  (variable 
-                                    (varname 
-                                      (simpleId 
-                                        (lowerId )))))
-                                (DOT )
-                                (predicateName 
-                                  (lowerId ))
-                                (OPAR )
-                                (CPAR )))
-                            (CPAR )))))
-                    (OR )
-                    (formula 
-                      (quantified 
-                        (EXISTS )
-                        (OPAR )
-                        (var_decls 
-                          (var_decl 
-                            (type 
-                              (classname 
-                                (upperId )))
-                            (simpleId 
-                              (lowerId ))))
-                        (BAR )
-                        (formula 
-                          (call 
-                            (primary 
-                              (variable 
-                                (varname 
-                                  (simpleId 
-                                    (lowerId )))))
-                            (DOT )
-                            (predicateName 
-                              (lowerId ))
-                            (OPAR )
-                            (CPAR )))
-                        (BAR )
-                        (formula 
-                          (call 
-                            (primary 
-                              (variable 
-                                (varname 
-                                  (simpleId 
-                                    (lowerId )))))
-                            (DOT )
-                            (predicateName 
-                              (lowerId ))
-                            (OPAR )
-                            (CPAR )))
-                        (CPAR )))))
-                (OR )
-                (formula 
-                  (quantified 
-                    (FORALL )
-                    (OPAR )
-                    (var_decls 
-                      (var_decl 
-                        (type 
-                          (classname 
-                            (upperId )))
-                        (simpleId 
-                          (lowerId ))))
-                    (BAR )
-                    (formula 
-                      (call 
-                        (primary 
-                          (variable 
-                            (varname 
-                              (simpleId 
-                                (lowerId )))))
-                        (DOT )
-                        (predicateName 
-                          (lowerId ))
-                        (OPAR )
-                        (CPAR )))
-                    (BAR )
-                    (formula 
-                      (call 
-                        (primary 
-                          (variable 
-                            (varname 
-                              (simpleId 
-                                (lowerId )))))
-                        (DOT )
-                        (predicateName 
-                          (lowerId ))
-                        (OPAR )
-                        (CPAR )))
-                    (CPAR )))))
-            (OR )
-            (formula 
-              (quantified 
-                (FOREX )
-                (OPAR )
-                (var_decls 
-                  (var_decl 
-                    (type 
-                      (classname 
-                        (upperId )))
-                    (simpleId 
-                      (lowerId ))))
-                (BAR )
-                (formula 
-                  (call 
-                    (primary 
-                      (variable 
-                        (varname 
-                          (simpleId 
-                            (lowerId )))))
-                    (DOT )
-                    (predicateName 
-                      (lowerId ))
-                    (OPAR )
-                    (CPAR )))
-                (BAR )
-                (formula 
-                  (call 
-                    (primary 
-                      (variable 
-                        (varname 
-                          (simpleId 
-                            (lowerId )))))
-                    (DOT )
-                    (predicateName 
-                      (lowerId ))
-                    (OPAR )
-                    (CPAR )))
-                (CPAR )))))
-        (SELECT )
-        (as_exprs 
-          (as_expr 
-            (expr 
-              (primary 
-                (variable 
-                  (varname 
-                    (simpleId 
-                      (lowerId ))))))))))))
+            (quantified (quantifier (exists)) (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))) 
+            (quantified (quantifier (exists)) (varDecl (typeExpr (className)) (varName (simpleId))) 
+          (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))) 
+        (quantified (quantifier (exists)) (varDecl (typeExpr (className)) (varName (simpleId))) 
+          (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
+          (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))) 
+      (quantified (quantifier (forall)) (varDecl (typeExpr (className)) (varName (simpleId))) 
+        (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) 
+        (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))) 
+    (quantified (quantifier (forex)) (varDecl (typeExpr (className)) (varName (simpleId)))
+      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
+      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))) 
+  (asExprs (asExpr (variable (varName (simpleId))))))))

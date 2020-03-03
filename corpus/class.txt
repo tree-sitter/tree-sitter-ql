@@ -5,8 +5,7 @@ empty class
 class Foo extends Bar {}
 
 ---
-
-(source_file (ql (moduleBody (class (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (CBRACE))))) 
+(ql (moduleMember (dataclass (class) (className) (extends) (typeExpr (className))))) 
 
 ===================================
 class with characteristic predicate
@@ -23,8 +22,12 @@ abstract class Foo extends Bar {
 
 ---
 
-(source_file (ql (moduleBody (class (annotation (simpleAnnotation)) (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (ERROR (OBLOCK) (IN) (UNEXPECTED 'n') (UNEXPECTED ']') (CBLOCK)) (member (character (classname (upperId)) (OPAR) (CPAR) (OBRACE) (formula (comparison (expr (primary (variable (THIS)))) (compop (EQ)) (expr (primary (variable (THIS)))))) (CBRACE))) (CBRACE))))) 
-
+(ql (moduleMember 
+  (annotation (annotName)) 
+  (dataclass (class) (className) (extends) (typeExpr (className)) 
+    (classMember (annotation (annotName)  (annotArg (simpleId))) 
+      (charpred (className) 
+        (comp_term (variable (this)) (compop (eq)) (variable (this)))))))) 
 ==================
 class with members
 ==================
@@ -33,13 +36,17 @@ class X extends Y {
   m::F f;
 
   m::F a() {
-    result = f;
+    result = f
   }
 }
 
 ---
 
-(source_file (ql (moduleBody (class (CLASS) (classname (upperId)) (EXTENDS) (type (classname (upperId))) (OBRACE) (member (field (var_decl (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (simpleId (lowerId))) (SEMI))) (member (predicate (head (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (predicateName (lowerId)) (OPAR) (CPAR)) (optbody (OBRACE) (formula (comparison (expr (primary (variable (RESULT)))) (compop (EQ)) (expr (primary (variable (varname (simpleId (lowerId)))))))) (ERROR (SEMI)) (CBRACE)))) (CBRACE)))))
+(ql (moduleMember 
+  (dataclass (class) (className) (extends) (typeExpr (className)) 
+    (classMember (field (varDecl (typeExpr (moduleExpr (simpleId)) (className)) (varName (simpleId))))) 
+    (classMember (memberPredicate (returnType (typeExpr (moduleExpr (simpleId))  (className))) (predicateName) 
+    (body (comp_term (variable (result)) (compop (eq)) (variable (varName (simpleId))))))))))
 
 ===========
 class alias
@@ -48,5 +55,5 @@ class alias
 class X = foo::Bas;
 
 ---
-
-(source_file (ql (moduleBody (alias (CLASS) (classname (upperId)) (EQ) (type (moduleId (qualId (simpleId (lowerId)))) (SELECTION) (classname (upperId))) (SEMI)))))
+(ql (moduleMember 
+  (dataclass (class) (className) (typeAliasBody (eq) (typeExpr (moduleExpr (simpleId)) (className))))))
