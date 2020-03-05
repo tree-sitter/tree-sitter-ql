@@ -9,9 +9,7 @@
   "repository": "https://github.com/samlanning/tree-sitter-ql",
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
-  "devDependencies": {
-    "tree-sitter-cli": "^0.15.14"
-  },
+  "devDependencies": {},
   "scripts": {
     "tree-sitter": "tree-sitter",
     "generate": "tree-sitter generate",
@@ -28,6 +26,7 @@
     }
   ],
   "dependencies": {
-    "nan": "^2.14.0"
+    "nan": "^2.14.0",
+    "tree-sitter-cli": "^0.16.5"
   }
 }
