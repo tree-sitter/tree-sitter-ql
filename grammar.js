@@ -17,7 +17,18 @@ module.exports = grammar({
 
     ql: $ => repeat($.moduleMember),
 
-    module: $ => seq('module', $.moduleName, choice(seq("{", repeat($.moduleMember), "}"), $.moduleAliasBody)),
+    module: $ => seq(
+      'module',
+      field("name", $.moduleName),
+      choice(
+        seq(
+          "{",
+          repeat($.moduleMember),
+          "}"
+        ),
+        $.moduleAliasBody
+      )
+    ),
 
     moduleMember: $ => choice(
       seq(
@@ -35,20 +46,26 @@ module.exports = grammar({
 
     classlessPredicate: $ => seq(
       $.returnType,
-      $.predicateName,
+      field("name", $.predicateName),
       choice(
         seq("(", sep($.varDecl, ","), ")", $._optbody),
         $.predicateAliasBody
       )
     ),
 
-    datatype: $ => seq($.newtype, $.className, $.eq, $.datatypeBranches),
+    datatype: $ => seq(
+      $.newtype,
+      field("name", $.className),
+      $.eq,
+      $.datatypeBranches
+    ),
+
     datatypeBranches: $ => sep1($.datatypeBranch, "or"),
 
     datatypeBranch: $ => seq(
       optional($.qldoc),
       optional($.annotation),
-      $.className,
+      field("name", $.className),
       "(",
       sep($.varDecl, ","),
       ")",
@@ -62,7 +79,8 @@ module.exports = grammar({
     ),
 
     dataclass: $ => seq(
-      $.class, $.className,
+      $.class,
+      field("name", $.className),
       choice(
         seq($.extends, sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
         $.typeAliasBody
@@ -79,7 +97,14 @@ module.exports = grammar({
 
     charpred: $ => seq($.className, "(", ")", "{", $._exprOrTerm, "}"),
 
-    memberPredicate: $ => seq($.returnType, $.predicateName, "(", sep($.varDecl, ","), ")", $._optbody),
+    memberPredicate: $ => seq(
+      $.returnType,
+      field("name", $.predicateName),
+      "(",
+      sep($.varDecl, ","),
+      ")",
+      $._optbody
+    ),
 
     field: $ => seq($.varDecl, ";"),
 
@@ -95,7 +120,7 @@ module.exports = grammar({
 
     higherOrderTerm: $ => seq(
       $.eq,
-      field('name', $.literalId),
+      field("name", $.literalId),
       "(",
       sep($.predicateExpr, ","),
       ")",
@@ -170,8 +195,18 @@ module.exports = grammar({
     ),
 
     qualifiedRhs: $ => choice(
-      seq($.predicateName, optional($.closure), "(", sep($._call_arg, ","), ")"), //QualCall
-      seq("(", $.typeExpr, ")")                                        // QualCast
+      seq( // QualCall
+        field("name", $.predicateName),
+        optional($.closure),
+        "(",
+        sep($._call_arg, ","),
+        ")"
+      ),
+      seq( // QualCast
+        "(",
+        $.typeExpr,
+        ")"
+      )
     ),
 
     classless_predicate_call: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), "(", sep($._call_arg, ","), ")")),
@@ -280,8 +315,8 @@ module.exports = grammar({
     literalId: $ => choice($._lower_id, $._upper_id),
 
     annotation: $ => choice(
-      field('name', $.annotName),                                  // SimpleAnnotation
-      seq(                                                       // ArgsAnnotation
+      field('name', $.annotName), // SimpleAnnotation
+      seq( // ArgsAnnotation
         field('name', $.annotName),
         "[",
         field('args', sep1($.annotArg, ",")),
@@ -313,13 +348,13 @@ module.exports = grammar({
     returnType: $ => choice($.predicate, $.typeExpr),
 
     typeExpr: $ => choice(
-      seq(optional(seq($.moduleExpr, "::")), $.className),
+      seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
       $.typeLiteral
     ),
 
     predicateName: $ => $._lower_id,
 
-    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), $.literalId),
+    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), field("name", $.literalId)),
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, $.slash, $.integer),
 

@@ -449,15 +449,22 @@
   {
     "type": "aritylessPredicateExpr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "literalId",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "literalId",
-          "named": true
-        },
         {
           "type": "moduleExpr",
           "named": true
@@ -847,7 +854,18 @@
   {
     "type": "classlessPredicate",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "predicateName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -866,10 +884,6 @@
         },
         {
           "type": "predicateAliasBody",
-          "named": true
-        },
-        {
-          "type": "predicateName",
           "named": true
         },
         {
@@ -1449,7 +1463,18 @@
   {
     "type": "dataclass",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "className",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1460,10 +1485,6 @@
         },
         {
           "type": "classMember",
-          "named": true
-        },
-        {
-          "type": "className",
           "named": true
         },
         {
@@ -1484,15 +1505,22 @@
   {
     "type": "datatype",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "className",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "className",
-          "named": true
-        },
         {
           "type": "datatypeBranches",
           "named": true
@@ -1511,10 +1539,21 @@
   {
     "type": "datatypeBranch",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "className",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "annotation",
@@ -1522,10 +1561,6 @@
         },
         {
           "type": "body",
-          "named": true
-        },
-        {
-          "type": "className",
           "named": true
         },
         {
@@ -2834,7 +2869,18 @@
   {
     "type": "memberPredicate",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "predicateName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -2852,10 +2898,6 @@
           "named": true
         },
         {
-          "type": "predicateName",
-          "named": true
-        },
-        {
           "type": "returnType",
           "named": true
         },
@@ -2869,10 +2911,21 @@
   {
     "type": "module",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "moduleName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "moduleAliasBody",
@@ -2880,10 +2933,6 @@
         },
         {
           "type": "moduleMember",
-          "named": true
-        },
-        {
-          "type": "moduleName",
           "named": true
         }
       ]
@@ -3715,10 +3764,21 @@
   {
     "type": "qualifiedRhs",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "predicateName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "add_expr",
@@ -3778,10 +3838,6 @@
         },
         {
           "type": "par_expr",
-          "named": true
-        },
-        {
-          "type": "predicateName",
           "named": true
         },
         {
@@ -4404,15 +4460,22 @@
   {
     "type": "typeExpr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "className",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "className",
-          "named": true
-        },
         {
           "type": "moduleExpr",
           "named": true

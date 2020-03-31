@@ -17,8 +17,12 @@
           "value": "module"
         },
         {
-          "type": "SYMBOL",
-          "name": "moduleName"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "moduleName"
+          }
         },
         {
           "type": "CHOICE",
@@ -194,8 +198,12 @@
           "name": "returnType"
         },
         {
-          "type": "SYMBOL",
-          "name": "predicateName"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "predicateName"
+          }
         },
         {
           "type": "CHOICE",
@@ -266,8 +274,12 @@
           "name": "newtype"
         },
         {
-          "type": "SYMBOL",
-          "name": "className"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "className"
+          }
         },
         {
           "type": "SYMBOL",
@@ -332,8 +344,12 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "className"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "className"
+          }
         },
         {
           "type": "STRING",
@@ -499,8 +515,12 @@
           "name": "class"
         },
         {
-          "type": "SYMBOL",
-          "name": "className"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "className"
+          }
         },
         {
           "type": "CHOICE",
@@ -637,8 +657,12 @@
           "name": "returnType"
         },
         {
-          "type": "SYMBOL",
-          "name": "predicateName"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "predicateName"
+          }
         },
         {
           "type": "STRING",
@@ -1325,8 +1349,12 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "predicateName"
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "predicateName"
+              }
             },
             {
               "type": "CHOICE",
@@ -2442,8 +2470,12 @@
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "className"
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "className"
+              }
             }
           ]
         },
@@ -2482,8 +2514,12 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "literalId"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "literalId"
+          }
         }
       ]
     },
