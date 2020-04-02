@@ -2307,8 +2307,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "simpleId"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "simpleId"
+          }
         },
         {
           "type": "REPEAT",
@@ -2320,8 +2324,12 @@
                 "value": "."
               },
               {
-                "type": "SYMBOL",
-                "name": "simpleId"
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "simpleId"
+                }
               }
             ]
           }
@@ -2345,8 +2353,12 @@
                 "value": "::"
               },
               {
-                "type": "SYMBOL",
-                "name": "simpleId"
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "simpleId"
+                }
               }
             ]
           }
@@ -2372,8 +2384,12 @@
               "value": "::"
             },
             {
-              "type": "SYMBOL",
-              "name": "simpleId"
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "simpleId"
+              }
             }
           ]
         }
