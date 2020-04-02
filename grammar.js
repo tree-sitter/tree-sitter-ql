@@ -331,11 +331,11 @@ module.exports = grammar({
 
     moduleName: $ => $.simpleId,
 
-    qualModuleExpr: $ => sep1($.simpleId, "."),
+    qualModuleExpr: $ => sep1(field("name", $.simpleId), "."),
 
-    importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", $.simpleId))),
+    importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", field("name", $.simpleId)))),
 
-    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", $.simpleId)),
+    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", field("name", $.simpleId))),
 
     typeLiteral: $ => choice($.dbtype, $.boolean, $.date, 'float', 'int', 'string'),
 
