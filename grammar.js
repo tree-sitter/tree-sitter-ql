@@ -208,8 +208,11 @@ module.exports = grammar({
         ")"
       )
     ),
+    
+    call_or_unqual_agg_body: $ => choice(seq("(", sep($._call_arg, ","), ")"),
+                                         seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")")),
 
-    classless_predicate_call: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), "(", sep($._call_arg, ","), ")")),
+    call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $.call_or_unqual_agg_body)),
     qualified_expr: $ => seq($._primary, ".", $.qualifiedRhs),
     super_ref: $ => seq(optional(seq($.typeExpr, ".")), $.super),
 
@@ -243,6 +246,11 @@ module.exports = grammar({
       field('lower', $._exprOrTerm), "..", field('upper', $._exprOrTerm),
       "]"
     ),
+    set_literal: $ => seq(
+      "[",
+      sep($._exprOrTerm, ','),
+      "]"
+    ),
 
     par_expr: $ => seq("(", $._exprOrTerm, ")"),
 
@@ -266,13 +274,14 @@ module.exports = grammar({
     ),
 
     _primary: $ => choice(
-      $.classless_predicate_call, // PredicateAtomExpr
+      $.call_or_unqual_agg_expr, // 
       $.qualified_expr,                                        // QualifiedExpr
       $.literal,                                                                  // Lit
       $.variable,                                                                 // Var
       $.super_ref,
       $.aggregate,
       $.range,
+      $.set_literal,
       $.par_expr                                                 // ParExpr
     ),
 
