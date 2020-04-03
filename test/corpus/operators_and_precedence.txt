@@ -111,7 +111,7 @@ select a+(b)
 
 ---
 
-(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (closure (plus)) (call_or_unqual_agg_body (variable (varName (simpleId))))))))))
+(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (closure (plus)) (call_body (variable (varName (simpleId))))))))))
 
 ==========
 cast vs subtract

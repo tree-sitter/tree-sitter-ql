@@ -74,8 +74,8 @@ select i
   (select 
     (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
     (conjunction 
-      (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_or_unqual_agg_body (variable (varName (simpleId))))) 
-      (call_or_unqual_agg_expr (aritylessPredicateExpr (moduleExpr (simpleId)) (literalId)) (closure (plus)) (call_or_unqual_agg_body))) 
+      (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_body (variable (varName (simpleId))))) 
+      (call_or_unqual_agg_expr (aritylessPredicateExpr (moduleExpr (simpleId)) (literalId)) (closure (plus)) (call_body))) 
     (asExprs (asExpr (variable (varName (simpleId))))))))
 =================================
 calls with results & method calls

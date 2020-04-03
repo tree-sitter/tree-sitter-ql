@@ -13,7 +13,7 @@ dontcare
 select foo(_)
 
 ---
-(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_or_unqual_agg_body (underscore))))))))
+(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_body (underscore))))))))
 ====
 unop
 ====
@@ -70,7 +70,7 @@ select unique(int x | x = 1 | x)
       (asExpr
         (call_or_unqual_agg_expr
           (aritylessPredicateExpr (literalId))
-          (call_or_unqual_agg_body
+          (unqual_agg_body
             (varDecl (typeExpr (typeLiteral)) (varName (simpleId)))
             (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
             (asExprs (asExpr (variable (varName (simpleId))))))))))))

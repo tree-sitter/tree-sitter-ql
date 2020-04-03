@@ -209,10 +209,12 @@ module.exports = grammar({
       )
     ),
     
-    call_or_unqual_agg_body: $ => choice(seq("(", sep($._call_arg, ","), ")"),
-                                         seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")")),
+    call_body:$ => seq("(", sep($._call_arg, ","), ")"),
+    unqual_agg_body:$ => seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
+    
+    _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
-    call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $.call_or_unqual_agg_body)),
+    call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
     qualified_expr: $ => seq($._primary, ".", $.qualifiedRhs),
     super_ref: $ => seq(optional(seq($.typeExpr, ".")), $.super),
 
