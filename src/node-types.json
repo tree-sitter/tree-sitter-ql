@@ -2663,17 +2663,24 @@
   {
     "type": "importModuleExpr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "simpleId",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "qualModuleExpr",
-          "named": true
-        },
-        {
-          "type": "simpleId",
           "named": true
         }
       ]
@@ -3067,9 +3074,20 @@
   {
     "type": "moduleExpr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "simpleId",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -3880,16 +3898,17 @@
   {
     "type": "qualModuleExpr",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "simpleId",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "simpleId",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
