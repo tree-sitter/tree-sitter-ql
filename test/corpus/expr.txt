@@ -13,7 +13,7 @@ dontcare
 select foo(_)
 
 ---
-(ql (moduleMember (select (asExprs (asExpr (classless_predicate_call (aritylessPredicateExpr (literalId)) (underscore)))))))
+(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_or_unqual_agg_body (underscore))))))))
 ====
 unop
 ====
@@ -38,6 +38,42 @@ select 5 + 5, 5 - 5, 5 * 5, 5 / 5, 5 % 5
       (asExpr (mul_expr (literal (integer)) (mulop (star)) (literal (integer)))) 
       (asExpr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer)))) 
       (asExpr (mul_expr (literal (integer)) (mulop (mod)) (literal (integer))))))))
+
+===========
+set literal
+===========
+
+select [1,2,4]
+
+---
+
+(ql (moduleMember
+  (select
+    (asExprs
+      (asExpr
+        (set_literal
+          (literal (integer))
+          (literal (integer))
+          (literal (integer))))))))
+
+====================
+uniqueness aggregate
+====================
+
+select unique(int x | x = 1 | x)
+
+---
+
+(ql (moduleMember
+  (select
+    (asExprs
+      (asExpr
+        (call_or_unqual_agg_expr
+          (aritylessPredicateExpr (literalId))
+          (call_or_unqual_agg_body
+            (varDecl (typeExpr (typeLiteral)) (varName (simpleId)))
+            (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
+            (asExprs (asExpr (variable (varName (simpleId))))))))))))
 
 ================
 binop precedence
