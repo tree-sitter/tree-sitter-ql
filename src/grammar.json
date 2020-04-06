@@ -1430,7 +1430,149 @@
         }
       ]
     },
-    "classless_predicate_call": {
+    "call_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_call_arg"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_call_arg"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "unqual_agg_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "varDecl"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "varDecl"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "|"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_exprOrTerm"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "|"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "asExprs"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "_call_or_unqual_agg_body": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "call_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unqual_agg_body"
+        }
+      ]
+    },
+    "call_or_unqual_agg_expr": {
       "type": "PREC_DYNAMIC",
       "value": 10,
       "content": {
@@ -1453,45 +1595,8 @@
             ]
           },
           {
-            "type": "STRING",
-            "value": "("
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_call_arg"
-                  },
-                  {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "STRING",
-                          "value": ","
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "_call_arg"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "STRING",
-            "value": ")"
+            "type": "SYMBOL",
+            "name": "_call_or_unqual_agg_body"
           }
         ]
       }
@@ -1803,6 +1908,52 @@
         }
       ]
     },
+    "set_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_exprOrTerm"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_exprOrTerm"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
     "par_expr": {
       "type": "SEQ",
       "members": [
@@ -1890,7 +2041,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "classless_predicate_call"
+          "name": "call_or_unqual_agg_expr"
         },
         {
           "type": "SYMBOL",
@@ -1915,6 +2066,10 @@
         {
           "type": "SYMBOL",
           "name": "range"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "set_literal"
         },
         {
           "type": "SYMBOL",
@@ -2200,7 +2355,7 @@
     },
     "qldoc": {
       "type": "PATTERN",
-      "value": "\\/\\*\\*[^*]*\\*+([^\\/*][^*]*\\*+)*\\/"
+      "value": "\\/\\*\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/"
     },
     "literalId": {
       "type": "CHOICE",
@@ -2639,7 +2794,7 @@
     },
     "block_comment": {
       "type": "PATTERN",
-      "value": "\\/\\*([^*]+\\*+([^\\/*][^*]*\\*+)*|\\*)\\/"
+      "value": "\\/\\*([^*]+\\*+([^/*][^*]*\\*+)*|\\*)\\/"
     },
     "any": {
       "type": "STRING",
