@@ -2,3 +2,4 @@
 /yarn-error.log
 /binding.gyp
 /build
+.DS_Store
