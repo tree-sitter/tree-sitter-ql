@@ -1561,6 +1561,10 @@
         {
           "type": "typeExpr",
           "named": true
+        },
+        {
+          "type": "typeUnionBody",
+          "named": true
         }
       ]
     }
@@ -4782,6 +4786,25 @@
         },
         {
           "type": "dbtype",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeUnionBody",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "eq",
+          "named": true
+        },
+        {
+          "type": "typeExpr",
           "named": true
         }
       ]

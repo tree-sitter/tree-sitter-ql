@@ -190,6 +190,60 @@
         }
       ]
     },
+    "typeUnionBody": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "eq"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typeExpr"
+        },
+        {
+          "type": "STRING",
+          "value": "or"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "typeExpr"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "or"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "typeExpr"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
     "classlessPredicate": {
       "type": "SEQ",
       "members": [
@@ -577,6 +631,10 @@
             {
               "type": "SYMBOL",
               "name": "typeAliasBody"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "typeUnionBody"
             }
           ]
         }
@@ -2355,7 +2413,7 @@
     },
     "qldoc": {
       "type": "PATTERN",
-      "value": "\\/\\*\\*[^*]*\\*+([^\\/*][^*]*\\*+)*\\/"
+      "value": "\\/\\*\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/"
     },
     "literalId": {
       "type": "CHOICE",
@@ -2794,7 +2852,7 @@
     },
     "block_comment": {
       "type": "PATTERN",
-      "value": "\\/\\*([^*]+\\*+([^\\/*][^*]*\\*+)*|\\*)\\/"
+      "value": "\\/\\*([^*]+\\*+([^/*][^*]*\\*+)*|\\*)\\/"
     },
     "any": {
       "type": "STRING",
