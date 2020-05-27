@@ -6,7 +6,10 @@
     "tree-sitter",
     "semmle-ql"
   ],
-  "repository": "https://github.com/samlanning/tree-sitter-ql",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tree-sitter/tree-sitter-ql.git"
+  },
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
   "devDependencies": {
@@ -28,6 +31,15 @@
     }
   ],
   "dependencies": {
-    "nan": "^2.14.0"
+    "nan": "^2.14.1"
+  },
+  "bugs": {
+    "url": "https://github.com/tree-sitter/tree-sitter-ql/issues"
+  },
+  "homepage": "https://github.com/tree-sitter/tree-sitter-ql#readme",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
   }
 }

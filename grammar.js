@@ -43,6 +43,7 @@ module.exports = grammar({
     moduleAliasBody: $ => seq($.eq, $.moduleExpr, ";"),
     predicateAliasBody: $ => seq($.eq, $.predicateExpr, ";"),
     typeAliasBody: $ => seq($.eq, $.typeExpr, ";"),
+    typeUnionBody: $ => seq($.eq, $.typeExpr, "or", sep($.typeExpr, "or"), ";"),
 
     classlessPredicate: $ => seq(
       $.returnType,
@@ -83,7 +84,8 @@ module.exports = grammar({
       field("name", $.className),
       choice(
         seq($.extends, sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
-        $.typeAliasBody
+        $.typeAliasBody,
+        $.typeUnionBody
       )
     ),
 
@@ -208,10 +210,10 @@ module.exports = grammar({
         ")"
       )
     ),
-    
+
     call_body:$ => seq("(", sep($._call_arg, ","), ")"),
     unqual_agg_body:$ => seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
-    
+
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
     call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
@@ -276,7 +278,7 @@ module.exports = grammar({
     ),
 
     _primary: $ => choice(
-      $.call_or_unqual_agg_expr, // 
+      $.call_or_unqual_agg_expr, //
       $.qualified_expr,                                        // QualifiedExpr
       $.literal,                                                                  // Lit
       $.variable,                                                                 // Var

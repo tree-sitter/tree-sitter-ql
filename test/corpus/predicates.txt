@@ -8,9 +8,9 @@ mod::Type foo(int arg, Foo arg);
 
 ---
 
-(ql 
-  (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (empty))) 
-  (moduleMember (classlessPredicate (returnType (typeExpr (moduleExpr (simpleId)) (className))) (predicateName) 
+(ql
+  (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (empty)))
+  (moduleMember (classlessPredicate (returnType (typeExpr (moduleExpr (simpleId)) (className))) (predicateName)
     (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) (varDecl (typeExpr (className)) (varName (simpleId))) (empty))))
 
 ================
@@ -27,10 +27,10 @@ int predicateWithResult(){
 
 ---
 
- (ql 
-    (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (varDecl (typeExpr (className)) (varName (simpleId))) (body 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))) 
-    (moduleMember (classlessPredicate (returnType (typeExpr (typeLiteral))) (predicateName) (body 
+ (ql
+    (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (varDecl (typeExpr (className)) (varName (simpleId))) (body
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))))
+    (moduleMember (classlessPredicate (returnType (typeExpr (typeLiteral))) (predicateName) (body
       (comp_term (variable (result)) (compop (eq)) (literal (integer)))))))
 
 =====================
@@ -41,17 +41,17 @@ int foo(X x, Y y) = name(pred1/1, pred2/3)(x.x(), result)
 
 ---
 
-(ql (moduleMember 
-  (classlessPredicate 
-    (returnType (typeExpr (typeLiteral))) 
-    (predicateName) 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (higherOrderTerm (eq) (literalId) 
-      (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer)) 
-      (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer)) 
-      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) 
-      (variable (result)))))) 
+(ql (moduleMember
+  (classlessPredicate
+    (returnType (typeExpr (typeLiteral)))
+    (predicateName)
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (higherOrderTerm (eq) (literalId)
+      (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer))
+      (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer))
+      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
+      (variable (result))))))
 
 ===============
 predicate alias
@@ -61,6 +61,30 @@ predicate foo = somePredicate/12;
 
 ---
 
-(ql (moduleMember (classlessPredicate 
-  (returnType (predicate)) 
-  (predicateName) (predicateAliasBody (eq) (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer)))))) 
+(ql (moduleMember (classlessPredicate
+  (returnType (predicate))
+  (predicateName) (predicateAliasBody (eq) (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer))))))
+
+==========
+type union
+==========
+
+newtype T =
+  T1() or
+  T2(int x) { x = 1 or x = 2 } or
+  T3(int x) { x = 3 or x = 4 or x = 5 }
+
+class T2orT3 = T2 or T3;
+
+---
+
+(ql (moduleMember (datatype (newtype) (className) (eq) (datatypeBranches
+      (datatypeBranch (className))
+      (datatypeBranch (className) (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) (body (disjunction
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer))))))
+      (datatypeBranch (className) (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) (body (disjunction (disjunction
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer))))
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))))))))
+    (moduleMember (dataclass (class) (className) (typeUnionBody (eq) (typeExpr (className)) (typeExpr (className))))))
