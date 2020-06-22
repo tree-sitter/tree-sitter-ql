@@ -30,13 +30,13 @@ select 5 + 5, 5 - 5, 5 * 5, 5 / 5, 5 % 5
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (asExprs 
-      (asExpr (add_expr (literal (integer)) (addop (plus)) (literal (integer)))) 
-      (asExpr (add_expr (literal (integer)) (addop (minus)) (literal (integer)))) 
-      (asExpr (mul_expr (literal (integer)) (mulop (star)) (literal (integer)))) 
-      (asExpr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer)))) 
+(ql (moduleMember
+  (select
+    (asExprs
+      (asExpr (add_expr (literal (integer)) (addop (plus)) (literal (integer))))
+      (asExpr (add_expr (literal (integer)) (addop (minus)) (literal (integer))))
+      (asExpr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))))
+      (asExpr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))))
       (asExpr (mul_expr (literal (integer)) (mulop (mod)) (literal (integer))))))))
 
 ===========
@@ -71,7 +71,7 @@ select unique(int x | x = 1 | x)
         (call_or_unqual_agg_expr
           (aritylessPredicateExpr (literalId))
           (unqual_agg_body
-            (varDecl (typeExpr (typeLiteral)) (varName (simpleId)))
+            (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
             (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
             (asExprs (asExpr (variable (varName (simpleId))))))))))))
 
@@ -97,18 +97,18 @@ select
 
 ---
 
-(ql (moduleMember (select (line_comment) 
-  (asExprs 
-    (asExpr (add_expr (add_expr (literal (integer)) (addop (plus)) (literal (integer))) (addop (minus)) (literal (integer)))) 
-    (asExpr (add_expr (add_expr (literal (integer)) (addop (minus)) (literal (integer))) (addop (plus)) (literal (integer)))) 
-    (line_comment) 
-    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (star)) (literal (integer))))) 
-    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))))) 
-    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (addop (plus)) (literal (integer)))) 
-    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (addop (plus)) (literal (integer)))) 
-    (line_comment) 
-    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (mulop (star)) (literal (integer)))) 
-    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (mulop (slash)) (literal (integer)))) 
-    (line_comment) 
+(ql (moduleMember (select (line_comment)
+  (asExprs
+    (asExpr (add_expr (add_expr (literal (integer)) (addop (plus)) (literal (integer))) (addop (minus)) (literal (integer))))
+    (asExpr (add_expr (add_expr (literal (integer)) (addop (minus)) (literal (integer))) (addop (plus)) (literal (integer))))
+    (line_comment)
+    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (star)) (literal (integer)))))
+    (asExpr (add_expr (literal (integer)) (addop (plus)) (mul_expr (literal (integer)) (mulop (slash)) (literal (integer)))))
+    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (addop (plus)) (literal (integer))))
+    (asExpr (add_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (addop (plus)) (literal (integer))))
+    (line_comment)
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (slash)) (literal (integer))) (mulop (star)) (literal (integer))))
+    (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (mulop (slash)) (literal (integer))))
+    (line_comment)
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (star)) (literal (integer))) (mulop (mod)) (literal (integer))))
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop (mod)) (literal (integer))) (mulop (star)) (literal (integer))))))))

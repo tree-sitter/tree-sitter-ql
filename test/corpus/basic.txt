@@ -15,15 +15,15 @@ select
 
 ---
 
-(ql 
-  (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
-  (moduleMember (select (asExprs 
-    (asExpr (literal (string)) (as) (varName (simpleId))) 
-    (asExpr (literal (string))) 
-    (asExpr (literal (string))) 
-    (asExpr (literal (integer))) 
-    (asExpr (literal (float))) 
-    (asExpr (literal (bool (true)))) 
+(ql
+  (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId)))))
+  (moduleMember (select (asExprs
+    (asExpr (literal (string)) (as) (varName (simpleId)))
+    (asExpr (literal (string)))
+    (asExpr (literal (string)))
+    (asExpr (literal (integer)))
+    (asExpr (literal (float)))
+    (asExpr (literal (bool (true))))
     (asExpr (literal (bool (false))))))))
 
 ============
@@ -44,21 +44,21 @@ order by foo, bar desc, baz asc
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (varDecl (typeExpr (moduleExpr (moduleExpr (simpleId)) (simpleId)) (className)) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral (dbtype))) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral (boolean))) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral (date))) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
-    (varDecl (typeExpr (typeLiteral)) (varName (simpleId))) 
-    (asExprs 
-      (asExpr (literal (string)))) 
+(ql (moduleMember
+  (select
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (varDecl (typeExpr (moduleExpr (moduleExpr (simpleId)) (simpleId)) (className)) (varName (simpleId)))
+    (varDecl (typeExpr (dbtype)) (varName (simpleId)))
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (asExprs
+      (asExpr (literal (string))))
     (orderBys
-      (orderBy (variable (varName (simpleId)))) 
-      (orderBy (variable (varName (simpleId))) (direction (desc))) 
+      (orderBy (variable (varName (simpleId))))
+      (orderBy (variable (varName (simpleId))) (direction (desc)))
       (orderBy (variable (varName (simpleId))) (direction (asc)))))))
 
 ========================
@@ -76,10 +76,10 @@ import bar
 
 ---
 
-(ql 
-  (moduleMember (annotation (annotName)) (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
-  (line_comment) (block_comment) 
-  (moduleMember 
-    (annotation (annotName) (annotArg (simpleId))) 
-    (annotation (annotName) (annotArg (simpleId)) (annotArg (this))) 
+(ql
+  (moduleMember (annotation (annotName)) (imprt (import) (importModuleExpr (qualModuleExpr (simpleId)))))
+  (line_comment) (block_comment)
+  (moduleMember
+    (annotation (annotName) (annotArg (simpleId)))
+    (annotation (annotName) (annotArg (simpleId)) (annotArg (this)))
     (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))))

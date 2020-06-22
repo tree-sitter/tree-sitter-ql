@@ -1657,11 +1657,6 @@
     }
   },
   {
-    "type": "dbtype",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "direction",
     "named": true,
     "fields": {},
@@ -3885,6 +3880,11 @@
     }
   },
   {
+    "type": "primitiveType",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "ql",
     "named": true,
     "fields": {},
@@ -4758,34 +4758,15 @@
       "required": false,
       "types": [
         {
+          "type": "dbtype",
+          "named": true
+        },
+        {
           "type": "moduleExpr",
           "named": true
         },
         {
-          "type": "typeLiteral",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "typeLiteral",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "date",
-          "named": true
-        },
-        {
-          "type": "dbtype",
+          "type": "primitiveType",
           "named": true
         }
       ]
@@ -5162,7 +5143,7 @@
   },
   {
     "type": "boolean",
-    "named": true
+    "named": false
   },
   {
     "type": "by",
@@ -5182,6 +5163,10 @@
   },
   {
     "type": "date",
+    "named": false
+  },
+  {
+    "type": "dbtype",
     "named": true
   },
   {

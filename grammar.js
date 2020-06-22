@@ -1,20 +1,21 @@
 module.exports = grammar({
   name: 'ql',
+
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
     [$.varDecl, $.returnType],
   ],
-  word: $ => $._lower_id,
+
   extras: $ => [
     /[ \t\r\n]/,
     $.line_comment,
     $.block_comment,
   ],
 
+  word: $ => $._lower_id,
 
   rules: {
-
     ql: $ => repeat($.moduleMember),
 
     module: $ => seq(
@@ -337,7 +338,6 @@ module.exports = grammar({
       )
     ),
 
-
     annotName: $ => $._lower_id,
 
     annotArg: $ => choice($.simpleId, $.this, $.result),
@@ -350,19 +350,20 @@ module.exports = grammar({
 
     moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", field("name", $.simpleId))),
 
-    typeLiteral: $ => choice($.dbtype, $.boolean, $.date, 'float', 'int', 'string'),
+    primitiveType: $ => choice('boolean', 'date', 'float', 'int', 'string'),
 
     simpleId: $ => choice($._lower_id, $._upper_id),
 
     className: $ => $._upper_id,
 
-    dbtype: $ => $._at_lower_id,
+    dbtype: $ => /@[a-z][A-Za-z0-9_]*/,
 
     returnType: $ => choice($.predicate, $.typeExpr),
 
     typeExpr: $ => choice(
       seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
-      $.typeLiteral
+      $.dbtype,
+      $.primitiveType
     ),
 
     predicateName: $ => $._lower_id,
@@ -377,7 +378,6 @@ module.exports = grammar({
 
     _upper_id: $ => /[A-Z][A-Za-z0-9_]*/,
     _lower_id: $ => /[a-z][A-Za-z0-9_]*/,
-    _at_lower_id: $ => /@[a-z][A-Za-z0-9_]*/,
     integer: $ => /[0-9]+/,
     float: $ => /[0-9]+\.[0-9]+/,
     string: $ => /"([^"\\\r\n\t]|\\["\\nrt])*"/,
@@ -388,11 +388,9 @@ module.exports = grammar({
     as: $ => 'as',
     asc: $ => 'asc',
     avg: $ => 'avg',
-    boolean: $ => 'boolean',
     class: $ => 'class',
     newtype: $ => 'newtype',
     count: $ => 'count',
-    date: $ => 'date',
     desc: $ => 'desc',
     exists: $ => 'exists',
     extends: $ => 'extends',

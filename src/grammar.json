@@ -2413,7 +2413,7 @@
     },
     "qldoc": {
       "type": "PATTERN",
-      "value": "\\/\\*\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/"
+      "value": "\\/\\*\\*[^*]*\\*+([^\\/*][^*]*\\*+)*\\/"
     },
     "literalId": {
       "type": "CHOICE",
@@ -2608,20 +2608,16 @@
         }
       ]
     },
-    "typeLiteral": {
+    "primitiveType": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "dbtype"
+          "type": "STRING",
+          "value": "boolean"
         },
         {
-          "type": "SYMBOL",
-          "name": "boolean"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "date"
+          "type": "STRING",
+          "value": "date"
         },
         {
           "type": "STRING",
@@ -2655,8 +2651,8 @@
       "name": "_upper_id"
     },
     "dbtype": {
-      "type": "SYMBOL",
-      "name": "_at_lower_id"
+      "type": "PATTERN",
+      "value": "@[a-z][A-Za-z0-9_]*"
     },
     "returnType": {
       "type": "CHOICE",
@@ -2710,7 +2706,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "typeLiteral"
+          "name": "dbtype"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "primitiveType"
         }
       ]
     },
@@ -2830,10 +2830,6 @@
       "type": "PATTERN",
       "value": "[a-z][A-Za-z0-9_]*"
     },
-    "_at_lower_id": {
-      "type": "PATTERN",
-      "value": "@[a-z][A-Za-z0-9_]*"
-    },
     "integer": {
       "type": "PATTERN",
       "value": "[0-9]+"
@@ -2852,7 +2848,7 @@
     },
     "block_comment": {
       "type": "PATTERN",
-      "value": "\\/\\*([^*]+\\*+([^/*][^*]*\\*+)*|\\*)\\/"
+      "value": "\\/\\*([^*]+\\*+([^\\/*][^*]*\\*+)*|\\*)\\/"
     },
     "any": {
       "type": "STRING",
@@ -2870,10 +2866,6 @@
       "type": "STRING",
       "value": "avg"
     },
-    "boolean": {
-      "type": "STRING",
-      "value": "boolean"
-    },
     "class": {
       "type": "STRING",
       "value": "class"
@@ -2885,10 +2877,6 @@
     "count": {
       "type": "STRING",
       "value": "count"
-    },
-    "date": {
-      "type": "STRING",
-      "value": "date"
     },
     "desc": {
       "type": "STRING",
