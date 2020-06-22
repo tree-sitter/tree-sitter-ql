@@ -9,8 +9,8 @@ mod::Type foo(int arg, Foo arg);
 ---
 
 (ql
-  (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (empty)))
-  (moduleMember (classlessPredicate (returnType (typeExpr (moduleExpr (simpleId)) (className))) (predicateName)
+  (moduleMember (classlessPredicate (predicate) (predicateName) (empty)))
+  (moduleMember (classlessPredicate (typeExpr (moduleExpr (simpleId)) (className)) (predicateName)
     (varDecl (typeExpr (primitiveType)) (varName (simpleId))) (varDecl (typeExpr (className)) (varName (simpleId))) (empty))))
 
 ================
@@ -28,9 +28,9 @@ int predicateWithResult(){
 ---
 
  (ql
-    (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (varDecl (typeExpr (className)) (varName (simpleId))) (body
+    (moduleMember (classlessPredicate (predicate) (predicateName) (varDecl (typeExpr (className)) (varName (simpleId))) (body
       (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))))
-    (moduleMember (classlessPredicate (returnType (typeExpr (primitiveType))) (predicateName) (body
+    (moduleMember (classlessPredicate (typeExpr (primitiveType)) (predicateName) (body
       (comp_term (variable (result)) (compop (eq)) (literal (integer)))))))
 
 =====================
@@ -43,7 +43,7 @@ int foo(X x, Y y) = name(pred1/1, pred2/3)(x.x(), result)
 
 (ql (moduleMember
   (classlessPredicate
-    (returnType (typeExpr (primitiveType)))
+    (typeExpr (primitiveType))
     (predicateName)
     (varDecl (typeExpr (className)) (varName (simpleId)))
     (varDecl (typeExpr (className)) (varName (simpleId)))
@@ -62,7 +62,7 @@ predicate foo = somePredicate/12;
 ---
 
 (ql (moduleMember (classlessPredicate
-  (returnType (predicate))
+  (predicate)
   (predicateName) (predicateAliasBody (eq) (predicateExpr (aritylessPredicateExpr (literalId)) (slash) (integer))))))
 
 ==========
@@ -78,7 +78,7 @@ class T2orT3 = T2 or T3;
 
 ---
 
-(ql (moduleMember (datatype (newtype) (className) (eq) (datatypeBranches
+(ql (moduleMember (datatype (className) (eq) (datatypeBranches
       (datatypeBranch (className))
       (datatypeBranch (className) (varDecl (typeExpr (primitiveType)) (varName (simpleId))) (body (disjunction
         (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
@@ -87,4 +87,4 @@ class T2orT3 = T2 or T3;
         (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))
         (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer))))
         (comp_term (variable (varName (simpleId))) (compop (eq)) (literal (integer)))))))))
-    (moduleMember (dataclass (class) (className) (typeUnionBody (eq) (typeExpr (className)) (typeExpr (className))))))
+    (moduleMember (dataclass (className) (typeUnionBody (eq) (typeExpr (className)) (typeExpr (className))))))

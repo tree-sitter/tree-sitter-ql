@@ -233,57 +233,7 @@
   {
     "type": "aggId",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "any",
-          "named": true
-        },
-        {
-          "type": "avg",
-          "named": true
-        },
-        {
-          "type": "concat",
-          "named": true
-        },
-        {
-          "type": "count",
-          "named": true
-        },
-        {
-          "type": "max",
-          "named": true
-        },
-        {
-          "type": "min",
-          "named": true
-        },
-        {
-          "type": "rank",
-          "named": true
-        },
-        {
-          "type": "strictconcat",
-          "named": true
-        },
-        {
-          "type": "strictcount",
-          "named": true
-        },
-        {
-          "type": "strictsum",
-          "named": true
-        },
-        {
-          "type": "sum",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "aggregate",
@@ -498,10 +448,6 @@
         },
         {
           "type": "aggregate",
-          "named": true
-        },
-        {
-          "type": "as",
           "named": true
         },
         {
@@ -1022,6 +968,20 @@
             "named": true
           }
         ]
+      },
+      "returnType": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "typeExpr",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -1042,10 +1002,6 @@
         },
         {
           "type": "predicateAliasBody",
-          "named": true
-        },
-        {
-          "type": "returnType",
           "named": true
         },
         {
@@ -1543,15 +1499,7 @@
       "required": true,
       "types": [
         {
-          "type": "class",
-          "named": true
-        },
-        {
           "type": "classMember",
-          "named": true
-        },
-        {
-          "type": "extends",
           "named": true
         },
         {
@@ -1594,10 +1542,6 @@
         },
         {
           "type": "eq",
-          "named": true
-        },
-        {
-          "type": "newtype",
           "named": true
         }
       ]
@@ -1659,21 +1603,7 @@
   {
     "type": "direction",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "asc",
-          "named": true
-        },
-        {
-          "type": "desc",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "disjunction",
@@ -2660,6 +2590,25 @@
     }
   },
   {
+    "type": "importDirective",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "importModuleExpr",
+          "named": true
+        },
+        {
+          "type": "moduleName",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "importModuleExpr",
     "named": true,
     "fields": {
@@ -2680,33 +2629,6 @@
       "types": [
         {
           "type": "qualModuleExpr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "imprt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "as",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "importModuleExpr",
-          "named": true
-        },
-        {
-          "type": "moduleName",
           "named": true
         }
       ]
@@ -2824,16 +2746,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "in",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2882,10 +2794,6 @@
         },
         {
           "type": "instance_of",
-          "named": true
-        },
-        {
-          "type": "instanceof",
           "named": true
         },
         {
@@ -2992,6 +2900,20 @@
             "named": true
           }
         ]
+      },
+      "returnType": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "predicate",
+            "named": true
+          },
+          {
+            "type": "typeExpr",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -3008,10 +2930,6 @@
         },
         {
           "type": "higherOrderTerm",
-          "named": true
-        },
-        {
-          "type": "returnType",
           "named": true
         },
         {
@@ -3125,7 +3043,7 @@
           "named": true
         },
         {
-          "type": "imprt",
+          "type": "importDirective",
           "named": true
         },
         {
@@ -3398,7 +3316,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -3451,10 +3369,6 @@
         },
         {
           "type": "negation",
-          "named": true
-        },
-        {
-          "type": "not",
           "named": true
         },
         {
@@ -4206,25 +4120,7 @@
   {
     "type": "quantifier",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "exists",
-          "named": true
-        },
-        {
-          "type": "forall",
-          "named": true
-        },
-        {
-          "type": "forex",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "range",
@@ -4426,25 +4322,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "returnType",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "predicate",
-          "named": true
-        },
-        {
-          "type": "typeExpr",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -4669,21 +4546,6 @@
     "type": "simpleId",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "specialId",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "none",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "special_call",
@@ -5127,19 +4989,19 @@
   },
   {
     "type": "any",
-    "named": true
+    "named": false
   },
   {
     "type": "as",
-    "named": true
+    "named": false
   },
   {
     "type": "asc",
-    "named": true
+    "named": false
   },
   {
     "type": "avg",
-    "named": true
+    "named": false
   },
   {
     "type": "boolean",
@@ -5151,15 +5013,15 @@
   },
   {
     "type": "class",
-    "named": true
+    "named": false
   },
   {
     "type": "concat",
-    "named": true
+    "named": false
   },
   {
     "type": "count",
-    "named": true
+    "named": false
   },
   {
     "type": "date",
@@ -5171,7 +5033,7 @@
   },
   {
     "type": "desc",
-    "named": true
+    "named": false
   },
   {
     "type": "else",
@@ -5183,11 +5045,11 @@
   },
   {
     "type": "exists",
-    "named": true
+    "named": false
   },
   {
     "type": "extends",
-    "named": true
+    "named": false
   },
   {
     "type": "false",
@@ -5203,11 +5065,11 @@
   },
   {
     "type": "forall",
-    "named": true
+    "named": false
   },
   {
     "type": "forex",
-    "named": true
+    "named": false
   },
   {
     "type": "from",
@@ -5231,15 +5093,15 @@
   },
   {
     "type": "import",
-    "named": true
+    "named": false
   },
   {
     "type": "in",
-    "named": true
+    "named": false
   },
   {
     "type": "instanceof",
-    "named": true
+    "named": false
   },
   {
     "type": "int",
@@ -5259,11 +5121,11 @@
   },
   {
     "type": "max",
-    "named": true
+    "named": false
   },
   {
     "type": "min",
-    "named": true
+    "named": false
   },
   {
     "type": "minus",
@@ -5283,15 +5145,11 @@
   },
   {
     "type": "newtype",
-    "named": true
-  },
-  {
-    "type": "none",
-    "named": true
+    "named": false
   },
   {
     "type": "not",
-    "named": true
+    "named": false
   },
   {
     "type": "or",
@@ -5315,7 +5173,7 @@
   },
   {
     "type": "rank",
-    "named": true
+    "named": false
   },
   {
     "type": "result",
@@ -5330,32 +5188,36 @@
     "named": true
   },
   {
+    "type": "specialId",
+    "named": true
+  },
+  {
     "type": "star",
     "named": true
   },
   {
     "type": "strictconcat",
-    "named": true
+    "named": false
   },
   {
     "type": "strictcount",
-    "named": true
+    "named": false
   },
   {
     "type": "strictsum",
-    "named": true
-  },
-  {
-    "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "string",
     "named": false
   },
   {
-    "type": "sum",
+    "type": "string",
     "named": true
+  },
+  {
+    "type": "sum",
+    "named": false
   },
   {
     "type": "super",

@@ -12,11 +12,12 @@ module foo {
 
 ---
 
-(ql (moduleMember 
-   (module (moduleName (simpleId)) (moduleMember 
-     (module (moduleName (simpleId)) 
-       (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))) 
-       (moduleMember (classlessPredicate (returnType (predicate)) (predicateName) (empty))))))))
+(ql (moduleMember
+   (module (moduleName (simpleId)) (moduleMember
+     (module (moduleName (simpleId))
+       (moduleMember (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
+       (moduleMember (classlessPredicate (predicate) (predicateName) (empty))))))))
+
 ============
 module alias
 ============

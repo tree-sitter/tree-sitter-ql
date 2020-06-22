@@ -16,9 +16,9 @@ select
 ---
 
 (ql
-  (moduleMember (imprt (import) (importModuleExpr (qualModuleExpr (simpleId)))))
+  (moduleMember (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
   (moduleMember (select (asExprs
-    (asExpr (literal (string)) (as) (varName (simpleId)))
+    (asExpr (literal (string)) (varName (simpleId)))
     (asExpr (literal (string)))
     (asExpr (literal (string)))
     (asExpr (literal (integer)))
@@ -58,8 +58,8 @@ order by foo, bar desc, baz asc
       (asExpr (literal (string))))
     (orderBys
       (orderBy (variable (varName (simpleId))))
-      (orderBy (variable (varName (simpleId))) (direction (desc)))
-      (orderBy (variable (varName (simpleId))) (direction (asc)))))))
+      (orderBy (variable (varName (simpleId))) (direction))
+      (orderBy (variable (varName (simpleId))) (direction))))))
 
 ========================
 Annotations and comments
@@ -77,9 +77,9 @@ import bar
 ---
 
 (ql
-  (moduleMember (annotation (annotName)) (imprt (import) (importModuleExpr (qualModuleExpr (simpleId)))))
+  (moduleMember (annotation (annotName)) (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
   (line_comment) (block_comment)
   (moduleMember
     (annotation (annotName) (annotArg (simpleId)))
     (annotation (annotName) (annotArg (simpleId)) (annotArg (this)))
-    (imprt (import) (importModuleExpr (qualModuleExpr (simpleId))))))
+    (importDirective (importModuleExpr (qualModuleExpr (simpleId))))))
