@@ -1,0 +1,2 @@
+examples/codeql/docs/language/ql-training/query-examples/cpp/data-flow-cpp-2.ql
+examples/codeql/docs/language/ql-training/query-examples/java/empty-if-java-class.ql

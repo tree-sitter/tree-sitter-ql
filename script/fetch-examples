@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+function checkout() {
+  repo=$1; url=$2; sha=$3
+
+  if [ ! -d "$repo" ]; then
+    git clone "https://github.com/$url" "$repo"
+  fi
+
+  pushd "$repo"
+  git fetch && git reset --hard "$sha"
+  popd
+}
+
+checkout examples/codeql github/codeql 39137510ba9d47f517bebcfc9770f6219cfd397d
