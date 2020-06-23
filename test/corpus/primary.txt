@@ -16,10 +16,10 @@ select super.foo(), module::Foo.super.foo()
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (asExprs 
-      (asExpr (qualified_expr (super_ref (super)) (qualifiedRhs (predicateName)))) 
+(ql (moduleMember
+  (select
+    (asExprs
+      (asExpr (qualified_expr (super_ref (super)) (qualifiedRhs (predicateName))))
       (asExpr (qualified_expr (super_ref (typeExpr (moduleExpr (simpleId)) (className)) (super)) (qualifiedRhs (predicateName))))))))
 
 ============
@@ -44,19 +44,19 @@ select
 
 ---
 
-(ql (moduleMember (select (asExprs 
-  (asExpr (aggregate (aggId (any)) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))))) 
-  (asExpr (aggregate (aggId (any)) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))) 
-  (asExpr (aggregate (aggId (any)) 
-    (full_aggregate_body 
-      (varDecl (typeExpr (className)) (varName (simpleId))) 
-      (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))))) 
-  (asExpr (aggregate (aggId (any)) (full_aggregate_body 
-    (varDecl (typeExpr (className)) 
-      (varName (simpleId))) 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-      (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))))))))) 
+(ql (moduleMember (select (asExprs
+  (asExpr (aggregate (aggId) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))))))
+  (asExpr (aggregate (aggId) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))
+    (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))))
+  (asExpr (aggregate (aggId)
+    (full_aggregate_body
+      (varDecl (typeExpr (className)) (varName (simpleId)))
+      (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))
+  (asExpr (aggregate (aggId) (full_aggregate_body
+    (varDecl (typeExpr (className))
+      (varName (simpleId)))
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))))))
 
 
 =====
@@ -90,47 +90,47 @@ select
 
 ---
 
-  (ql (moduleMember (select  (asExprs 
-    (asExpr (aggregate (aggId (rank)) (literal (integer)) 
-      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))))) 
-    (asExpr (aggregate (aggId (count)) 
-      (expr_aggregate_body (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))))) 
-    (asExpr (aggregate (aggId (count)) 
-      (expr_aggregate_body (asExprs 
-        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (as) (varName (simpleId)))) 
-        (orderBys  
-        (orderBy (variable (varName (simpleId))) (direction (asc))) 
-        (orderBy (variable (varName (simpleId))) (direction (desc))))))) 
-    (asExpr (aggregate (aggId (count)) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))))) 
-    (asExpr (aggregate (aggId (count)) (expr_aggregate_body (asExprs (asExpr (variable (varName (simpleId)))))))) 
-    (asExpr (aggregate (aggId (count)) (full_aggregate_body (asExprs (asExpr (variable (varName (simpleId)))))))) 
-    (asExpr (aggregate (aggId (count)))) 
-    (asExpr (aggregate (aggId (count)) 
-      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))) 
-        (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))) 
-    (asExpr (aggregate (aggId (sum)) 
-      (full_aggregate_body 
-        (varDecl (typeExpr (className)) 
-        (varName (simpleId))) 
-        (asExprs 
-        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))))) 
-    (asExpr (aggregate (aggId (sum)) 
-      (full_aggregate_body 
-        (varDecl (typeExpr (className)) (varName (simpleId))) 
-        (asExprs 
-          (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (as) (varName (simpleId))))))) 
-    (asExpr (aggregate (aggId (sum)) (full_aggregate_body 
-      (varDecl (typeExpr (className)) (varName (simpleId))) 
-      (asExprs 
-        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (as) (varName (simpleId)))) 
-        (orderBys  (orderBy (variable (varName (simpleId)))))))) 
-    (asExpr (aggregate (aggId (sum)) 
-      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))) 
-        (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (as) (varName (simpleId)))) 
-        (orderBys  
-          (orderBy (variable (varName (simpleId))) (direction (asc))) 
-          (orderBy (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))))) 
-    (asExpr (aggregate (aggId (sum)) (full_aggregate_body 
-      (varDecl (typeExpr (className)) (varName (simpleId))) 
-      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) 
+  (ql (moduleMember (select  (asExprs
+    (asExpr (aggregate (aggId) (literal (integer))
+      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))))))
+    (asExpr (aggregate (aggId)
+      (expr_aggregate_body (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))
+    (asExpr (aggregate (aggId)
+      (expr_aggregate_body (asExprs
+        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (varName (simpleId))))
+        (orderBys
+        (orderBy (variable (varName (simpleId))) (direction))
+        (orderBy (variable (varName (simpleId))) (direction))))))
+    (asExpr (aggregate (aggId) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))))))
+    (asExpr (aggregate (aggId) (expr_aggregate_body (asExprs (asExpr (variable (varName (simpleId))))))))
+    (asExpr (aggregate (aggId) (full_aggregate_body (asExprs (asExpr (variable (varName (simpleId))))))))
+    (asExpr (aggregate (aggId)))
+    (asExpr (aggregate (aggId)
+      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))
+        (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))
+    (asExpr (aggregate (aggId)
+      (full_aggregate_body
+        (varDecl (typeExpr (className))
+        (varName (simpleId)))
+        (asExprs
+        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))
+    (asExpr (aggregate (aggId)
+      (full_aggregate_body
+        (varDecl (typeExpr (className)) (varName (simpleId)))
+        (asExprs
+          (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (varName (simpleId)))))))
+    (asExpr (aggregate (aggId) (full_aggregate_body
+      (varDecl (typeExpr (className)) (varName (simpleId)))
+      (asExprs
+        (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (varName (simpleId))))
+        (orderBys  (orderBy (variable (varName (simpleId))))))))
+    (asExpr (aggregate (aggId)
+      (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))
+        (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))) (varName (simpleId))))
+        (orderBys
+          (orderBy (variable (varName (simpleId))) (direction))
+          (orderBy (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))
+    (asExpr (aggregate (aggId) (full_aggregate_body
+      (varDecl (typeExpr (className)) (varName (simpleId)))
+      (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
       (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))))))

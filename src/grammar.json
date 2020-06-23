@@ -73,7 +73,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "imprt"
+                  "name": "importDirective"
                 },
                 {
                   "type": "SYMBOL",
@@ -105,12 +105,12 @@
         }
       ]
     },
-    "imprt": {
+    "importDirective": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "import"
+          "type": "STRING",
+          "value": "import"
         },
         {
           "type": "SYMBOL",
@@ -123,8 +123,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "as"
+                  "type": "STRING",
+                  "value": "as"
                 },
                 {
                   "type": "SYMBOL",
@@ -248,8 +248,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "returnType"
+          "type": "FIELD",
+          "name": "returnType",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "predicate"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "typeExpr"
+              }
+            ]
+          }
         },
         {
           "type": "FIELD",
@@ -324,8 +337,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "newtype"
+          "type": "STRING",
+          "value": "newtype"
         },
         {
           "type": "FIELD",
@@ -565,8 +578,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "class"
+          "type": "STRING",
+          "value": "class"
         },
         {
           "type": "FIELD",
@@ -583,8 +596,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "extends"
+                  "type": "STRING",
+                  "value": "extends"
                 },
                 {
                   "type": "SEQ",
@@ -711,8 +724,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "returnType"
+          "type": "FIELD",
+          "name": "returnType",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "predicate"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "typeExpr"
+              }
+            ]
+          }
         },
         {
           "type": "FIELD",
@@ -1047,8 +1073,8 @@
             }
           },
           {
-            "type": "SYMBOL",
-            "name": "in"
+            "type": "STRING",
+            "value": "in"
           },
           {
             "type": "FIELD",
@@ -1101,8 +1127,8 @@
             "name": "_exprOrTerm"
           },
           {
-            "type": "SYMBOL",
-            "name": "instanceof"
+            "type": "STRING",
+            "value": "instanceof"
           },
           {
             "type": "SYMBOL",
@@ -1118,8 +1144,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "not"
+            "type": "STRING",
+            "value": "not"
           },
           {
             "type": "SYMBOL",
@@ -1367,23 +1393,23 @@
       ]
     },
     "specialId": {
-      "type": "SYMBOL",
-      "name": "none"
+      "type": "STRING",
+      "value": "none"
     },
     "quantifier": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "exists"
+          "type": "STRING",
+          "value": "exists"
         },
         {
-          "type": "SYMBOL",
-          "name": "forall"
+          "type": "STRING",
+          "value": "forall"
         },
         {
-          "type": "SYMBOL",
-          "name": "forex"
+          "type": "STRING",
+          "value": "forex"
         }
       ]
     },
@@ -2275,12 +2301,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "asc"
+          "type": "STRING",
+          "value": "asc"
         },
         {
-          "type": "SYMBOL",
-          "name": "desc"
+          "type": "STRING",
+          "value": "desc"
         }
       ]
     },
@@ -2336,8 +2362,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "as"
+                  "type": "STRING",
+                  "value": "as"
                 },
                 {
                   "type": "SYMBOL",
@@ -2654,19 +2680,6 @@
       "type": "PATTERN",
       "value": "@[a-z][A-Za-z0-9_]*"
     },
-    "returnType": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "predicate"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "typeExpr"
-        }
-      ]
-    },
     "typeExpr": {
       "type": "CHOICE",
       "members": [
@@ -2777,48 +2790,48 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "avg"
+          "type": "STRING",
+          "value": "avg"
         },
         {
-          "type": "SYMBOL",
-          "name": "concat"
+          "type": "STRING",
+          "value": "concat"
         },
         {
-          "type": "SYMBOL",
-          "name": "strictconcat"
+          "type": "STRING",
+          "value": "strictconcat"
         },
         {
-          "type": "SYMBOL",
-          "name": "count"
+          "type": "STRING",
+          "value": "count"
         },
         {
-          "type": "SYMBOL",
-          "name": "max"
+          "type": "STRING",
+          "value": "max"
         },
         {
-          "type": "SYMBOL",
-          "name": "min"
+          "type": "STRING",
+          "value": "min"
         },
         {
-          "type": "SYMBOL",
-          "name": "rank"
+          "type": "STRING",
+          "value": "rank"
         },
         {
-          "type": "SYMBOL",
-          "name": "strictcount"
+          "type": "STRING",
+          "value": "strictcount"
         },
         {
-          "type": "SYMBOL",
-          "name": "strictsum"
+          "type": "STRING",
+          "value": "strictsum"
         },
         {
-          "type": "SYMBOL",
-          "name": "sum"
+          "type": "STRING",
+          "value": "sum"
         },
         {
-          "type": "SYMBOL",
-          "name": "any"
+          "type": "STRING",
+          "value": "any"
         }
       ]
     },
@@ -2850,117 +2863,17 @@
       "type": "PATTERN",
       "value": "\\/\\*([^*]+\\*+([^\\/*][^*]*\\*+)*|\\*)\\/"
     },
-    "any": {
-      "type": "STRING",
-      "value": "any"
-    },
-    "as": {
-      "type": "STRING",
-      "value": "as"
-    },
-    "asc": {
-      "type": "STRING",
-      "value": "asc"
-    },
-    "avg": {
-      "type": "STRING",
-      "value": "avg"
-    },
-    "class": {
-      "type": "STRING",
-      "value": "class"
-    },
-    "newtype": {
-      "type": "STRING",
-      "value": "newtype"
-    },
-    "count": {
-      "type": "STRING",
-      "value": "count"
-    },
-    "desc": {
-      "type": "STRING",
-      "value": "desc"
-    },
-    "exists": {
-      "type": "STRING",
-      "value": "exists"
-    },
-    "extends": {
-      "type": "STRING",
-      "value": "extends"
-    },
     "false": {
       "type": "STRING",
       "value": "false"
-    },
-    "forall": {
-      "type": "STRING",
-      "value": "forall"
-    },
-    "forex": {
-      "type": "STRING",
-      "value": "forex"
-    },
-    "import": {
-      "type": "STRING",
-      "value": "import"
-    },
-    "in": {
-      "type": "STRING",
-      "value": "in"
-    },
-    "instanceof": {
-      "type": "STRING",
-      "value": "instanceof"
-    },
-    "max": {
-      "type": "STRING",
-      "value": "max"
-    },
-    "min": {
-      "type": "STRING",
-      "value": "min"
-    },
-    "not": {
-      "type": "STRING",
-      "value": "not"
-    },
-    "none": {
-      "type": "STRING",
-      "value": "none"
     },
     "predicate": {
       "type": "STRING",
       "value": "predicate"
     },
-    "rank": {
-      "type": "STRING",
-      "value": "rank"
-    },
     "result": {
       "type": "STRING",
       "value": "result"
-    },
-    "strictcount": {
-      "type": "STRING",
-      "value": "strictcount"
-    },
-    "strictsum": {
-      "type": "STRING",
-      "value": "strictsum"
-    },
-    "strictconcat": {
-      "type": "STRING",
-      "value": "strictconcat"
-    },
-    "concat": {
-      "type": "STRING",
-      "value": "concat"
-    },
-    "sum": {
-      "type": "STRING",
-      "value": "sum"
     },
     "super": {
       "type": "STRING",
@@ -3045,10 +2958,6 @@
     [
       "simpleId",
       "literalId"
-    ],
-    [
-      "varDecl",
-      "returnType"
     ]
   ],
   "externals": [],

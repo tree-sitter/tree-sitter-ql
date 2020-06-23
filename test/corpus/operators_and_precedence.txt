@@ -8,14 +8,14 @@ select f
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (disjunction 
-      (conjunction 
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
+(ql (moduleMember
+  (select
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (disjunction
+      (conjunction
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
@@ -28,14 +28,14 @@ select f
 
 ---
 
-(ql (moduleMember 
-  (select (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (disjunction 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-      (conjunction 
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))) 
-    (asExprs (asExpr (variable (varName (simpleId)))))))) 
+(ql (moduleMember
+  (select (varDecl (typeExpr (className)) (varName (simpleId)))
+    (disjunction
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (conjunction
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))
+    (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
 Or vs implies
@@ -48,22 +48,22 @@ select f
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (conjunction 
-      (par_expr 
-        (implication 
-          (disjunction 
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
+(ql (moduleMember
+  (select
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (conjunction
+      (par_expr
+        (implication
+          (disjunction
+            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
         (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))
-      (par_expr 
-        (implication 
-          (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-          (disjunction 
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))))) 
+      (par_expr
+        (implication
+          (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+          (disjunction
+            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
@@ -76,13 +76,13 @@ select f
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (if_term 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))) 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
+(ql (moduleMember
+  (select
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (if_term
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
   (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ==========
@@ -95,12 +95,12 @@ select f
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (varDecl (typeExpr (className)) (varName (simpleId))) 
-    (conjunction 
-      (negation (not) (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))) 
+(ql (moduleMember
+  (select
+    (varDecl (typeExpr (className)) (varName (simpleId)))
+    (conjunction
+      (negation (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ==========

@@ -41,7 +41,7 @@ select f
 (ql (moduleMember
   (select
     (varDecl (typeExpr (className)) (varName (simpleId)))
-    (instance_of (variable (varName (simpleId))) (instanceof) (typeExpr (className)))
+    (instance_of (variable (varName (simpleId))) (typeExpr (className)))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 =====
@@ -57,7 +57,7 @@ select i
 (ql (moduleMember
   (select
    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
-   (in_expr (variable (varName (simpleId))) (in) (range (literal (integer)) (literal (integer))))
+   (in_expr (variable (varName (simpleId))) (range (literal (integer)) (literal (integer))))
    (asExprs (asExpr (variable (varName (simpleId))))))))
 
 =================
@@ -115,16 +115,16 @@ select f
       (disjunction
         (disjunction
           (disjunction
-            (quantified (quantifier (exists)) (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))
-            (quantified (quantifier (exists)) (varDecl (typeExpr (className)) (varName (simpleId)))
+            (quantified (quantifier) (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))
+            (quantified (quantifier) (varDecl (typeExpr (className)) (varName (simpleId)))
           (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))
-        (quantified (quantifier (exists)) (varDecl (typeExpr (className)) (varName (simpleId)))
+        (quantified (quantifier) (varDecl (typeExpr (className)) (varName (simpleId)))
           (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
           (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))
-      (quantified (quantifier (forall)) (varDecl (typeExpr (className)) (varName (simpleId)))
+      (quantified (quantifier) (varDecl (typeExpr (className)) (varName (simpleId)))
         (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
         (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))
-    (quantified (quantifier (forex)) (varDecl (typeExpr (className)) (varName (simpleId)))
+    (quantified (quantifier) (varDecl (typeExpr (className)) (varName (simpleId)))
       (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
       (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))
   (asExprs (asExpr (variable (varName (simpleId))))))))

@@ -4,7 +4,6 @@ module.exports = grammar({
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
-    [$.varDecl, $.returnType],
   ],
 
   extras: $ => [
@@ -34,12 +33,16 @@ module.exports = grammar({
     moduleMember: $ => choice(
       seq(
         repeat($.annotation),
-        choice($.imprt, $.classlessPredicate, $.dataclass, $.datatype, $.select, $.module)
+        choice($.importDirective, $.classlessPredicate, $.dataclass, $.datatype, $.select, $.module)
       ),
       $.qldoc
     ),
 
-    imprt: $ => seq($.import, $.importModuleExpr, optional(seq($.as, $.moduleName))),
+    importDirective: $ => seq(
+      'import',
+      $.importModuleExpr,
+      optional(seq('as', $.moduleName))
+    ),
 
     moduleAliasBody: $ => seq($.eq, $.moduleExpr, ";"),
     predicateAliasBody: $ => seq($.eq, $.predicateExpr, ";"),
@@ -47,7 +50,7 @@ module.exports = grammar({
     typeUnionBody: $ => seq($.eq, $.typeExpr, "or", sep($.typeExpr, "or"), ";"),
 
     classlessPredicate: $ => seq(
-      $.returnType,
+      field("returnType", choice($.predicate, $.typeExpr)),
       field("name", $.predicateName),
       choice(
         seq("(", sep($.varDecl, ","), ")", $._optbody),
@@ -56,7 +59,7 @@ module.exports = grammar({
     ),
 
     datatype: $ => seq(
-      $.newtype,
+      'newtype',
       field("name", $.className),
       $.eq,
       $.datatypeBranches
@@ -81,10 +84,10 @@ module.exports = grammar({
     ),
 
     dataclass: $ => seq(
-      $.class,
+      'class',
       field("name", $.className),
       choice(
-        seq($.extends, sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
+        seq('extends', sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
         $.typeAliasBody,
         $.typeUnionBody
       )
@@ -101,7 +104,7 @@ module.exports = grammar({
     charpred: $ => seq($.className, "(", ")", "{", $._exprOrTerm, "}"),
 
     memberPredicate: $ => seq(
-      $.returnType,
+      field("returnType", choice($.predicate, $.typeExpr)),
       field("name", $.predicateName),
       "(",
       sep($.varDecl, ","),
@@ -147,7 +150,7 @@ module.exports = grammar({
     )),
     in_expr: $ => prec.left(7, seq(
       field('left', $._exprOrTerm),
-      $.in,
+      'in',
       field('right', $.range)
     )),
     comp_term: $ => prec.left(6, seq(
@@ -155,8 +158,8 @@ module.exports = grammar({
       $.compop,
       field('right', $._exprOrTerm)
     )),
-    instance_of: $ => prec.left(5, seq($._exprOrTerm, $.instanceof, $.typeExpr)),
-    negation: $ => prec.left(4, seq($.not, $._exprOrTerm)),
+    instance_of: $ => prec.left(5, seq($._exprOrTerm, 'instanceof', $.typeExpr)),
+    negation: $ => prec.left(4, seq('not', $._exprOrTerm)),
     if_term: $ => prec.left(3, seq(
       "if", field('cond', $._exprOrTerm),
       "then", field('first', $._exprOrTerm),
@@ -188,9 +191,9 @@ module.exports = grammar({
       ),
       ")"),
 
-    specialId: $ => $.none,
+    specialId: $ => 'none',
 
-    quantifier: $ => choice($.exists, $.forall, $.forex),
+    quantifier: $ => choice('exists', 'forall', 'forex'),
 
     _call_arg: $ => choice(
       $._exprOrTerm,  // ExprArg
@@ -312,13 +315,13 @@ module.exports = grammar({
 
     closure: $ => choice($.star, $.plus),
 
-    direction: $ => choice($.asc, $.desc),
+    direction: $ => choice('asc', 'desc'),
 
     varDecl: $ => seq($.typeExpr, $.varName),
 
     asExprs: $ => sep1($.asExpr, ","),
 
-    asExpr: $ => seq($._exprOrTerm, optional(seq($.as, $.varName))),
+    asExpr: $ => seq($._exprOrTerm, optional(seq('as', $.varName))),
 
     orderBys: $ => seq("order", "by", sep1($.orderBy, ",")),
 
@@ -358,8 +361,6 @@ module.exports = grammar({
 
     dbtype: $ => /@[a-z][A-Za-z0-9_]*/,
 
-    returnType: $ => choice($.predicate, $.typeExpr),
-
     typeExpr: $ => choice(
       seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
       $.dbtype,
@@ -374,7 +375,7 @@ module.exports = grammar({
 
     varName: $ => $.simpleId,
 
-    aggId: $ => choice($.avg, $.concat, $.strictconcat, $.count, $.max, $.min, $.rank, $.strictcount, $.strictsum, $.sum, $.any),
+    aggId: $ => choice('avg', 'concat', 'strictconcat', 'count', 'max', 'min', 'rank', 'strictcount', 'strictsum', 'sum', 'any'),
 
     _upper_id: $ => /[A-Z][A-Za-z0-9_]*/,
     _lower_id: $ => /[a-z][A-Za-z0-9_]*/,
@@ -384,34 +385,9 @@ module.exports = grammar({
     line_comment: $ => /\/\/[^\r\n]*/,
     block_comment: $ => /\/\*([^*]+\*+([^/*][^*]*\*+)*|\*)\//,
 
-    any: $ => 'any',
-    as: $ => 'as',
-    asc: $ => 'asc',
-    avg: $ => 'avg',
-    class: $ => 'class',
-    newtype: $ => 'newtype',
-    count: $ => 'count',
-    desc: $ => 'desc',
-    exists: $ => 'exists',
-    extends: $ => 'extends',
     false: $ => 'false',
-    forall: $ => 'forall',
-    forex: $ => 'forex',
-    import: $ => 'import',
-    in: $ => 'in',
-    instanceof: $ => 'instanceof',
-    max: $ => 'max',
-    min: $ => 'min',
-    not: $ => 'not',
-    none: $ => 'none',
     predicate: $ => 'predicate',
-    rank: $ => 'rank',
     result: $ => 'result',
-    strictcount: $ => 'strictcount',
-    strictsum: $ => 'strictsum',
-    strictconcat: $ => 'strictconcat',
-    concat: $ => 'concat',
-    sum: $ => 'sum',
     super: $ => 'super',
     this: $ => 'this',
     true: $ => 'true',
