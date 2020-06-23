@@ -8,7 +8,6 @@
 (class) @keyword
 (newtype) @keyword
 (count) @keyword
-(date) @keyword
 (desc) @keyword
 "else" @keyword
 (exists) @keyword
@@ -44,12 +43,11 @@
 (true) @keyword
 "where" @keyword
 
-
-(boolean) @type.builtin
+"boolean" @type.builtin
 "float" @type.builtin
 "int" @type.builtin
-(date) @type.builtin
-(string) @type.builtin
+"date" @type.builtin
+"string" @type.builtin
 
 (annotName) @attribute
 
@@ -81,11 +79,10 @@
 
 (varName) @variable
 
-
 (integer) @number
-(float) @number 
+(float) @number
 
-(string) @string 
+(string) @string
 
 (aritylessPredicateExpr (literalId) @function)
 (predicateName) @function
