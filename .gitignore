@@ -3,3 +3,4 @@
 /binding.gyp
 /build
 .DS_Store
+package-lock.json
