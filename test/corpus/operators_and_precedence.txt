@@ -13,9 +13,9 @@ select f
     (varDecl (typeExpr (className)) (varName (simpleId)))
     (disjunction
       (conjunction
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
@@ -31,10 +31,10 @@ select f
 (ql (moduleMember
   (select (varDecl (typeExpr (className)) (varName (simpleId)))
     (disjunction
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
       (conjunction
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
@@ -55,15 +55,15 @@ select f
       (par_expr
         (implication
           (disjunction
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
-        (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))))
       (par_expr
         (implication
-          (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+          (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
           (disjunction
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-            (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ============
@@ -80,9 +80,9 @@ select f
   (select
     (varDecl (typeExpr (className)) (varName (simpleId)))
     (if_term
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
   (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ==========
@@ -99,8 +99,8 @@ select f
   (select
     (varDecl (typeExpr (className)) (varName (simpleId)))
     (conjunction
-      (negation (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (negation (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ==========
@@ -111,7 +111,7 @@ select a+(b)
 
 ---
 
-(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (closure (plus)) (call_body (variable (varName (simpleId))))))))))
+(ql (moduleMember (select (asExprs (asExpr (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (closure) (call_body (variable (varName (simpleId))))))))))
 
 ==========
 cast vs subtract
@@ -120,4 +120,4 @@ cast vs subtract
 select (A)-(b)
 
 ---
-(ql (moduleMember (select (asExprs (asExpr (prefix_cast (typeExpr (className)) (unary_expr (unop (minus)) (par_expr (variable (varName (simpleId)))))))))))
+(ql (moduleMember (select (asExprs (asExpr (prefix_cast (typeExpr (className)) (unary_expr (unop) (par_expr (variable (varName (simpleId)))))))))))

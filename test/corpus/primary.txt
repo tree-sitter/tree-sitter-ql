@@ -47,7 +47,7 @@ select
 (ql (moduleMember (select (asExprs
   (asExpr (aggregate (aggId) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId))))))
   (asExpr (aggregate (aggId) (full_aggregate_body (varDecl (typeExpr (className)) (varName (simpleId)))
-    (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))))
+    (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))))
   (asExpr (aggregate (aggId)
     (full_aggregate_body
       (varDecl (typeExpr (className)) (varName (simpleId)))
@@ -55,7 +55,7 @@ select
   (asExpr (aggregate (aggId) (full_aggregate_body
     (varDecl (typeExpr (className))
       (varName (simpleId)))
-      (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId))))
+      (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
       (asExprs (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName))))))))))))
 
 

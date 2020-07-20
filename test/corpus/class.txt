@@ -27,7 +27,7 @@ abstract class Foo extends Bar {
   (dataclass (className) (typeExpr (className))
     (classMember (annotation (annotName)  (annotArg (simpleId)))
       (charpred (className)
-        (comp_term (variable (this)) (compop (eq)) (variable (this))))))))
+        (comp_term (variable (this)) (compop) (variable (this))))))))
 ==================
 class with members
 ==================
@@ -46,7 +46,7 @@ class X extends Y {
   (dataclass (className) (typeExpr (className))
     (classMember (field (varDecl (typeExpr (moduleExpr (simpleId)) (className)) (varName (simpleId)))))
     (classMember (memberPredicate (typeExpr (moduleExpr (simpleId)) (className)) (predicateName)
-    (body (comp_term (variable (result)) (compop (eq)) (variable (varName (simpleId))))))))))
+    (body (comp_term (variable (result)) (compop) (variable (varName (simpleId))))))))))
 
 ===========
 class alias
@@ -56,4 +56,4 @@ class X = foo::Bas;
 
 ---
 (ql (moduleMember
-  (dataclass (className) (typeAliasBody (eq) (typeExpr (moduleExpr (simpleId)) (className))))))
+  (dataclass (className) (typeAliasBody (typeExpr (moduleExpr (simpleId)) (className))))))

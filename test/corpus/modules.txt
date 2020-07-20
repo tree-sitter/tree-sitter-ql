@@ -26,4 +26,4 @@ module foo = bar::baz;
 
 ---
 
-(ql (moduleMember (module (moduleName (simpleId)) (moduleAliasBody (eq) (moduleExpr (moduleExpr (simpleId)) (simpleId))))))
+(ql (moduleMember (module (moduleName (simpleId)) (moduleAliasBody (moduleExpr (moduleExpr (simpleId)) (simpleId))))))

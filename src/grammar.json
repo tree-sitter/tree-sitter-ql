@@ -143,8 +143,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "SYMBOL",
@@ -160,8 +160,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "SYMBOL",
@@ -177,8 +177,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "SYMBOL",
@@ -194,8 +194,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "SYMBOL",
@@ -349,8 +349,8 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "SYMBOL",
@@ -850,8 +850,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
           "type": "FIELD",
@@ -1425,6 +1425,10 @@
           "name": "underscore"
         }
       ]
+    },
+    "underscore": {
+      "type": "STRING",
+      "value": "_"
     },
     "qualifiedRhs": {
       "type": "CHOICE",
@@ -2216,28 +2220,28 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "eq"
+          "type": "STRING",
+          "value": "="
         },
         {
-          "type": "SYMBOL",
-          "name": "ne"
+          "type": "STRING",
+          "value": "!="
         },
         {
-          "type": "SYMBOL",
-          "name": "lt"
+          "type": "STRING",
+          "value": "<"
         },
         {
-          "type": "SYMBOL",
-          "name": "gt"
+          "type": "STRING",
+          "value": ">"
         },
         {
-          "type": "SYMBOL",
-          "name": "le"
+          "type": "STRING",
+          "value": "<="
         },
         {
-          "type": "SYMBOL",
-          "name": "ge"
+          "type": "STRING",
+          "value": ">="
         }
       ]
     },
@@ -2245,12 +2249,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "plus"
+          "type": "STRING",
+          "value": "+"
         },
         {
-          "type": "SYMBOL",
-          "name": "minus"
+          "type": "STRING",
+          "value": "-"
         }
       ]
     },
@@ -2258,16 +2262,16 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "star"
+          "type": "STRING",
+          "value": "*"
         },
         {
-          "type": "SYMBOL",
-          "name": "slash"
+          "type": "STRING",
+          "value": "/"
         },
         {
-          "type": "SYMBOL",
-          "name": "mod"
+          "type": "STRING",
+          "value": "%"
         }
       ]
     },
@@ -2275,12 +2279,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "plus"
+          "type": "STRING",
+          "value": "+"
         },
         {
-          "type": "SYMBOL",
-          "name": "minus"
+          "type": "STRING",
+          "value": "-"
         }
       ]
     },
@@ -2288,12 +2292,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "star"
+          "type": "STRING",
+          "value": "*"
         },
         {
-          "type": "SYMBOL",
-          "name": "plus"
+          "type": "STRING",
+          "value": "+"
         }
       ]
     },
@@ -2773,8 +2777,8 @@
           "name": "aritylessPredicateExpr"
         },
         {
-          "type": "SYMBOL",
-          "name": "slash"
+          "type": "STRING",
+          "value": "/"
         },
         {
           "type": "SYMBOL",
@@ -2886,54 +2890,6 @@
     "true": {
       "type": "STRING",
       "value": "true"
-    },
-    "lt": {
-      "type": "STRING",
-      "value": "<"
-    },
-    "le": {
-      "type": "STRING",
-      "value": "<="
-    },
-    "eq": {
-      "type": "STRING",
-      "value": "="
-    },
-    "gt": {
-      "type": "STRING",
-      "value": ">"
-    },
-    "ge": {
-      "type": "STRING",
-      "value": ">="
-    },
-    "underscore": {
-      "type": "STRING",
-      "value": "_"
-    },
-    "minus": {
-      "type": "STRING",
-      "value": "-"
-    },
-    "ne": {
-      "type": "STRING",
-      "value": "!="
-    },
-    "slash": {
-      "type": "STRING",
-      "value": "/"
-    },
-    "star": {
-      "type": "STRING",
-      "value": "*"
-    },
-    "mod": {
-      "type": "STRING",
-      "value": "%"
-    },
-    "plus": {
-      "type": "STRING",
-      "value": "+"
     }
   },
   "extras": [

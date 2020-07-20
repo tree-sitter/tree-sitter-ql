@@ -214,21 +214,7 @@
   {
     "type": "addop",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "minus",
-          "named": true
-        },
-        {
-          "type": "plus",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "aggId",
@@ -1014,21 +1000,7 @@
   {
     "type": "closure",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "plus",
-          "named": true
-        },
-        {
-          "type": "star",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "comp_term",
@@ -1245,37 +1217,7 @@
   {
     "type": "compop",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "eq",
-          "named": true
-        },
-        {
-          "type": "ge",
-          "named": true
-        },
-        {
-          "type": "gt",
-          "named": true
-        },
-        {
-          "type": "le",
-          "named": true
-        },
-        {
-          "type": "lt",
-          "named": true
-        },
-        {
-          "type": "ne",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "conjunction",
@@ -1533,15 +1475,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "datatypeBranches",
-          "named": true
-        },
-        {
-          "type": "eq",
           "named": true
         }
       ]
@@ -1978,7 +1916,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "add_expr",
@@ -2002,10 +1940,6 @@
         },
         {
           "type": "disjunction",
-          "named": true
-        },
-        {
-          "type": "eq",
           "named": true
         },
         {
@@ -2974,13 +2908,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "eq",
-          "named": true
-        },
         {
           "type": "moduleExpr",
           "named": true
@@ -3291,25 +3221,7 @@
   {
     "type": "mulop",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "mod",
-          "named": true
-        },
-        {
-          "type": "slash",
-          "named": true
-        },
-        {
-          "type": "star",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "negation",
@@ -3644,13 +3556,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "eq",
-          "named": true
-        },
         {
           "type": "predicateExpr",
           "named": true
@@ -3672,10 +3580,6 @@
         },
         {
           "type": "integer",
-          "named": true
-        },
-        {
-          "type": "slash",
           "named": true
         }
       ]
@@ -4586,13 +4490,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "eq",
-          "named": true
-        },
         {
           "type": "typeExpr",
           "named": true
@@ -4642,10 +4542,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "eq",
-          "named": true
-        },
         {
           "type": "typeExpr",
           "named": true
@@ -4763,21 +4659,7 @@
   {
     "type": "unop",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "minus",
-          "named": true
-        },
-        {
-          "type": "plus",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "unqual_agg_body",
@@ -4948,6 +4830,14 @@
     }
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -4956,7 +4846,19 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -4968,11 +4870,35 @@
     "named": false
   },
   {
+    "type": "/",
+    "named": false
+  },
+  {
     "type": "::",
     "named": false
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
     "named": false
   },
   {
@@ -5040,10 +4966,6 @@
     "named": false
   },
   {
-    "type": "eq",
-    "named": true
-  },
-  {
     "type": "exists",
     "named": false
   },
@@ -5076,14 +4998,6 @@
     "named": false
   },
   {
-    "type": "ge",
-    "named": true
-  },
-  {
-    "type": "gt",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -5112,14 +5026,6 @@
     "named": true
   },
   {
-    "type": "le",
-    "named": true
-  },
-  {
-    "type": "lt",
-    "named": true
-  },
-  {
     "type": "max",
     "named": false
   },
@@ -5128,20 +5034,8 @@
     "named": false
   },
   {
-    "type": "minus",
-    "named": true
-  },
-  {
-    "type": "mod",
-    "named": true
-  },
-  {
     "type": "module",
     "named": false
-  },
-  {
-    "type": "ne",
-    "named": true
   },
   {
     "type": "newtype",
@@ -5158,10 +5052,6 @@
   {
     "type": "order",
     "named": false
-  },
-  {
-    "type": "plus",
-    "named": true
   },
   {
     "type": "predicate",
@@ -5184,15 +5074,7 @@
     "named": false
   },
   {
-    "type": "slash",
-    "named": true
-  },
-  {
     "type": "specialId",
-    "named": true
-  },
-  {
-    "type": "star",
     "named": true
   },
   {

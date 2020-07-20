@@ -16,16 +16,16 @@ select f
   (select
     (varDecl (typeExpr (className)) (varName (simpleId)))
     (disjunction
-      (par_expr (comp_term (variable (varName (simpleId))) (compop (eq)) (variable (varName (simpleId)))))
+      (par_expr (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
       (conjunction
         (conjunction
           (conjunction
-            (comp_term (variable (varName (simpleId))) (compop (ne)) (variable (varName (simpleId))))
-            (comp_term (variable (varName (simpleId))) (compop (lt)) (variable (varName (simpleId)))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))
           (par_expr (disjunction
-            (comp_term (variable (varName (simpleId))) (compop (gt)) (variable (varName (simpleId))))
-            (comp_term (variable (varName (simpleId))) (compop (le)) (variable (varName (simpleId)))))))
-        (comp_term (variable (varName (simpleId))) (compop (ge)) (variable (varName (simpleId))))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))
+            (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId)))))))
+        (comp_term (variable (varName (simpleId))) (compop) (variable (varName (simpleId))))))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 
 ==========
@@ -75,7 +75,7 @@ select i
     (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
     (conjunction
       (call_or_unqual_agg_expr (aritylessPredicateExpr (literalId)) (call_body (variable (varName (simpleId)))))
-      (call_or_unqual_agg_expr (aritylessPredicateExpr (moduleExpr (simpleId)) (literalId)) (closure (plus)) (call_body)))
+      (call_or_unqual_agg_expr (aritylessPredicateExpr (moduleExpr (simpleId)) (literalId)) (closure) (call_body)))
     (asExprs (asExpr (variable (varName (simpleId))))))))
 =================================
 calls with results & method calls
@@ -89,7 +89,7 @@ select i.foo+(), 1.foo(), 1.1.foo()
   (select
     (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
     (asExprs
-      (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName) (closure (plus)))))
+      (asExpr (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName) (closure))))
       (asExpr (qualified_expr (literal (integer)) (qualifiedRhs (predicateName))))
       (asExpr (qualified_expr (literal (float)) (qualifiedRhs (predicateName))))))))
 

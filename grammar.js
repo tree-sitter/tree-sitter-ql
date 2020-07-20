@@ -44,10 +44,10 @@ module.exports = grammar({
       optional(seq('as', $.moduleName))
     ),
 
-    moduleAliasBody: $ => seq($.eq, $.moduleExpr, ";"),
-    predicateAliasBody: $ => seq($.eq, $.predicateExpr, ";"),
-    typeAliasBody: $ => seq($.eq, $.typeExpr, ";"),
-    typeUnionBody: $ => seq($.eq, $.typeExpr, "or", sep($.typeExpr, "or"), ";"),
+    moduleAliasBody: $ => seq('=', $.moduleExpr, ";"),
+    predicateAliasBody: $ => seq('=', $.predicateExpr, ";"),
+    typeAliasBody: $ => seq('=', $.typeExpr, ";"),
+    typeUnionBody: $ => seq('=', $.typeExpr, "or", sep($.typeExpr, "or"), ";"),
 
     classlessPredicate: $ => seq(
       field("returnType", choice($.predicate, $.typeExpr)),
@@ -61,7 +61,7 @@ module.exports = grammar({
     datatype: $ => seq(
       'newtype',
       field("name", $.className),
-      $.eq,
+      '=',
       $.datatypeBranches
     ),
 
@@ -125,7 +125,7 @@ module.exports = grammar({
     body: $ => seq("{", $._exprOrTerm, "}"),
 
     higherOrderTerm: $ => seq(
-      $.eq,
+      '=',
       field("name", $.literalId),
       "(",
       sep($.predicateExpr, ","),
@@ -199,6 +199,8 @@ module.exports = grammar({
       $._exprOrTerm,  // ExprArg
       $.underscore  // DontCare
     ),
+
+    underscore: $ => '_',
 
     qualifiedRhs: $ => choice(
       seq( // QualCall
@@ -305,15 +307,15 @@ module.exports = grammar({
 
     variable: $ => choice($.this, $.result, $.varName),
 
-    compop: $ => choice($.eq, $.ne, $.lt, $.gt, $.le, $.ge),
+    compop: $ => choice('=', '!=', '<', '>', '<=', '>='),
 
-    unop: $ => choice($.plus, $.minus),
+    unop: $ => choice('+', '-'),
 
-    mulop: $ => choice($.star, $.slash, $.mod),
+    mulop: $ => choice('*', '/', '%'),
 
-    addop: $ => choice($.plus, $.minus),
+    addop: $ => choice('+', '-'),
 
-    closure: $ => choice($.star, $.plus),
+    closure: $ => choice('*', '+'),
 
     direction: $ => choice('asc', 'desc'),
 
@@ -371,7 +373,7 @@ module.exports = grammar({
 
     aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), field("name", $.literalId)),
 
-    predicateExpr: $ => seq($.aritylessPredicateExpr, $.slash, $.integer),
+    predicateExpr: $ => seq($.aritylessPredicateExpr, '/', $.integer),
 
     varName: $ => $.simpleId,
 
@@ -391,20 +393,6 @@ module.exports = grammar({
     super: $ => 'super',
     this: $ => 'this',
     true: $ => 'true',
-
-    // symbols
-    lt: $ => '<',
-    le: $ => '<=',
-    eq: $ => '=',
-    gt: $ => '>',
-    ge: $ => '>=',
-    underscore: $ => '_',
-    minus: $ => '-',
-    ne: $ => '!=',
-    slash: $ => '/',
-    star: $ => '*',
-    mod: $ => '%',
-    plus: $ => '+',
   }
 });
 
