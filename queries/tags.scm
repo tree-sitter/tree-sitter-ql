@@ -1,30 +1,23 @@
 (classlessPredicate
-  name: (predicateName) @name
-  (#not-eq? @name "")) @definition.function
+  name: (predicateName) @name) @definition.function
 
 (memberPredicate
-  name: (predicateName) @name
-  (#not-eq? @name "")) @definition.method
+  name: (predicateName) @name) @definition.method
 
 (aritylessPredicateExpr
-  name: (literalId) @name
-  (#not-eq? @name "")) @reference.call
+  name: (literalId) @name) @reference.call
 
 (module
-  name: (moduleName) @name
-  (#not-eq? @name "")) @definition.module
+  name: (moduleName) @name) @definition.module
 
 (dataclass
- name: (className) @name
- (#not-eq? @name "")) @definition.class
+  name: (className) @name) @definition.class
 
 (datatype
-  name: (className) @name
-  (#not-eq? @name "")) @definition.class
+  name: (className) @name) @definition.class
 
 (datatypeBranch
-  name: (className) @name
-  (#not-eq? @name "")) @definition.class
+  name: (className) @name) @definition.class
 
 (qualifiedRhs
   name: (predicateName) @name) @reference.call
