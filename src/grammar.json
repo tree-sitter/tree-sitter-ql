@@ -1081,7 +1081,7 @@
             "name": "right",
             "content": {
               "type": "SYMBOL",
-              "name": "range"
+              "name": "_primary"
             }
           }
         ]
@@ -2443,7 +2443,7 @@
     },
     "qldoc": {
       "type": "PATTERN",
-      "value": "\\/\\*\\*[^*]*\\*+([^\\/*][^*]*\\*+)*\\/"
+      "value": "\\/\\*\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/"
     },
     "literalId": {
       "type": "CHOICE",
@@ -2865,7 +2865,7 @@
     },
     "block_comment": {
       "type": "PATTERN",
-      "value": "\\/\\*([^*]+\\*+([^\\/*][^*]*\\*+)*|\\*)\\/"
+      "value": "\\/\\*([^*]+\\*+([^/*][^*]*\\*+)*|\\*)\\/"
     },
     "false": {
       "type": "STRING",

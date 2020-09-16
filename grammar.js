@@ -151,7 +151,7 @@ module.exports = grammar({
     in_expr: $ => prec.left(7, seq(
       field('left', $._exprOrTerm),
       'in',
-      field('right', $.range)
+      field('right', $._primary)
     )),
     comp_term: $ => prec.left(6, seq(
       field('left', $._exprOrTerm),

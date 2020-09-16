@@ -14,4 +14,4 @@ function checkout() {
   popd
 }
 
-checkout examples/codeql github/codeql 39137510ba9d47f517bebcfc9770f6219cfd397d
+checkout examples/codeql github/codeql 86404af50100b409b18e62651295e79393a6016a
