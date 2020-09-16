@@ -2675,7 +2675,39 @@
         "required": true,
         "types": [
           {
+            "type": "aggregate",
+            "named": true
+          },
+          {
+            "type": "call_or_unqual_agg_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "par_expr",
+            "named": true
+          },
+          {
+            "type": "qualified_expr",
+            "named": true
+          },
+          {
             "type": "range",
+            "named": true
+          },
+          {
+            "type": "set_literal",
+            "named": true
+          },
+          {
+            "type": "super_ref",
+            "named": true
+          },
+          {
+            "type": "variable",
             "named": true
           }
         ]
