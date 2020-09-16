@@ -60,6 +60,17 @@ select i
    (in_expr (variable (varName (simpleId))) (range (literal (integer)) (literal (integer))))
    (asExprs (asExpr (variable (varName (simpleId))))))))
 
+=====
+set literals
+=====
+
+from int i
+where i in [1, 2]
+select i
+
+---
+
+
 =================
 predicateRef call
 =================
