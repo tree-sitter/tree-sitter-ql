@@ -2,4 +2,4 @@
 
 [![Build Status](https://travis-ci.org/tree-sitter/tree-sitter-ql.svg?branch=master)](https://travis-ci.org/tree-sitter/tree-sitter-ql)
 
-tree-sitter grammar for Semmle QL ([Language Spec](https://help.semmle.com/QL/ql-spec/language.html))
+tree-sitter grammar for GitHub CodeQL ([Language Spec](https://codeql.github.com/docs/ql-language-reference/ql-language-specification/))
