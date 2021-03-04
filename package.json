@@ -13,7 +13,7 @@
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
   "devDependencies": {
-    "tree-sitter-cli": "^0.16.9"
+    "tree-sitter-cli": "^0.19.1"
   },
   "scripts": {
     "tree-sitter": "tree-sitter",
@@ -37,7 +37,7 @@
     "url": "https://github.com/tree-sitter/tree-sitter-ql/issues"
   },
   "homepage": "https://github.com/tree-sitter/tree-sitter-ql#readme",
-  "main": "index.js",
+  "main": "bindings/node",
   "directories": {
     "example": "examples",
     "test": "test"

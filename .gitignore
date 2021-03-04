@@ -5,3 +5,5 @@
 test.ql
 .DS_Store
 package-lock.json
+target
+Cargo.lock

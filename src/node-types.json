@@ -4962,6 +4962,10 @@
     "named": false
   },
   {
+    "type": "block_comment",
+    "named": true
+  },
+  {
     "type": "boolean",
     "named": false
   },
@@ -5011,11 +5015,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "forall",
@@ -5055,6 +5059,10 @@
   },
   {
     "type": "integer",
+    "named": true
+  },
+  {
+    "type": "line_comment",
     "named": true
   },
   {
@@ -5123,11 +5131,11 @@
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "sum",
