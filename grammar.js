@@ -101,7 +101,7 @@ module.exports = grammar({
       $.qldoc
     ),
 
-    charpred: $ => seq($.className, "(", ")", "{", field('body',$._exprOrTerm), "}"),
+    charpred: $ => seq($.className, "(", ")", "{", field('body', $._exprOrTerm), "}"),
 
     memberPredicate: $ => seq(
       field("returnType", choice($.predicate, $.typeExpr)),
@@ -185,9 +185,9 @@ module.exports = grammar({
       choice(
         seq(
           sep($.varDecl, ","),
-          optional(seq("|", field('range',$._exprOrTerm), optional(seq("|", field('formula',$._exprOrTerm)))))
+          optional(seq("|", field('range', $._exprOrTerm), optional(seq("|", field('formula', $._exprOrTerm)))))
         ),
-        $._exprOrTerm
+        field('expr', $._exprOrTerm)
       ),
       ")"),
 
@@ -218,7 +218,14 @@ module.exports = grammar({
     ),
 
     call_body: $ => seq("(", sep($._call_arg, ","), ")"),
-    unqual_agg_body: $ => seq("(", sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
+    unqual_agg_body: $ => seq(
+      "(",
+      sep($.varDecl, ","),
+      "|",
+      field('guard', optional($._exprOrTerm)),
+      field('asExprs', optional(seq("|", $.asExprs))),
+      ")"
+    ),
 
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
@@ -232,14 +239,14 @@ module.exports = grammar({
       seq(sep($.varDecl, ","),
         seq(
           "|",
-          optional($._exprOrTerm),
-          optional(seq("|", $.asExprs, optional($.orderBys)))
+          field('guard', optional($._exprOrTerm)),
+          optional(seq("|", field('asExprs', $.asExprs), field('orderBys', optional($.orderBys))))
         )
       ),
       sep1($.varDecl, ","),
     ),
 
-    expr_aggregate_body: $ => seq($.asExprs, optional($.orderBys)),
+    expr_aggregate_body: $ => seq(field('asExprs', $.asExprs), field('orderBys', optional($.orderBys))),
 
     aggregate: $ => seq($.aggId,                                                                // Agg
       optional(

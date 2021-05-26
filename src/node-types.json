@@ -1812,20 +1812,27 @@
   {
     "type": "expr_aggregate_body",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "asExprs",
-          "named": true
-        },
-        {
-          "type": "orderBys",
-          "named": true
-        }
-      ]
+    "fields": {
+      "asExprs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "asExprs",
+            "named": true
+          }
+        ]
+      },
+      "orderBys": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "orderBys",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1974,117 +1981,136 @@
   {
     "type": "full_aggregate_body",
     "named": true,
-    "fields": {},
+    "fields": {
+      "asExprs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "asExprs",
+            "named": true
+          }
+        ]
+      },
+      "guard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "add_expr",
+            "named": true
+          },
+          {
+            "type": "aggregate",
+            "named": true
+          },
+          {
+            "type": "call_or_unqual_agg_expr",
+            "named": true
+          },
+          {
+            "type": "comp_term",
+            "named": true
+          },
+          {
+            "type": "conjunction",
+            "named": true
+          },
+          {
+            "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
+            "type": "if_term",
+            "named": true
+          },
+          {
+            "type": "implication",
+            "named": true
+          },
+          {
+            "type": "in_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "mul_expr",
+            "named": true
+          },
+          {
+            "type": "negation",
+            "named": true
+          },
+          {
+            "type": "par_expr",
+            "named": true
+          },
+          {
+            "type": "prefix_cast",
+            "named": true
+          },
+          {
+            "type": "qualified_expr",
+            "named": true
+          },
+          {
+            "type": "quantified",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "set_literal",
+            "named": true
+          },
+          {
+            "type": "special_call",
+            "named": true
+          },
+          {
+            "type": "super_ref",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "orderBys": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "orderBys",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "add_expr",
-          "named": true
-        },
-        {
-          "type": "aggregate",
-          "named": true
-        },
-        {
-          "type": "asExprs",
-          "named": true
-        },
-        {
-          "type": "call_or_unqual_agg_expr",
-          "named": true
-        },
-        {
-          "type": "comp_term",
-          "named": true
-        },
-        {
-          "type": "conjunction",
-          "named": true
-        },
-        {
-          "type": "disjunction",
-          "named": true
-        },
-        {
-          "type": "expr_annotation",
-          "named": true
-        },
-        {
-          "type": "if_term",
-          "named": true
-        },
-        {
-          "type": "implication",
-          "named": true
-        },
-        {
-          "type": "in_expr",
-          "named": true
-        },
-        {
-          "type": "instance_of",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "mul_expr",
-          "named": true
-        },
-        {
-          "type": "negation",
-          "named": true
-        },
-        {
-          "type": "orderBys",
-          "named": true
-        },
-        {
-          "type": "par_expr",
-          "named": true
-        },
-        {
-          "type": "prefix_cast",
-          "named": true
-        },
-        {
-          "type": "qualified_expr",
-          "named": true
-        },
-        {
-          "type": "quantified",
-          "named": true
-        },
-        {
-          "type": "range",
-          "named": true
-        },
-        {
-          "type": "set_literal",
-          "named": true
-        },
-        {
-          "type": "special_call",
-          "named": true
-        },
-        {
-          "type": "super_ref",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
-          "named": true
-        },
-        {
           "type": "varDecl",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         }
       ]
@@ -4205,6 +4231,108 @@
     "type": "quantified",
     "named": true,
     "fields": {
+      "expr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "add_expr",
+            "named": true
+          },
+          {
+            "type": "aggregate",
+            "named": true
+          },
+          {
+            "type": "call_or_unqual_agg_expr",
+            "named": true
+          },
+          {
+            "type": "comp_term",
+            "named": true
+          },
+          {
+            "type": "conjunction",
+            "named": true
+          },
+          {
+            "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
+            "type": "if_term",
+            "named": true
+          },
+          {
+            "type": "implication",
+            "named": true
+          },
+          {
+            "type": "in_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "mul_expr",
+            "named": true
+          },
+          {
+            "type": "negation",
+            "named": true
+          },
+          {
+            "type": "par_expr",
+            "named": true
+          },
+          {
+            "type": "prefix_cast",
+            "named": true
+          },
+          {
+            "type": "qualified_expr",
+            "named": true
+          },
+          {
+            "type": "quantified",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "set_literal",
+            "named": true
+          },
+          {
+            "type": "special_call",
+            "named": true
+          },
+          {
+            "type": "super_ref",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
       "formula": {
         "multiple": false,
         "required": false,
@@ -4415,107 +4543,11 @@
       "required": true,
       "types": [
         {
-          "type": "add_expr",
-          "named": true
-        },
-        {
-          "type": "aggregate",
-          "named": true
-        },
-        {
-          "type": "call_or_unqual_agg_expr",
-          "named": true
-        },
-        {
-          "type": "comp_term",
-          "named": true
-        },
-        {
-          "type": "conjunction",
-          "named": true
-        },
-        {
-          "type": "disjunction",
-          "named": true
-        },
-        {
-          "type": "expr_annotation",
-          "named": true
-        },
-        {
-          "type": "if_term",
-          "named": true
-        },
-        {
-          "type": "implication",
-          "named": true
-        },
-        {
-          "type": "in_expr",
-          "named": true
-        },
-        {
-          "type": "instance_of",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "mul_expr",
-          "named": true
-        },
-        {
-          "type": "negation",
-          "named": true
-        },
-        {
-          "type": "par_expr",
-          "named": true
-        },
-        {
-          "type": "prefix_cast",
-          "named": true
-        },
-        {
-          "type": "qualified_expr",
-          "named": true
-        },
-        {
-          "type": "quantified",
-          "named": true
-        },
-        {
           "type": "quantifier",
           "named": true
         },
         {
-          "type": "range",
-          "named": true
-        },
-        {
-          "type": "set_literal",
-          "named": true
-        },
-        {
-          "type": "special_call",
-          "named": true
-        },
-        {
-          "type": "super_ref",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
-          "named": true
-        },
-        {
           "type": "varDecl",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         }
       ]
@@ -5184,113 +5216,130 @@
   {
     "type": "unqual_agg_body",
     "named": true,
-    "fields": {},
+    "fields": {
+      "asExprs": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "asExprs",
+            "named": true
+          },
+          {
+            "type": "|",
+            "named": false
+          }
+        ]
+      },
+      "guard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "add_expr",
+            "named": true
+          },
+          {
+            "type": "aggregate",
+            "named": true
+          },
+          {
+            "type": "call_or_unqual_agg_expr",
+            "named": true
+          },
+          {
+            "type": "comp_term",
+            "named": true
+          },
+          {
+            "type": "conjunction",
+            "named": true
+          },
+          {
+            "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
+            "type": "if_term",
+            "named": true
+          },
+          {
+            "type": "implication",
+            "named": true
+          },
+          {
+            "type": "in_expr",
+            "named": true
+          },
+          {
+            "type": "instance_of",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "mul_expr",
+            "named": true
+          },
+          {
+            "type": "negation",
+            "named": true
+          },
+          {
+            "type": "par_expr",
+            "named": true
+          },
+          {
+            "type": "prefix_cast",
+            "named": true
+          },
+          {
+            "type": "qualified_expr",
+            "named": true
+          },
+          {
+            "type": "quantified",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "set_literal",
+            "named": true
+          },
+          {
+            "type": "special_call",
+            "named": true
+          },
+          {
+            "type": "super_ref",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "add_expr",
-          "named": true
-        },
-        {
-          "type": "aggregate",
-          "named": true
-        },
-        {
-          "type": "asExprs",
-          "named": true
-        },
-        {
-          "type": "call_or_unqual_agg_expr",
-          "named": true
-        },
-        {
-          "type": "comp_term",
-          "named": true
-        },
-        {
-          "type": "conjunction",
-          "named": true
-        },
-        {
-          "type": "disjunction",
-          "named": true
-        },
-        {
-          "type": "expr_annotation",
-          "named": true
-        },
-        {
-          "type": "if_term",
-          "named": true
-        },
-        {
-          "type": "implication",
-          "named": true
-        },
-        {
-          "type": "in_expr",
-          "named": true
-        },
-        {
-          "type": "instance_of",
-          "named": true
-        },
-        {
-          "type": "literal",
-          "named": true
-        },
-        {
-          "type": "mul_expr",
-          "named": true
-        },
-        {
-          "type": "negation",
-          "named": true
-        },
-        {
-          "type": "par_expr",
-          "named": true
-        },
-        {
-          "type": "prefix_cast",
-          "named": true
-        },
-        {
-          "type": "qualified_expr",
-          "named": true
-        },
-        {
-          "type": "quantified",
-          "named": true
-        },
-        {
-          "type": "range",
-          "named": true
-        },
-        {
-          "type": "set_literal",
-          "named": true
-        },
-        {
-          "type": "special_call",
-          "named": true
-        },
-        {
-          "type": "super_ref",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
-          "named": true
-        },
-        {
           "type": "varDecl",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         }
       ]
