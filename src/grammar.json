@@ -1355,8 +1355,12 @@
                           "value": "|"
                         },
                         {
-                          "type": "SYMBOL",
-                          "name": "_exprOrTerm"
+                          "type": "FIELD",
+                          "name": "range",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "_exprOrTerm"
+                          }
                         },
                         {
                           "type": "CHOICE",
@@ -1369,8 +1373,12 @@
                                   "value": "|"
                                 },
                                 {
-                                  "type": "SYMBOL",
-                                  "name": "_exprOrTerm"
+                                  "type": "FIELD",
+                                  "name": "formula",
+                                  "content": {
+                                    "type": "SYMBOL",
+                                    "name": "_exprOrTerm"
+                                  }
                                 }
                               ]
                             },

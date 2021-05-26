@@ -185,7 +185,7 @@ module.exports = grammar({
       choice(
         seq(
           sep($.varDecl, ","),
-          optional(seq("|", $._exprOrTerm, optional(seq("|", $._exprOrTerm))))
+          optional(seq("|", field('range',$._exprOrTerm), optional(seq("|", field('formula',$._exprOrTerm)))))
         ),
         $._exprOrTerm
       ),
