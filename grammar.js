@@ -217,8 +217,8 @@ module.exports = grammar({
       )
     ),
 
-    call_body:$ => seq("(", sep($._call_arg, ","), ")"),
-    unqual_agg_body:$ => seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
+    call_body: $ => seq("(", sep($._call_arg, ","), ")"),
+    unqual_agg_body: $ => seq("(", sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
 
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
@@ -237,7 +237,7 @@ module.exports = grammar({
         )
       ),
       sep1($.varDecl, ","),
-      ),
+    ),
 
     expr_aggregate_body: $ => seq($.asExprs, optional($.orderBys)),
 
@@ -267,10 +267,10 @@ module.exports = grammar({
     expr_annotation: $ => seq(
       field('name', $.annotName),
       "[",
-      field('annot_arg',$.annotName),
+      field('annot_arg', $.annotName),
       "]",
-      "(", 
-      $._exprOrTerm, 
+      "(",
+      $._exprOrTerm,
       ")",
     ),
 
@@ -302,7 +302,7 @@ module.exports = grammar({
       $.range,
       $.set_literal,
       $.par_expr,                                                // ParExpr
-      $.expr_annotation
+      $.expr_annotation, // ExprAnnotation
     ),
 
     literal: $ => choice(

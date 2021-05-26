@@ -128,7 +128,7 @@ select 0
       (variable (varName (simpleId)))
       (compop)
       (unary_expr
-        (unop) 
+        (unop)
         (prefix_cast
           (typeExpr (primitiveType))
           (unary_expr
@@ -180,9 +180,9 @@ select 0
         (variable (varName (simpleId)))))
     (asExprs (asExpr (literal (integer)))))))
 
-======================
-expression annotations
-======================
+========================
+expression-level pragmas
+========================
 
 from int i
 where i = pragma[only_bind_out](5)
