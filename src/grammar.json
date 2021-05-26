@@ -711,8 +711,12 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "_exprOrTerm"
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_exprOrTerm"
+          }
         },
         {
           "type": "STRING",

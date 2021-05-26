@@ -101,7 +101,7 @@ module.exports = grammar({
       $.qldoc
     ),
 
-    charpred: $ => seq($.className, "(", ")", "{", $._exprOrTerm, "}"),
+    charpred: $ => seq($.className, "(", ")", "{", field('body',$._exprOrTerm), "}"),
 
     memberPredicate: $ => seq(
       field("returnType", choice($.predicate, $.typeExpr)),

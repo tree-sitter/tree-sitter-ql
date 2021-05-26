@@ -12,9 +12,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 82
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 11
+#define FIELD_COUNT 12
 #define MAX_ALIAS_SEQUENCE_LENGTH 10
-#define PRODUCTION_ID_COUNT 14
+#define PRODUCTION_ID_COUNT 15
 
 enum {
   sym__lower_id = 1,
@@ -1304,21 +1304,23 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 enum {
   field_annot_arg = 1,
   field_args = 2,
-  field_cond = 3,
-  field_first = 4,
-  field_left = 5,
-  field_lower = 6,
-  field_name = 7,
-  field_returnType = 8,
-  field_right = 9,
-  field_second = 10,
-  field_upper = 11,
+  field_body = 3,
+  field_cond = 4,
+  field_first = 5,
+  field_left = 6,
+  field_lower = 7,
+  field_name = 8,
+  field_returnType = 9,
+  field_right = 10,
+  field_second = 11,
+  field_upper = 12,
 };
 
 static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_annot_arg] = "annot_arg",
   [field_args] = "args",
+  [field_body] = "body",
   [field_cond] = "cond",
   [field_first] = "first",
   [field_left] = "left",
@@ -1344,6 +1346,7 @@ static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [11] = {.index = 17, .length = 2},
   [12] = {.index = 19, .length = 3},
   [13] = {.index = 22, .length = 2},
+  [14] = {.index = 24, .length = 1},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -1384,6 +1387,8 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [22] =
     {field_annot_arg, 2},
     {field_name, 0},
+  [24] =
+    {field_body, 4},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -68209,8 +68214,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1803] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_memberPredicate, 6, .production_id = 5),
   [1805] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_memberPredicate, 7, .production_id = 5),
   [1807] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_memberPredicate, 7, .production_id = 5),
-  [1809] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_charpred, 6),
-  [1811] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_charpred, 6),
+  [1809] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_charpred, 6, .production_id = 14),
+  [1811] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_charpred, 6, .production_id = 14),
   [1813] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_classMember, 1),
   [1815] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_classMember, 1),
   [1817] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_field, 2),
