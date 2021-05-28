@@ -993,7 +993,7 @@
     },
     "unary_expr": {
       "type": "PREC_LEFT",
-      "value": 9,
+      "value": 7,
       "content": {
         "type": "SEQ",
         "members": [

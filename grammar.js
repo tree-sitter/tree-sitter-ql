@@ -137,7 +137,7 @@ module.exports = grammar({
 
     special_call: $ => seq($.specialId, "(", ")"),
     prefix_cast: $ => prec.dynamic(10, seq("(", $.typeExpr, ")", $._exprOrTerm)),
-    unary_expr: $ => prec.left(9, seq($.unop, $._exprOrTerm)),
+    unary_expr: $ => prec.left(7, seq($.unop, $._exprOrTerm)),
     mul_expr: $ => prec.left(9, seq(
       field('left', $._exprOrTerm),
       $.mulop,
