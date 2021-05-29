@@ -968,7 +968,7 @@
     },
     "prefix_cast": {
       "type": "PREC_DYNAMIC",
-      "value": 10,
+      "value": 11,
       "content": {
         "type": "SEQ",
         "members": [
@@ -993,7 +993,7 @@
     },
     "unary_expr": {
       "type": "PREC_LEFT",
-      "value": 7,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1690,7 +1690,7 @@
     },
     "call_or_unqual_agg_expr": {
       "type": "PREC_DYNAMIC",
-      "value": 10,
+      "value": 11,
       "content": {
         "type": "SEQ",
         "members": [

@@ -136,8 +136,8 @@ module.exports = grammar({
     ),
 
     special_call: $ => seq($.specialId, "(", ")"),
-    prefix_cast: $ => prec.dynamic(10, seq("(", $.typeExpr, ")", $._exprOrTerm)),
-    unary_expr: $ => prec.left(7, seq($.unop, $._exprOrTerm)),
+    prefix_cast: $ => prec.dynamic(11, seq("(", $.typeExpr, ")", $._exprOrTerm)),
+    unary_expr: $ => prec.left(10, seq($.unop, $._exprOrTerm)),
     mul_expr: $ => prec.left(9, seq(
       field('left', $._exprOrTerm),
       $.mulop,
@@ -229,7 +229,7 @@ module.exports = grammar({
 
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
-    call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
+    call_or_unqual_agg_expr: $ => prec.dynamic(11, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
     qualified_expr: $ => seq($._primary, ".", $.qualifiedRhs),
     super_ref: $ => seq(optional(seq($.typeExpr, ".")), $.super),
 
