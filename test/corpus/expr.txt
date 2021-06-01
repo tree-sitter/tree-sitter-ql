@@ -150,12 +150,12 @@ select 0
     (comp_term
       (variable (varName (simpleId)))
       (compop)
-      (unary_expr
-        (unop)
-        (add_expr
-          (par_expr (variable (varName (simpleId))))
-          (addop)
-          (literal (integer)))))
+      (add_expr
+        (unary_expr
+          (unop)
+          (par_expr (variable (varName (simpleId)))))
+        (addop)
+        (literal (integer))))
     (asExprs (asExpr (literal (integer)))))))
 
 ==============================
@@ -172,10 +172,10 @@ select 0
     (comp_term
       (variable (varName (simpleId)))
       (compop)
-      (unary_expr
+      (mul_expr
+        (unary_expr
         (unop)
-        (mul_expr
-          (variable (varName (simpleId)))
-          (mulop)
-          (variable (varName (simpleId))))))
+          (variable (varName (simpleId))))
+        (mulop)
+        (variable (varName (simpleId)))))
     (asExprs (asExpr (literal (integer)))))))

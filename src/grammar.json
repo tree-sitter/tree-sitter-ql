@@ -988,17 +988,21 @@
       }
     },
     "unary_expr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "unop"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_exprOrTerm"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 9,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "unop"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_exprOrTerm"
+          }
+        ]
+      }
     },
     "mul_expr": {
       "type": "PREC_LEFT",
