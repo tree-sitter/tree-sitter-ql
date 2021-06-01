@@ -112,3 +112,70 @@ select
     (line_comment)
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop) (literal (integer))) (mulop) (literal (integer))))
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop) (literal (integer))) (mulop) (literal (integer))))))))
+
+===========================
+unary minus and prefix cast
+===========================
+
+where x = -(float) -7
+select 0
+
+---
+
+(ql (moduleMember
+  (select
+    (comp_term
+      (variable (varName (simpleId)))
+      (compop)
+      (unary_expr
+        (unop) 
+        (prefix_cast
+          (typeExpr (primitiveType))
+          (unary_expr
+            (unop)
+            (literal (integer))))))
+    (asExprs (asExpr (literal (integer)))))))
+
+========================
+unary minus and non-cast
+========================
+
+where x = -(foo) -7
+select 0
+
+---
+
+(ql (moduleMember
+  (select
+    (comp_term
+      (variable (varName (simpleId)))
+      (compop)
+      (unary_expr
+        (unop)
+        (add_expr
+          (par_expr (variable (varName (simpleId))))
+          (addop)
+          (literal (integer)))))
+    (asExprs (asExpr (literal (integer)))))))
+
+==============================
+unary minus and multiplication
+==============================
+
+where x = -a * b
+select 0
+
+---
+
+(ql (moduleMember
+  (select
+    (comp_term
+      (variable (varName (simpleId)))
+      (compop)
+      (unary_expr
+        (unop)
+        (mul_expr
+          (variable (varName (simpleId)))
+          (mulop)
+          (variable (varName (simpleId))))))
+    (asExprs (asExpr (literal (integer)))))))
