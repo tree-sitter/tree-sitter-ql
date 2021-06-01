@@ -264,6 +264,15 @@ module.exports = grammar({
 
     par_expr: $ => seq("(", $._exprOrTerm, ")"),
 
+    expr_annotation: $ => seq(
+      field('name', $.annotName),
+      "[",
+      field('annot_arg',$.annotName),
+      "]",
+      "(", 
+      $._exprOrTerm, 
+      ")",
+    ),
 
     _exprOrTerm: $ => choice(
       $.special_call,
@@ -292,7 +301,8 @@ module.exports = grammar({
       $.aggregate,
       $.range,
       $.set_literal,
-      $.par_expr                                                 // ParExpr
+      $.par_expr,                                                // ParExpr
+      $.expr_annotation
     ),
 
     literal: $ => choice(

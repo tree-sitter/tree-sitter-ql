@@ -179,3 +179,24 @@ select 0
         (mulop)
         (variable (varName (simpleId)))))
     (asExprs (asExpr (literal (integer)))))))
+
+======================
+expression annotations
+======================
+
+from int i
+where i = pragma[only_bind_out](5)
+select i
+
+---
+
+(ql (moduleMember (select
+  (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+  (comp_term
+    (variable (varName (simpleId)))
+    (compop)
+    (expr_annotation
+      (annotName)
+      (annotName)
+      (literal (integer))))
+  (asExprs (asExpr (variable (varName (simpleId))))))))
