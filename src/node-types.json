@@ -32,6 +32,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -127,6 +131,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -259,6 +267,10 @@
         },
         {
           "type": "expr_aggregate_body",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -453,6 +465,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -575,6 +591,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -694,6 +714,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -832,6 +856,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -1035,6 +1063,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -1130,6 +1162,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -1252,6 +1288,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -1347,6 +1387,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -1576,6 +1620,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -1671,6 +1719,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -1770,6 +1822,134 @@
     }
   },
   {
+    "type": "expr_annotation",
+    "named": true,
+    "fields": {
+      "annot_arg": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotName",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotName",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "add_expr",
+          "named": true
+        },
+        {
+          "type": "aggregate",
+          "named": true
+        },
+        {
+          "type": "call_or_unqual_agg_expr",
+          "named": true
+        },
+        {
+          "type": "comp_term",
+          "named": true
+        },
+        {
+          "type": "conjunction",
+          "named": true
+        },
+        {
+          "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
+          "type": "if_term",
+          "named": true
+        },
+        {
+          "type": "implication",
+          "named": true
+        },
+        {
+          "type": "in_expr",
+          "named": true
+        },
+        {
+          "type": "instance_of",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "mul_expr",
+          "named": true
+        },
+        {
+          "type": "negation",
+          "named": true
+        },
+        {
+          "type": "par_expr",
+          "named": true
+        },
+        {
+          "type": "prefix_cast",
+          "named": true
+        },
+        {
+          "type": "qualified_expr",
+          "named": true
+        },
+        {
+          "type": "quantified",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        },
+        {
+          "type": "set_literal",
+          "named": true
+        },
+        {
+          "type": "special_call",
+          "named": true
+        },
+        {
+          "type": "super_ref",
+          "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "field",
     "named": true,
     "fields": {},
@@ -1818,6 +1998,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -1943,6 +2127,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -2054,6 +2242,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -2152,6 +2344,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -2247,6 +2443,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -2354,6 +2554,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -2449,6 +2653,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -2601,6 +2809,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -2683,6 +2895,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "literal",
             "named": true
           },
@@ -2744,6 +2960,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -3071,6 +3291,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -3166,6 +3390,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -3288,6 +3516,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -3392,6 +3624,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -3510,6 +3746,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -3652,6 +3892,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -3813,6 +4057,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -3908,6 +4156,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "literal",
           "named": true
         },
@@ -3972,6 +4224,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -4091,6 +4347,10 @@
             "named": true
           },
           {
+            "type": "expr_annotation",
+            "named": true
+          },
+          {
             "type": "if_term",
             "named": true
           },
@@ -4186,6 +4446,10 @@
           },
           {
             "type": "disjunction",
+            "named": true
+          },
+          {
+            "type": "expr_annotation",
             "named": true
           },
           {
@@ -4297,6 +4561,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -4405,6 +4673,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -4614,6 +4886,10 @@
           "named": true
         },
         {
+          "type": "expr_annotation",
+          "named": true
+        },
+        {
           "type": "if_term",
           "named": true
         },
@@ -4727,6 +5003,10 @@
         },
         {
           "type": "disjunction",
+          "named": true
+        },
+        {
+          "type": "expr_annotation",
           "named": true
         },
         {
@@ -5131,11 +5411,11 @@
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "sum",
