@@ -87,7 +87,13 @@ module.exports = grammar({
       'class',
       field("name", $.className),
       choice(
-        seq('extends', sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
+        seq(
+          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))), 
+          optional(field("instanceof", seq('instanceof', sep1($.typeExpr, ",")))),
+          "{",
+          repeat($.classMember),
+          "}"
+        ),
         $.typeAliasBody,
         $.typeUnionBody
       )
@@ -136,8 +142,8 @@ module.exports = grammar({
     ),
 
     special_call: $ => seq($.specialId, "(", ")"),
-    prefix_cast: $ => prec.dynamic(11, seq("(", $.typeExpr, ")", $._exprOrTerm)),
-    unary_expr: $ => prec.left(10, seq($.unop, $._exprOrTerm)),
+    prefix_cast: $ => prec.dynamic(10, seq("(", $.typeExpr, ")", $._exprOrTerm)),
+    unary_expr: $ => prec.left(9, seq($.unop, $._exprOrTerm)),
     mul_expr: $ => prec.left(9, seq(
       field('left', $._exprOrTerm),
       $.mulop,
@@ -229,7 +235,7 @@ module.exports = grammar({
 
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
-    call_or_unqual_agg_expr: $ => prec.dynamic(11, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
+    call_or_unqual_agg_expr: $ => prec.dynamic(10, seq($.aritylessPredicateExpr, optional($.closure), $._call_or_unqual_agg_body)),
     qualified_expr: $ => seq($._primary, ".", $.qualifiedRhs),
     super_ref: $ => seq(optional(seq($.typeExpr, ".")), $.super),
 
@@ -394,7 +400,7 @@ module.exports = grammar({
 
     varName: $ => $.simpleId,
 
-    aggId: $ => choice('avg', 'concat', 'strictconcat', 'count', 'max', 'min', 'rank', 'strictcount', 'strictsum', 'sum', 'any', 'unique'),
+    aggId: $ => choice('avg', 'concat', 'strictconcat', 'count', 'max', 'min', 'rank', 'strictcount', 'strictsum', 'sum', 'any'),
 
     _upper_id: $ => /[A-Z][A-Za-z0-9_]*/,
     _lower_id: $ => /[a-z][A-Za-z0-9_]*/,

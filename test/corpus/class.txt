@@ -57,3 +57,32 @@ class X = foo::Bas;
 ---
 (ql (moduleMember
   (dataclass (className) (typeAliasBody (typeExpr (moduleExpr (simpleId)) (className))))))
+
+
+================
+class instanceof
+================
+
+class X extends Y1, Y2 instanceof Z1, Z2 {
+  X() { none() }
+}
+
+---
+
+(ql
+  (moduleMember
+    (dataclass
+      (className)
+      (typeExpr
+        (className))
+      (typeExpr
+        (className))
+      (typeExpr
+        (className))
+      (typeExpr
+        (className))
+      (classMember
+        (charpred
+          (className)
+          (special_call
+            (specialId)))))))
