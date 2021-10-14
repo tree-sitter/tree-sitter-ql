@@ -2992,6 +2992,10 @@
         {
           "type": "STRING",
           "value": "any"
+        },
+        {
+          "type": "STRING",
+          "value": "unique"
         }
       ]
     },
