@@ -245,3 +245,21 @@ select 0
         (addop) 
         (literal (integer)))) 
     (asExprs (asExpr (literal (integer)))))))
+
+===============================
+set literal with trailing comma
+===============================
+
+where x in [1,2,]
+select x
+
+---
+
+(ql (moduleMember
+  (select
+    (in_expr
+      (variable (varName (simpleId)))
+      (set_literal
+        (literal (integer))
+        (literal (integer))))
+    (asExprs (asExpr (variable (varName (simpleId))))))))
