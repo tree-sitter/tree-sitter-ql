@@ -20,6 +20,13 @@ module.exports = grammar({
     module: $ => seq(
       'module',
       field("name", $.moduleName),
+      optional(
+        seq(
+          "<",
+          $.moduleParam,
+          ">"
+        )
+      ),
       choice(
         seq(
           "{",
@@ -350,6 +357,8 @@ module.exports = grammar({
 
     varDecl: $ => seq($.typeExpr, $.varName),
 
+    moduleParam: $ => seq($.signatureExpr, $.simpleId),
+
     asExprs: $ => sep1($.asExpr, ","),
 
     asExpr: $ => seq($._exprOrTerm, optional(seq('as', $.varName))),
@@ -396,6 +405,12 @@ module.exports = grammar({
       seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
       $.dbtype,
       $.primitiveType
+    ),
+
+    signatureExpr: $ => seq(
+      optional(seq($.moduleExpr, "::")),
+      field("name", $.simpleId),
+      optional(seq("/", $.integer))
     ),
 
     predicateName: $ => $._lower_id,
