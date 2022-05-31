@@ -90,9 +90,14 @@ module.exports = grammar({
         seq(
           optional(field("extends", seq('extends', sep1($.typeExpr, ",")))),
           optional(field("instanceof", seq('instanceof', sep1($.typeExpr, ",")))),
-          "{",
-          repeat($.classMember),
-          "}"
+          choice(
+            seq(
+              "{",
+              repeat($.classMember),
+              "}"
+            ),
+            ";"
+          )
         ),
         $.typeAliasBody,
         $.typeUnionBody
