@@ -88,7 +88,7 @@ module.exports = grammar({
       field("name", $.className),
       choice(
         seq(
-          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))), 
+          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))),
           optional(field("instanceof", seq('instanceof', sep1($.typeExpr, ",")))),
           "{",
           repeat($.classMember),
