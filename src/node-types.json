@@ -3264,21 +3264,6 @@
     }
   },
   {
-    "type": "moduleApplication",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "signatureExpr",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "moduleExpr",
     "named": true,
     "fields": {
@@ -3298,15 +3283,30 @@
       "required": true,
       "types": [
         {
-          "type": "moduleApplication",
-          "named": true
-        },
-        {
           "type": "moduleExpr",
           "named": true
         },
         {
+          "type": "moduleInstantiation",
+          "named": true
+        },
+        {
           "type": "simpleId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleInstantiation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "signatureExpr",
           "named": true
         }
       ]

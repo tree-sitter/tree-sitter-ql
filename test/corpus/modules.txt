@@ -175,7 +175,7 @@ select PModule<supply6/0, supply10/0, Supply11, Supply15>::foo()
           (call_or_unqual_agg_expr
             (aritylessPredicateExpr
               (moduleExpr
-                (moduleApplication
+                (moduleInstantiation
                   (signatureExpr
                     (simpleId)
                     (integer))

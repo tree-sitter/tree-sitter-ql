@@ -4,8 +4,8 @@ module.exports = grammar({
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
-    [$.simpleId, $.moduleApplication],
-    [$.className, $.moduleApplication],
+    [$.simpleId, $.moduleInstantiation],
+    [$.className, $.moduleInstantiation],
   ],
 
   extras: $ => [
@@ -399,11 +399,11 @@ module.exports = grammar({
 
     moduleExpr: $ => choice(
       $.simpleId,
-      $.moduleApplication,
+      $.moduleInstantiation,
       seq($.moduleExpr, "::", field("name", $.simpleId))
     ),
 
-    moduleApplication: $ => seq(
+    moduleInstantiation: $ => seq(
       $._upper_id,
       "<",
       sep1($.signatureExpr, ","),
