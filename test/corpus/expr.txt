@@ -210,18 +210,18 @@ select 0
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (comp_term 
+(ql (moduleMember
+  (select
+    (comp_term
       (variable (varName (simpleId)))
-      (compop) 
-      (unary_expr 
-        (unop) 
-        (prefix_cast 
-          (typeExpr (primitiveType)) 
-          (unary_expr 
-            (unop) 
-            (literal (integer)))))) 
+      (compop)
+      (unary_expr
+        (unop)
+        (prefix_cast
+          (typeExpr (primitiveType))
+          (unary_expr
+            (unop)
+            (literal (integer))))))
     (asExprs (asExpr (literal (integer)))))))
 
 ========================
@@ -233,18 +233,19 @@ select 0
 
 ---
 
-(ql (moduleMember 
-  (select 
-    (comp_term 
-      (variable (varName (simpleId))) 
-      (compop) 
-      (add_expr 
-        (unary_expr 
-          (unop) 
-          (par_expr (variable (varName (simpleId))))) 
-        (addop) 
-        (literal (integer)))) 
+(ql (moduleMember
+  (select
+    (comp_term
+      (variable (varName (simpleId)))
+      (compop)
+      (add_expr
+        (unary_expr
+          (unop)
+          (par_expr (variable (varName (simpleId)))))
+        (addop)
+        (literal (integer))))
     (asExprs (asExpr (literal (integer)))))))
+
 
 ===============================
 set literal with trailing comma
