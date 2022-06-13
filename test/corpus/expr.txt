@@ -68,9 +68,9 @@ select unique(int x | x = 1 | x)
   (select
     (asExprs
       (asExpr
-        (call_or_unqual_agg_expr
-          (aritylessPredicateExpr (literalId))
-          (unqual_agg_body
+        (aggregate
+          (aggId)
+          (full_aggregate_body
             (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
             (comp_term (variable (varName (simpleId))) (compop) (literal (integer)))
             (asExprs (asExpr (variable (varName (simpleId))))))))))))
