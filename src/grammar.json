@@ -35,33 +35,37 @@
                   "value": "<"
                 },
                 {
-                  "type": "FIELD",
-                  "name": "parameter",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "parameter",
+                      "content": {
                         "type": "SYMBOL",
                         "name": "moduleParam"
-                      },
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SEQ",
-                          "members": [
-                            {
-                              "type": "STRING",
-                              "value": ","
-                            },
-                            {
+                      }
+                    },
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "FIELD",
+                            "name": "parameter",
+                            "content": {
                               "type": "SYMBOL",
                               "name": "moduleParam"
                             }
-                          ]
-                        }
+                          }
+                        ]
                       }
-                    ]
-                  }
+                    }
+                  ]
                 },
                 {
                   "type": "STRING",

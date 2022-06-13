@@ -25,7 +25,7 @@ module.exports = grammar({
       optional(
         seq(
           "<",
-          field('parameter', sep1($.moduleParam, ",")),
+          sep1(field('parameter', $.moduleParam), ","),
           ">"
         )
       ),
