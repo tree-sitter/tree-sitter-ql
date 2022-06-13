@@ -31,7 +31,7 @@ module.exports = grammar({
       ),
       optional(seq(
         "implements",
-        field('implements', sep1($.signatureExpr, ","))
+        sep1(field('implements', $.signatureExpr), ",")
       )),
       choice(
         seq(
