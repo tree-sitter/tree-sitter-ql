@@ -3373,20 +3373,27 @@
   {
     "type": "moduleParam",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "signatureExpr",
-          "named": true
-        },
-        {
-          "type": "simpleId",
-          "named": true
-        }
-      ]
+    "fields": {
+      "parameter": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "simpleId",
+            "named": true
+          }
+        ]
+      },
+      "signature": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "signatureExpr",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

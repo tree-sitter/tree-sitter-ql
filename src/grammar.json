@@ -2609,12 +2609,20 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "signatureExpr"
+          "type": "FIELD",
+          "name": "signature",
+          "content": {
+            "type": "SYMBOL",
+            "name": "signatureExpr"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "simpleId"
+          "type": "FIELD",
+          "name": "parameter",
+          "content": {
+            "type": "SYMBOL",
+            "name": "simpleId"
+          }
         }
       ]
     },
