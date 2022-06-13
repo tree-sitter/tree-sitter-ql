@@ -3086,8 +3086,12 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "moduleExpr"
+                  "type": "FIELD",
+                  "name": "qualifier",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "moduleExpr"
+                  }
                 },
                 {
                   "type": "STRING",

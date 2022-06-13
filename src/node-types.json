@@ -5122,17 +5122,17 @@
             "named": true
           }
         ]
+      },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "moduleExpr",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "moduleExpr",
-          "named": true
-        }
-      ]
     }
   },
   {
