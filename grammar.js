@@ -422,20 +422,19 @@ module.exports = grammar({
     dbtype: $ => /@[a-z][A-Za-z0-9_]*/,
 
     typeExpr: $ => choice(
-      seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
+      seq(optional(seq(field("qualifier", $.moduleExpr), "::")), field("name", $.className)),
       $.dbtype,
       $.primitiveType
     ),
 
-    signatureExpr: $ => seq(
-      optional(seq(field('qualifier', $.moduleExpr), "::")),
-      field("name", $.simpleId),
-      optional(seq("/", field('arity', $.integer)))
+    signatureExpr: $ => choice(
+      field("type_expr", $.typeExpr),
+      field("predicate", $.predicateExpr)
     ),
 
     predicateName: $ => $._lower_id,
 
-    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), field("name", $.literalId)),
+    aritylessPredicateExpr: $ => seq(optional(seq(field('qualifier', $.moduleExpr), "::")), field("name", $.literalId)),
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, '/', $.integer),
 

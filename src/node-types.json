@@ -419,17 +419,17 @@
             "named": true
           }
         ]
+      },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "moduleExpr",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "moduleExpr",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -5095,32 +5095,22 @@
     "type": "signatureExpr",
     "named": true,
     "fields": {
-      "arity": {
+      "predicate": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "integer",
+            "type": "predicateExpr",
             "named": true
           }
         ]
       },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "simpleId",
-            "named": true
-          }
-        ]
-      },
-      "qualifier": {
+      "type_expr": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "moduleExpr",
+            "type": "typeExpr",
             "named": true
           }
         ]
@@ -5194,6 +5184,16 @@
             "named": true
           }
         ]
+      },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "moduleExpr",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -5202,10 +5202,6 @@
       "types": [
         {
           "type": "dbtype",
-          "named": true
-        },
-        {
-          "type": "moduleExpr",
           "named": true
         },
         {

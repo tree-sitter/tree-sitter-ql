@@ -3050,8 +3050,12 @@
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "moduleExpr"
+                      "type": "FIELD",
+                      "name": "qualifier",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "moduleExpr"
+                      }
                     },
                     {
                       "type": "STRING",
@@ -3085,65 +3089,23 @@
       ]
     },
     "signatureExpr": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "qualifier",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "moduleExpr"
-                  }
-                },
-                {
-                  "type": "STRING",
-                  "value": "::"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "FIELD",
-          "name": "name",
+          "name": "type_expr",
           "content": {
             "type": "SYMBOL",
-            "name": "simpleId"
+            "name": "typeExpr"
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "/"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "arity",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "integer"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "FIELD",
+          "name": "predicate",
+          "content": {
+            "type": "SYMBOL",
+            "name": "predicateExpr"
+          }
         }
       ]
     },
@@ -3161,8 +3123,12 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "moduleExpr"
+                  "type": "FIELD",
+                  "name": "qualifier",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "moduleExpr"
+                  }
                 },
                 {
                   "type": "STRING",

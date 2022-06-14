@@ -98,12 +98,15 @@ module PModule<supplyInt/0 s1, SupplyInt S2> {
         (simpleId))
       (moduleParam
         (signatureExpr
-          (simpleId)
-          (integer))
+          (predicateExpr
+            (aritylessPredicateExpr
+              (literalId))
+            (integer)))
         (simpleId))
       (moduleParam
         (signatureExpr
-          (simpleId))
+          (typeExpr
+            (className)))
         (simpleId))
       (moduleMember
         (classlessPredicate
@@ -144,7 +147,8 @@ module Supply11 implements SupplyInt {
       (moduleName
         (simpleId))
       (signatureExpr
-        (simpleId))
+        (typeExpr
+          (className)))
       (moduleMember
         (classlessPredicate
           (typeExpr
@@ -177,14 +181,20 @@ select PModule<supply6/0, supply10/0, Supply11, Supply15>::foo()
               (moduleExpr
                 (moduleInstantiation
                   (signatureExpr
-                    (simpleId)
-                    (integer))
+                    (predicateExpr
+                      (aritylessPredicateExpr
+                        (literalId))
+                      (integer)))
                   (signatureExpr
-                    (simpleId)
-                    (integer))
+                    (predicateExpr
+                      (aritylessPredicateExpr
+                        (literalId))
+                      (integer)))
                   (signatureExpr
-                    (simpleId))
+                    (typeExpr
+                      (className)))
                   (signatureExpr
-                    (simpleId))))
+                    (typeExpr
+                      (className)))))
               (literalId))
             (call_body)))))))
