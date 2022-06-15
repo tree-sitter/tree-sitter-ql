@@ -198,3 +198,38 @@ select PModule<supply6/0, supply10/0, Supply11, Supply15>::foo()
                       (className)))))
               (literalId))
             (call_body)))))))
+
+==================
+second application
+==================
+
+where node = DataFlow::BarrierGuard<containsDotDotSanitizer/3>::getABarrierNode()
+select 1
+
+---
+
+(ql
+  (moduleMember
+    (select
+      (comp_term
+        (variable
+          (varName
+            (simpleId)))
+        (compop)
+        (call_or_unqual_agg_expr
+          (aritylessPredicateExpr
+            (moduleExpr
+              (moduleExpr
+                (simpleId))
+              (moduleInstantiation
+                (signatureExpr
+                  (predicateExpr
+                    (aritylessPredicateExpr
+                      (literalId))
+                    (integer)))))
+            (literalId))
+          (call_body)))
+      (asExprs
+        (asExpr
+          (literal
+            (integer)))))))

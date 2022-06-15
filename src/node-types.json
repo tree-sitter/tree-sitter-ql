@@ -3264,6 +3264,10 @@
         "required": false,
         "types": [
           {
+            "type": "moduleInstantiation",
+            "named": true
+          },
+          {
             "type": "simpleId",
             "named": true
           }

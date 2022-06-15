@@ -2941,8 +2941,17 @@
               "type": "FIELD",
               "name": "name",
               "content": {
-                "type": "SYMBOL",
-                "name": "simpleId"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "simpleId"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "moduleInstantiation"
+                  }
+                ]
               }
             }
           ]

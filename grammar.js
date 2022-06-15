@@ -403,7 +403,7 @@ module.exports = grammar({
     moduleExpr: $ => choice(
       $.simpleId,
       $.moduleInstantiation,
-      seq($.moduleExpr, "::", field("name", $.simpleId))
+      seq($.moduleExpr, "::", field("name", choice($.simpleId, $.moduleInstantiation)))
     ),
 
     moduleInstantiation: $ => seq(
