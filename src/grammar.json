@@ -2962,8 +2962,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_upper_id"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "moduleName"
+          }
         },
         {
           "type": "STRING",
@@ -3309,6 +3313,10 @@
     [
       "simpleId",
       "literalId"
+    ],
+    [
+      "moduleName",
+      "varName"
     ],
     [
       "simpleId",

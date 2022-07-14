@@ -13,7 +13,7 @@
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
   "devDependencies": {
-    "tree-sitter-cli": "^0.19.5"
+    "tree-sitter-cli": "^0.20.6"
   },
   "scripts": {
     "tree-sitter": "tree-sitter",
