@@ -4,6 +4,9 @@ module.exports = grammar({
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
+    [$.moduleName, $.varName],
+    [$.simpleId, $.moduleInstantiation],
+    [$.className, $.moduleInstantiation],
   ],
 
   extras: $ => [
@@ -20,6 +23,17 @@ module.exports = grammar({
     module: $ => seq(
       'module',
       field("name", $.moduleName),
+      optional(
+        seq(
+          "<",
+          sep1(field('parameter', $.moduleParam), ","),
+          ">"
+        )
+      ),
+      optional(seq(
+        "implements",
+        sep1(field('implements', $.signatureExpr), ",")
+      )),
       choice(
         seq(
           "{",
@@ -87,7 +101,18 @@ module.exports = grammar({
       'class',
       field("name", $.className),
       choice(
-        seq('extends', sep1($.typeExpr, ","), "{", repeat($.classMember), "}"),
+        seq(
+          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))),
+          optional(field("instanceof", seq('instanceof', sep1($.typeExpr, ",")))),
+          choice(
+            seq(
+              "{",
+              repeat($.classMember),
+              "}"
+            ),
+            ";"
+          )
+        ),
         $.typeAliasBody,
         $.typeUnionBody
       )
@@ -101,7 +126,7 @@ module.exports = grammar({
       $.qldoc
     ),
 
-    charpred: $ => seq($.className, "(", ")", "{", $._exprOrTerm, "}"),
+    charpred: $ => seq($.className, "(", ")", "{", field('body', $._exprOrTerm), "}"),
 
     memberPredicate: $ => seq(
       field("returnType", choice($.predicate, $.typeExpr)),
@@ -185,9 +210,9 @@ module.exports = grammar({
       choice(
         seq(
           sep($.varDecl, ","),
-          optional(seq("|", $._exprOrTerm, optional(seq("|", $._exprOrTerm))))
+          optional(seq("|", field('range', $._exprOrTerm), optional(seq("|", field('formula', $._exprOrTerm)))))
         ),
-        $._exprOrTerm
+        field('expr', $._exprOrTerm)
       ),
       ")"),
 
@@ -217,8 +242,15 @@ module.exports = grammar({
       )
     ),
 
-    call_body:$ => seq("(", sep($._call_arg, ","), ")"),
-    unqual_agg_body:$ => seq("(",  sep($.varDecl, ","), "|", optional($._exprOrTerm), optional(seq("|", $.asExprs)), ")"),
+    call_body: $ => seq("(", sep($._call_arg, ","), ")"),
+    unqual_agg_body: $ => seq(
+      "(",
+      sep($.varDecl, ","),
+      "|",
+      field('guard', optional($._exprOrTerm)),
+      field('asExprs', optional(seq("|", $.asExprs))),
+      ")"
+    ),
 
     _call_or_unqual_agg_body: $ => choice($.call_body, $.unqual_agg_body),
 
@@ -232,14 +264,14 @@ module.exports = grammar({
       seq(sep($.varDecl, ","),
         seq(
           "|",
-          optional($._exprOrTerm),
-          optional(seq("|", $.asExprs, optional($.orderBys)))
+          field('guard', optional($._exprOrTerm)),
+          optional(seq("|", field('asExprs', $.asExprs), field('orderBys', optional($.orderBys))))
         )
       ),
       sep1($.varDecl, ","),
-      ),
+    ),
 
-    expr_aggregate_body: $ => seq($.asExprs, optional($.orderBys)),
+    expr_aggregate_body: $ => seq(field('asExprs', $.asExprs), field('orderBys', optional($.orderBys))),
 
     aggregate: $ => seq($.aggId,                                                                // Agg
       optional(
@@ -259,6 +291,7 @@ module.exports = grammar({
     set_literal: $ => seq(
       "[",
       sep($._exprOrTerm, ','),
+      optional(','),
       "]"
     ),
 
@@ -267,10 +300,10 @@ module.exports = grammar({
     expr_annotation: $ => seq(
       field('name', $.annotName),
       "[",
-      field('annot_arg',$.annotName),
+      field('annot_arg', $.annotName),
       "]",
-      "(", 
-      $._exprOrTerm, 
+      "(",
+      $._exprOrTerm,
       ")",
     ),
 
@@ -302,7 +335,7 @@ module.exports = grammar({
       $.range,
       $.set_literal,
       $.par_expr,                                                // ParExpr
-      $.expr_annotation
+      $.expr_annotation, // ExprAnnotation
     ),
 
     literal: $ => choice(
@@ -330,6 +363,11 @@ module.exports = grammar({
     direction: $ => choice('asc', 'desc'),
 
     varDecl: $ => seq($.typeExpr, $.varName),
+
+    moduleParam: $ => seq(
+      field('signature', $.signatureExpr),
+      field('parameter', $.simpleId)
+    ),
 
     asExprs: $ => sep1($.asExpr, ","),
 
@@ -363,7 +401,18 @@ module.exports = grammar({
 
     importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", field("name", $.simpleId)))),
 
-    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", field("name", $.simpleId))),
+    moduleExpr: $ => choice(
+      $.simpleId,
+      $.moduleInstantiation,
+      seq($.moduleExpr, "::", field("name", choice($.simpleId, $.moduleInstantiation)))
+    ),
+
+    moduleInstantiation: $ => seq(
+      field("name", $.moduleName),
+      "<",
+      sep1($.signatureExpr, ","),
+      ">"
+    ),
 
     primitiveType: $ => choice('boolean', 'date', 'float', 'int', 'string'),
 
@@ -374,20 +423,25 @@ module.exports = grammar({
     dbtype: $ => /@[a-z][A-Za-z0-9_]*/,
 
     typeExpr: $ => choice(
-      seq(optional(seq($.moduleExpr, "::")), field("name", $.className)),
+      seq(optional(seq(field("qualifier", $.moduleExpr), "::")), field("name", $.className)),
       $.dbtype,
       $.primitiveType
     ),
 
+    signatureExpr: $ => choice(
+      field("type_expr", $.typeExpr),
+      field("predicate", $.predicateExpr)
+    ),
+
     predicateName: $ => $._lower_id,
 
-    aritylessPredicateExpr: $ => seq(optional(seq($.moduleExpr, "::")), field("name", $.literalId)),
+    aritylessPredicateExpr: $ => seq(optional(seq(field('qualifier', $.moduleExpr), "::")), field("name", $.literalId)),
 
     predicateExpr: $ => seq($.aritylessPredicateExpr, '/', $.integer),
 
     varName: $ => $.simpleId,
 
-    aggId: $ => choice('avg', 'concat', 'strictconcat', 'count', 'max', 'min', 'rank', 'strictcount', 'strictsum', 'sum', 'any'),
+    aggId: $ => choice('avg', 'concat', 'strictconcat', 'count', 'max', 'min', 'rank', 'strictcount', 'strictsum', 'sum', 'any', 'unique'),
 
     _upper_id: $ => /[A-Z][A-Za-z0-9_]*/,
     _lower_id: $ => /[a-z][A-Za-z0-9_]*/,

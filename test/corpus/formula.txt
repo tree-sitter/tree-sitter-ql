@@ -144,3 +144,42 @@ select f
       (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))
       (qualified_expr (variable (varName (simpleId))) (qualifiedRhs (predicateName)))))
   (asExprs (asExpr (variable (varName (simpleId))))))))
+
+==================
+unary op ambiguity
+==================
+
+from int x
+where x = -1 and any()
+select x
+
+---
+
+(ql (moduleMember
+  (select 
+    (varDecl (typeExpr (primitiveType)) (varName (simpleId)))
+    (conjunction 
+      (comp_term 
+        (variable (varName (simpleId))) 
+        (compop) 
+        (unary_expr (unop) (literal (integer))))
+      (aggregate (aggId)))
+    (asExprs (asExpr (variable (varName (simpleId))))))))
+
+====================
+unary op ambiguity 2
+====================
+
+where -1 in [-1..1]
+select "yes"
+
+---
+
+(ql (moduleMember
+  (select 
+    (in_expr 
+      (unary_expr (unop) (literal (integer))) 
+      (range 
+        (unary_expr (unop) (literal (integer))) 
+        (literal (integer)))) 
+  (asExprs (asExpr (literal (string)))))))
