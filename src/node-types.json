@@ -2819,7 +2819,7 @@
     "type": "importModuleExpr",
     "named": true,
     "fields": {
-      "name": {
+      "qualName": {
         "multiple": true,
         "required": false,
         "types": [
@@ -2835,7 +2835,7 @@
       "required": true,
       "types": [
         {
-          "type": "qualModuleExpr",
+          "type": "moduleExpr",
           "named": true
         }
       ]
@@ -4136,22 +4136,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "qualModuleExpr",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "simpleId",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {

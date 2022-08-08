@@ -397,9 +397,10 @@ module.exports = grammar({
 
     moduleName: $ => $.simpleId,
 
-    qualModuleExpr: $ => sep1(field("name", $.simpleId), "."),
-
-    importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", field("name", $.simpleId)))),
+    importModuleExpr: $ => seq(
+      repeat(seq(field("qualName", $.simpleId), ".")),
+      $.moduleExpr
+    ),
 
     moduleExpr: $ => choice(
       $.simpleId,
