@@ -16,7 +16,7 @@ select
 ---
 
 (ql
-  (moduleMember (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
+  (moduleMember (importDirective (importModuleExpr (moduleExpr (simpleId)))))
   (moduleMember (select (asExprs
     (asExpr (literal (string)) (varName (simpleId)))
     (asExpr (literal (string)))
@@ -77,9 +77,9 @@ import bar
 ---
 
 (ql
-  (moduleMember (annotation (annotName)) (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
+  (moduleMember (annotation (annotName)) (importDirective (importModuleExpr (moduleExpr (simpleId)))))
   (line_comment) (block_comment)
   (moduleMember
     (annotation (annotName) (annotArg (simpleId)))
     (annotation (annotName) (annotArg (simpleId)) (annotArg (this)))
-    (importDirective (importModuleExpr (qualModuleExpr (simpleId))))))
+    (importDirective (importModuleExpr (moduleExpr (simpleId))))))

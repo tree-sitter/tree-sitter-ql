@@ -2853,65 +2853,32 @@
       "type": "SYMBOL",
       "name": "simpleId"
     },
-    "qualModuleExpr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "simpleId"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "."
-              },
-              {
-                "type": "FIELD",
-                "name": "name",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "simpleId"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
     "importModuleExpr": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "qualModuleExpr"
-        },
-        {
           "type": "REPEAT",
           "content": {
             "type": "SEQ",
             "members": [
               {
-                "type": "STRING",
-                "value": "::"
-              },
-              {
                 "type": "FIELD",
-                "name": "name",
+                "name": "qualName",
                 "content": {
                   "type": "SYMBOL",
                   "name": "simpleId"
                 }
+              },
+              {
+                "type": "STRING",
+                "value": "."
               }
             ]
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "moduleExpr"
         }
       ]
     },

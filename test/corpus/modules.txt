@@ -15,7 +15,7 @@ module foo {
 (ql (moduleMember
    (module (moduleName (simpleId)) (moduleMember
      (module (moduleName (simpleId))
-       (moduleMember (importDirective (importModuleExpr (qualModuleExpr (simpleId)))))
+       (moduleMember (importDirective (importModuleExpr (moduleExpr (simpleId)))))
        (moduleMember (classlessPredicate (predicate) (predicateName) (empty))))))))
 
 ============
