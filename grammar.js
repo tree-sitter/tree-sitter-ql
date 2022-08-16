@@ -431,6 +431,7 @@ module.exports = grammar({
 
     signatureExpr: $ => choice(
       field("type_expr", $.typeExpr),
+      field("mod_expr", $.moduleExpr),
       field("predicate", $.predicateExpr)
     ),
 
