@@ -3081,6 +3081,14 @@
         },
         {
           "type": "FIELD",
+          "name": "mod_expr",
+          "content": {
+            "type": "SYMBOL",
+            "name": "moduleExpr"
+          }
+        },
+        {
+          "type": "FIELD",
           "name": "predicate",
           "content": {
             "type": "SYMBOL",

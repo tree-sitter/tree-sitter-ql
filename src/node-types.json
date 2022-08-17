@@ -5094,6 +5094,16 @@
     "type": "signatureExpr",
     "named": true,
     "fields": {
+      "mod_expr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "moduleExpr",
+            "named": true
+          }
+        ]
+      },
       "predicate": {
         "multiple": false,
         "required": false,
