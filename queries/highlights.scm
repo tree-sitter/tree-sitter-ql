@@ -16,6 +16,7 @@
   "forex"
   "from"
   "if"
+  "implements"
   "implies"
   "import"
   "in"
