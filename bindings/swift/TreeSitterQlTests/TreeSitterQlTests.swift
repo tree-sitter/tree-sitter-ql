@@ -7,6 +7,6 @@ final class TreeSitterQlTests: XCTestCase {
         let parser = Parser()
         let language = Language(language: tree_sitter_ql())
         XCTAssertNoThrow(try parser.setLanguage(language),
-                         "Error loading Ql grammar")
+                         "Error loading QL grammar")
     }
 }

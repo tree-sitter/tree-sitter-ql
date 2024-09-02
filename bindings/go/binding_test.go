@@ -10,6 +10,6 @@ import (
 func TestCanLoadGrammar(t *testing.T) {
 	language := tree_sitter.NewLanguage(tree_sitter_ql.Language())
 	if language == nil {
-		t.Errorf("Error loading Ql grammar")
+		t.Errorf("Error loading QL grammar")
 	}
 }

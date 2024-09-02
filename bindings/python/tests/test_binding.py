@@ -8,4 +8,4 @@ class TestLanguage(TestCase):
         try:
             tree_sitter.Language(tree_sitter_ql.language())
         except Exception:
-            self.fail("Error loading Ql grammar")
+            self.fail("Error loading QL grammar")
