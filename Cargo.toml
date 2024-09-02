@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-ql"
 description = "ql grammar for the tree-sitter parsing library"
-version = "0.22.5"
+version = "0.23.0"
 keywords = ["incremental", "parsing", "ql"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/tree-sitter/tree-sitter-ql"
@@ -21,7 +21,8 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "0.22.5"
+tree-sitter-language = "0.1.0"
+tree-sitter = "0.23.0"
 
 [build-dependencies]
 cc = "1.0"

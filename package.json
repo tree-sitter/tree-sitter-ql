@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-ql",
-  "version": "0.22.5",
+  "version": "0.23.0",
   "description": "tree-sitter grammar for Semmle QL",
   "keywords": [
     "tree-sitter",
@@ -21,16 +21,14 @@
   "author": "Sam Lanning <sam@samlanning.com>",
   "license": "MIT",
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.5",
+    "tree-sitter-cli": "^0.23.0",
     "prebuildify": "^6.0.0"
   },
   "scripts": {
-    "tree-sitter": "tree-sitter",
-    "generate": "tree-sitter generate",
-    "test": "tree-sitter test",
-    "build": "tree-sitter generate && node-gyp build",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   },
   "tree-sitter": [
     {
