@@ -1,0 +1,36 @@
+{
+  "grammars": [
+    {
+      "name": "ql",
+      "camelcase": "QL",
+      "scope": "source.ql",
+      "path": ".",
+      "file-types": [
+        "ql",
+        "qll"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.23.0",
+    "license": "MIT",
+    "description": "Semmle QL grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Sam Lanning",
+        "email": "sam@samlanning.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter/tree-sitter-ql"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

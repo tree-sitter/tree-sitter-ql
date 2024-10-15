@@ -1,4 +1,4 @@
-"""QL grammar for tree-sitter"""
+"""Semmle QL grammar for tree-sitter"""
 
 from importlib.resources import files as _files
 
