@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-ql"
-description = "QL grammar for tree-sitter"
+description = "Semmle QL grammar for tree-sitter"
 version = "0.23.0"
 authors = ["Sam Lanning <sam@samlanning.com>"]
 license = "MIT"
