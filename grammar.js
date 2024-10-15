@@ -5,8 +5,6 @@ module.exports = grammar({
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
     [$.moduleName, $.varName],
-    [$.simpleId, $.moduleInstantiation],
-    [$.className, $.moduleInstantiation],
   ],
 
   extras: $ => [
