@@ -12,7 +12,7 @@
     }
   ],
   "metadata": {
-    "version": "0.23.0",
+    "version": "0.23.1",
     "license": "MIT",
     "description": "Semmle QL grammar for tree-sitter",
     "authors": [
