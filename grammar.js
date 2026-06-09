@@ -20,25 +20,30 @@ module.exports = grammar({
 
     module: $ => seq(
       'module',
-      field('name', $.moduleName),
-      optional(
-        seq(
-          '<',
-          sep1(field('parameter', $.moduleParam), ','),
-          '>',
-        ),
-      ),
-      optional(seq(
-        'implements',
-        sep1(field('implements', $.signatureExpr), ','),
-      )),
       choice(
+        ';',
         seq(
-          '{',
-          repeat($.moduleMember),
-          '}',
+          field('name', $.moduleName),
+          optional(
+            seq(
+              '<',
+              sep1(field('parameter', $.moduleParam), ','),
+              '>',
+            ),
+          ),
+          optional(seq(
+            'implements',
+            sep1(field('implements', $.signatureExpr), ','),
+          )),
+          choice(
+            seq(
+              '{',
+              repeat($.moduleMember),
+              '}',
+            ),
+            $.moduleAliasBody,
+          ),
         ),
-        $.moduleAliasBody,
       ),
     ),
 
