@@ -237,3 +237,27 @@ select 1
         (asExpr
           (literal
             (integer)))))))
+
+=============================
+file-level module declaration
+=============================
+
+overlay[local]
+module;
+
+import foo
+
+---
+
+(ql
+  (moduleMember
+    (annotation
+      (annotName)
+      (annotArg
+        (simpleId)))
+    (module))
+  (moduleMember
+    (importDirective
+      (importModuleExpr
+        (moduleExpr
+          (simpleId))))))
