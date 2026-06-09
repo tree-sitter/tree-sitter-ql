@@ -3206,7 +3206,7 @@
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "moduleName",
@@ -5643,7 +5643,8 @@
   },
   {
     "type": "block_comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "boolean",
@@ -5747,7 +5748,8 @@
   },
   {
     "type": "line_comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "max",
@@ -5815,11 +5817,11 @@
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "sum",
