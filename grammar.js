@@ -396,7 +396,7 @@ module.exports = grammar({
 
     annotName: $ => $._lower_id,
 
-    annotArg: $ => choice($.simpleId, $.this, $.result),
+    annotArg: $ => seq(choice($.simpleId, $.this, $.result), optional('?')),
 
     moduleName: $ => $.simpleId,
 
