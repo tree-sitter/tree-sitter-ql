@@ -261,3 +261,37 @@ import foo
       (importModuleExpr
         (moduleExpr
           (simpleId))))))
+
+=========================================
+file-level module with optional localness
+=========================================
+
+overlay[local?]
+module;
+
+---
+
+(ql
+  (moduleMember
+    (annotation
+      (annotName)
+      (annotArg
+        (simpleId)))
+    (module)))
+
+==========================================
+file-level module with inferred localness
+==========================================
+
+overlay[caller?]
+module;
+
+---
+
+(ql
+  (moduleMember
+    (annotation
+      (annotName)
+      (annotArg
+        (simpleId)))
+    (module)))
